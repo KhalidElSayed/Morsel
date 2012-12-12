@@ -30,6 +30,8 @@
 		4557B9451678E87000F5E689 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4557B9401678E87000F5E689 /* NSLayoutConstraint+Conveniences.m */; };
 		4557B9461678E87000F5E689 /* UIView+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 4557B9421678E87000F5E689 /* UIView+Conveniences.m */; };
 		455BFC8916769C11009927F9 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455BFC8616769BD3009927F9 /* libCocoaYAML.a */; };
+		4590D89C1679105100CF2473 /* map.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 4590D89B1679105100CF2473 /* map.morsel */; };
+		4590D89E1679124A00CF2473 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4590D89D1679124A00CF2473 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		4557B9411678E87000F5E689 /* UIView+Conveniences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Conveniences.h"; sourceTree = "<group>"; };
 		4557B9421678E87000F5E689 /* UIView+Conveniences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Conveniences.m"; sourceTree = "<group>"; };
 		455BFC8116769BD3009927F9 /* CocoaYAML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CocoaYAML.xcodeproj; sourceTree = "<group>"; };
+		4590D89B1679105100CF2473 /* map.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.morsel; sourceTree = "<group>"; };
+		4590D89D1679124A00CF2473 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4590D89E1679124A00CF2473 /* MapKit.framework in Frameworks */,
 				455BFC8916769C11009927F9 /* libCocoaYAML.a in Frameworks */,
 				4501826B1670167900CCEF25 /* QuartzCore.framework in Frameworks */,
 				4501823E1670133000CCEF25 /* UIKit.framework in Frameworks */,
@@ -159,6 +164,7 @@
 		4501823C1670133000CCEF25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4590D89D1679124A00CF2473 /* MapKit.framework */,
 				4501826A1670167900CCEF25 /* QuartzCore.framework */,
 				4501823D1670133000CCEF25 /* UIKit.framework */,
 				4501823F1670133000CCEF25 /* Foundation.framework */,
@@ -170,8 +176,8 @@
 		450748FD1678D4D9009D3C46 /* MorselBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				450748FE1678D4D9009D3C46 /* Resources */,
 				450749091678D4D9009D3C46 /* Source */,
+				450748FE1678D4D9009D3C46 /* Resources */,
 			);
 			path = MorselBrowser;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				4557B9271678E30700F5E689 /* simple.morsel */,
+				4590D89B1679105100CF2473 /* map.morsel */,
 				4557B9281678E30700F5E689 /* ui_bad.morsel */,
 			);
 			name = Samples;
