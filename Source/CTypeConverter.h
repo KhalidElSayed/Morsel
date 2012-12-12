@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef id (^TypeConverterBlock)(id inValue, NSError **outError);
+
 @interface CTypeConverter : NSObject
 
-- (void)addConverterForSourceType:(NSString *)inSourceType destinationType:(NSString *)inDestinationType block:(id (^)(id inValue, NSError **outError))inBlock;
-- (void)addConverterForSourceClass:(Class)inSourceClass destinationClass:(Class)inDestinationClass block:(id (^)(id inValue, NSError **outError))inBlock;
+- (void)addConverterForSourceType:(NSString *)inSourceType destinationType:(NSString *)inDestinationType block:(TypeConverterBlock)inBlock;
+- (void)addConverterForSourceClass:(Class)inSourceClass destinationClass:(Class)inDestinationClass block:(TypeConverterBlock)inBlock;
 
 - (NSString *)typeForClass:(Class)inClass;
 - (NSString *)typeForObject:(id)inObject;

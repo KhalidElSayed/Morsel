@@ -41,6 +41,7 @@ static CMorselContext *gSharedInstance = NULL;
     if ((self = [super init]) != NULL)
         {
 		_typeConverter = [[CTypeConverter alloc] init];
+		_propertyHandlers = [NSMutableArray array];
 
 		[self setup];
         }
@@ -53,17 +54,43 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// #########################################################################
 
+	// NSURL
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+		return([NSURL URLWithString:inValue]);
+		}];
+
+	// UIColor
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([weakSelf colorWithObject:inValue error:NULL]);
 		}];
 
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([weakSelf imageWithObject:inValue error:NULL]);
-		}];
-
+	// UIFont
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIFont class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([weakSelf fontWithSpecification:inValue error:NULL]);
 		}];
+
+	// UIImage
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+		return([weakSelf imageNamed:inValue]);
+		}];
+
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+
+		UIImage *theImage = [weakSelf imageNamed:inValue[@"name"]];
+		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
+		if (theCapInsetsDictionary)
+			{
+			UIEdgeInsets theCapInsets;
+			theCapInsets.left = [theCapInsetsDictionary[@"left"] floatValue];
+			theCapInsets.right = [theCapInsetsDictionary[@"right"] floatValue];
+			theCapInsets.top = [theCapInsetsDictionary[@"top"] floatValue];
+			theCapInsets.bottom = [theCapInsetsDictionary[@"bottom"] floatValue];
+			theImage = [theImage resizableImageWithCapInsets:theCapInsets];
+			}
+
+		return(theImage);
+		}];
+
 
 	// #########################################################################
 
@@ -78,27 +105,28 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
-
-		NSLog(@"IMAGE");
-
-		if (IS_DICT(object))
+		if (IS_DICT(specification))
 			{
-			if (object[@"url"])
+			if (specification[@"url"])
 				{
-				id theURL = object[@"url"];
-				if ([theURL isKindOfClass:[NSURL class]])
-					{
-					
-					}
+				NSURL *theURL = [self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:NULL];
+				NSURLRequest *theREquest = [NSURLRequest requestWithURL:theURL];
+				[NSURLConnection sendAsynchronousRequest:theREquest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+					NSHTTPURLResponse *theResponse = (NSHTTPURLResponse *)response;
+					if (theResponse.statusCode == 200)
+						{
+						UIImage *theImage = [UIImage imageWithData:data];
+						((UIImageView *)object).image = theImage;
+						}
+					}];
+				}
+			else
+				{
+				UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
+				((UIImageView *)object).image = theImage;
 				}
 			}
-
-
-
 		}];
-
-
-
 	}
 
 - (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(void (^)(id object, NSString *property, id specification))inBlock
@@ -118,6 +146,11 @@ static CMorselContext *gSharedInstance = NULL;
 	}
 
 #pragma mark -
+
+- (UIImage *)imageNamed:(NSString *)inName
+	{
+	return([UIImage imageNamed:inName]);
+	}
 
 - (UIFont *)fontWithSpecification:(id)inSpecification error:(NSError **)outError
 	{
@@ -147,30 +180,6 @@ static CMorselContext *gSharedInstance = NULL;
 	theRect.size.width = [theArray[2] floatValue];
 	theRect.size.height = [theArray[3] floatValue];
 	return(theRect);
-	}
-
-- (UIImage *)imageWithObject:(id)inObject error:(NSError **)outError
-	{
-	UIImage *theImage = NULL;
-	if ([inObject isKindOfClass:[NSString class]])
-		{
-		theImage = [UIImage imageNamed:inObject];
-		}
-	else if ([inObject isKindOfClass:[NSDictionary class]])
-		{
-		theImage = [UIImage imageNamed:inObject[@"name"]];
-		NSDictionary *theCapInsetsDictionary = inObject[@"capInsets"];
-		if (theCapInsetsDictionary)
-			{
-			UIEdgeInsets theCapInsets;
-			theCapInsets.left = [theCapInsetsDictionary[@"left"] floatValue];
-			theCapInsets.right = [theCapInsetsDictionary[@"right"] floatValue];
-			theCapInsets.top = [theCapInsetsDictionary[@"top"] floatValue];
-			theCapInsets.bottom = [theCapInsetsDictionary[@"bottom"] floatValue];
-			theImage = [theImage resizableImageWithCapInsets:theCapInsets];
-			}
-		}
-	return(theImage);
 	}
 
 @end

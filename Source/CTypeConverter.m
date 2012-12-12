@@ -29,13 +29,13 @@
 
 #pragma mark -
 
-- (void)addConverterForSourceType:(NSString *)inSourceType destinationType:(NSString *)inDestinationType block:(id (^)(id inValue, NSError **outError))inBlock;
+- (void)addConverterForSourceType:(NSString *)inSourceType destinationType:(NSString *)inDestinationType block:(TypeConverterBlock)inBlock;
 	{
 	NSArray *theKey = @[ inSourceType, inDestinationType ];
 	self.converters[theKey] = [inBlock copy];
 	}
 
-- (void)addConverterForSourceClass:(Class)inSourceClass destinationClass:(Class)inDestinationClass block:(id (^)(id inValue, NSError **outError))inBlock;
+- (void)addConverterForSourceClass:(Class)inSourceClass destinationClass:(Class)inDestinationClass block:(TypeConverterBlock)inBlock;
 	{
 	NSString *theSourceType = [self typeForClass:inSourceClass createMapping:YES];
 	NSString *theDestinationType = [self typeForClass:inDestinationClass createMapping:YES];
@@ -75,7 +75,7 @@
 
 	NSArray *theKey = @[ inSourceType, inDestinationType ];
 	
-	id (^theBlock)(id inValue, NSError **outError) = self.converters[theKey];
+	TypeConverterBlock theBlock = self.converters[theKey];
 	if (theBlock == NULL)
 		{
 		if (outError != NULL)

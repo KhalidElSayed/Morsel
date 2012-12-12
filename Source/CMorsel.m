@@ -293,12 +293,15 @@
 
 - (void)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath
 	{
+	NSDictionary *theTestDictionary = @{
+		@"class": [inObject class],
+		@"property": inKeyPath
+		};
+
 	for (NSDictionary *theDictionary in self.context.propertyHandlers)
 		{
 		NSPredicate *thePredicate = theDictionary[@"predicate"];
-		if ([thePredicate evaluateWithObject:@{
-			@"class": [inObject class],
-			@"property": inKeyPath}] == YES)
+		if ([thePredicate evaluateWithObject:theTestDictionary] == YES)
 			{
 			void (^theBlock)(id object, NSString *property, id specification) = theDictionary[@"block"];
 			theBlock(inObject, inKeyPath, inValue);
