@@ -30,7 +30,7 @@
 - (void)test1
 	{
 	CTypeConverter *theConverter = [[CTypeConverter alloc] init];
-	[theConverter addConverterForSourceClass:[NSString class] destinationType:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[theConverter addConverterForSourceClass:[NSString class] destinationClass:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([NSURL URLWithString:inValue]);
 		}];
 

@@ -40,6 +40,7 @@
 		4590D8B716791C6E00CF2473 /* CTypeConverterUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4590D8B616791C6E00CF2473 /* CTypeConverterUnitTests.m */; };
 		4590D8C716791CBF00CF2473 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4590D8A0167916E400CF2473 /* CTypeConverter.m */; };
 		45A0FEBD167939B000FABF57 /* very_simple.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A0FEBC167939B000FABF57 /* very_simple.morsel */; };
+		45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A0FEBF16793CD700FABF57 /* CMorselContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,8 @@
 		4590D8B616791C6E00CF2473 /* CTypeConverterUnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTypeConverterUnitTests.m; sourceTree = "<group>"; };
 		4590D8B816791C6E00CF2473 /* Unit Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unit Tests-Prefix.pch"; sourceTree = "<group>"; };
 		45A0FEBC167939B000FABF57 /* very_simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = very_simple.morsel; sourceTree = "<group>"; };
+		45A0FEBE16793CD700FABF57 /* CMorselContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselContext.h; sourceTree = "<group>"; };
+		45A0FEBF16793CD700FABF57 /* CMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +266,8 @@
 			children = (
 				4557B93B1678E87000F5E689 /* CMorsel.h */,
 				4557B93C1678E87000F5E689 /* CMorsel.m */,
+				45A0FEBE16793CD700FABF57 /* CMorselContext.h */,
+				45A0FEBF16793CD700FABF57 /* CMorselContext.m */,
 				4590D89F167916E400CF2473 /* CTypeConverter.h */,
 				4590D8A0167916E400CF2473 /* CTypeConverter.m */,
 				4557B93D1678E87000F5E689 /* global.morsel */,
@@ -462,6 +467,7 @@
 				4557B9451678E87000F5E689 /* NSLayoutConstraint+Conveniences.m in Sources */,
 				4557B9461678E87000F5E689 /* UIView+Conveniences.m in Sources */,
 				4590D8A1167916E400CF2473 /* CTypeConverter.m in Sources */,
+				45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

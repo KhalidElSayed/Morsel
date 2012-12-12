@@ -32,19 +32,19 @@ value-synonyms:
 property-types:
   - class: UILabel
     property: font
-    type: UIFont
+    type: 'class:UIFont'
   - class: UILabel
     property: textColor
-    type: UIColor
+    type: 'class:UIColor'
   - class: UIView
     property: backgroundColor
-    type: class:UIColor
+    type: 'class:UIColor'
   - class: UIView
     property: frame
-    type: CGRect
+    type: 'struct:CGRect'
   - class: UIImageView
     property: image
-    type: UIImage
+    type: 'class:UIImage'
   - class: UIButton
     property: backgroundImage
     type: 'UIImage+UIControlState'

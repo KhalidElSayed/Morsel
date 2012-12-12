@@ -15,10 +15,7 @@
 #import "CTypeConverter.h"
 #import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
-
-#define IS_STRING(o) [o isKindOfClass:[NSString class]]
-#define IS_ARRAY(o) [o isKindOfClass:[NSArray class]]
-#define IS_DICT(o) [o isKindOfClass:[NSDictionary class]]
+#import "CMorselContext.h"
 
 @interface CMorsel ()
 @property (readwrite, nonatomic, strong) NSData *data;
@@ -26,13 +23,11 @@
 @property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
 @property (readwrite, nonatomic, strong) NSMutableDictionary *objectsByID;
-@property (readwrite, nonatomic, strong) NSMutableDictionary *typeTransformers;
-@property (readwrite, nonatomic, strong) NSMutableArray *propertyHandlers;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
 @property (readonly, nonatomic, strong) NSDictionary *keySynonyms;
-@property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
+@property (readwrite, nonatomic, strong) CMorselContext *context;
 @end
 
 #pragma mark -
@@ -50,9 +45,7 @@
         {
 		_data = inData;
 		_objectsByID = [NSMutableDictionary dictionary];
-		_propertyHandlers = [NSMutableArray array];
-		_typeTransformers = [NSMutableDictionary dictionary];
-		_typeConverter = [[CTypeConverter alloc] init];
+		_context = [CMorselContext defaultContext];
 		[self setup:NULL];
 		[self process:NULL];
         }
@@ -157,77 +150,6 @@
 
 - (BOOL)setup:(NSError **)outError
 	{
-	__weak __typeof(self) weak_self = self;
-
-// x.struct.CGRect
-// x.class.NSDictionary / conforms to class, conforms to 'dict', confirms to 'map' etc
-// x.container.map
-// x.container.hashtable
-
-//	[self addConvertFromType:@"dict" toType:@"CGRect" block:...]
-//	[self setType:@"CGRect" forProperty:@"frame" ofClass:[UIView class]];
-
-//	[self addHandlerToClass:[UIView view] property:@"children" block:…];
-//	[self addHandlerToClass:[UIView view] property:@"constraints" block:…];
-
-	// #########################################################################
-
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([weak_self colorWithObject:inValue error:NULL]);
-		}];
-
-	// #########################################################################
-
-	[self addTypeTransformersForType:@"UIColor" block:^id(id value) {
-		return([weak_self colorWithObject:value error:NULL]);
-		}];
-	[self addTypeTransformersForType:@"UIImage" block:^id(id value) {
-		return([weak_self imageWithObject:value error:NULL]);
-		}];
-	[self addTypeTransformersForType:@"UIFont" block:^id(id value) {
-		return([weak_self fontWithSpecification:value error:NULL]);
-		}];
-	[self addTypeTransformersForType:@"UIImage+UIControlState" block:^id(id value) {
-		return(@{ @"image":[weak_self imageWithObject:value error:NULL], @"state":@(UIControlStateNormal)});
-		}];
-	[self addTypeTransformersForType:@"UIColor+UIControlState" block:^id(id value) {
-		return(@{ @"color":[weak_self colorWithObject:value error:NULL], @"state":@(UIControlStateNormal)});
-		}];
-	[self addTypeTransformersForType:@"NSString+UIControlState" block:^id(id value) {
-		return(@{ @"string":value, @"state":@(UIControlStateNormal)});
-		}];
-
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^(id object, NSString *property, id specification) {
-		[(UIButton *)object setTitle:specification forState:UIControlStateNormal];
-		}];
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^(id object, NSString *property, id specification) {
-		[(UIButton *)object setBackgroundImage:specification[@"image"] forState:[specification[@"state"] integerValue]];
-		}];
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^(id object, NSString *property, id specification) {
-		[(UIButton *)object setTitleColor:specification[@"color"] forState:[specification[@"state"] integerValue]];
-		}];
-
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
-
-		NSLog(@"IMAGE");
-
-		if (IS_DICT(object))
-			{
-			if (object[@"url"])
-				{
-				id theURL = object[@"url"];
-				if ([theURL isKindOfClass:[NSURL class]])
-					{
-					
-					}
-				}
-			}
-
-
-
-		}];
-
-
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
 	self.globalSpecification = [theDeserializer deserializeURL:theURL error:NULL];
@@ -238,35 +160,18 @@
 - (BOOL)process:(NSError **)outError
 	{
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-	self.specification = [theDeserializer deserializeData:self.data error:NULL];
-//	self.specification = [NSDictionary dictionaryWithContentsOfURL:self.URL];
-	self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] error:outError];
-
-	return(YES);
-	}
-
-//- (id)objectOfClass:(Class)inClass withObject:(id)inObject
-//	{
-//	if ([inObject isKindOfClass:inClass])
-//		{
-//		return(inObject);
-//		}
-//	if ()
-//	}
-
-#pragma mark -
-
-- (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(void (^)(id object, NSString *property, id specification))inBlock
-	{
-	[self.propertyHandlers addObject:@{
-		@"predicate": inPredicate,
-		@"block": [inBlock copy],
-		}];
-	}
-
-- (void)addTypeTransformersForType:(NSString *)inType block:(id (^)(id value))inBlock
-	{
-	self.typeTransformers[inType] = [inBlock copy];
+	NSError *theError = NULL;
+	self.specification = [theDeserializer deserializeData:self.data error:&theError];
+	if (self.specification == NULL)
+		{
+		NSLog(@"%@", theError);
+		return(NO);
+		}
+	else
+		{
+		self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] error:outError];
+		return(YES);
+		}
 	}
 
 #pragma mark -
@@ -348,22 +253,12 @@
 		NSString *theType = [self typeForObject:theObject propertyName:theKeyValuePath];
 		if (theType != NULL)
 			{
-			id theNewValue = [self.typeConverter objectOfType:theType withObject:theValue error:NULL];
+			id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
 			if (theNewValue != NULL)
 				{
-				NSLog(@"CONVERTED");
 				theValue = theNewValue;
 				}
-			else
-				{
-				id (^theTypeTransformer)(id value) = self.typeTransformers[theType];
-				if (theTypeTransformer)
-					{
-					theValue = theTypeTransformer(theValue);
-					}
-				}
 			}
-
 		[self setObject:theObject value:theValue forKeyPath:theKeyValuePath];
 		}];
 
@@ -398,14 +293,13 @@
 
 - (void)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath
 	{
-	for (NSDictionary *theDictionary in self.propertyHandlers)
+	for (NSDictionary *theDictionary in self.context.propertyHandlers)
 		{
 		NSPredicate *thePredicate = theDictionary[@"predicate"];
 		if ([thePredicate evaluateWithObject:@{
 			@"class": [inObject class],
 			@"property": inKeyPath}] == YES)
 			{
-//			NSLog(@"HIT");
 			void (^theBlock)(id object, NSString *property, id specification) = theDictionary[@"block"];
 			theBlock(inObject, inKeyPath, inValue);
 			return;
@@ -422,11 +316,9 @@
 	return(theClass);
 	}
 
-
 - (NSString *)expandKey:(NSString *)inKey error:(NSError **)outError
 	{
 	inKey = self.keySynonyms[inKey] ?: inKey;
-
 	return(inKey);
 	}
 
@@ -531,63 +423,6 @@
 		NSLog(@"Do not understand constraint: %@", inObject);
 		}
 	return(theConstraints);
-	}
-
-
-#pragma mark -
-
-- (UIFont *)fontWithSpecification:(id)inSpecification error:(NSError **)outError
-	{
-	UIFont *theFont = [UIFont fontWithName:inSpecification[@"name"] size:[inSpecification[@"size"] floatValue]];
-	return(theFont);
-	}
-
-- (UIColor *)colorWithObject:(id)inObject error:(NSError **)outError
-	{
-	NSDictionary *theColors = @{
-		@"clearColor": [UIColor clearColor],
-		@"redColor": [UIColor redColor],
-		@"greenColor": [UIColor greenColor],
-		@"grayColor": [UIColor grayColor],
-		@"blueColor": [UIColor blueColor],
-		@"whiteColor": [UIColor whiteColor],
-		};
-	return(theColors[inObject]);
-	}
-
-- (CGRect)rectWithObject:(id)inObject error:(NSError **)outError
-	{
-	NSArray *theArray = inObject;
-	CGRect theRect;
-	theRect.origin.x = [theArray[0] floatValue];
-	theRect.origin.y = [theArray[1] floatValue];
-	theRect.size.width = [theArray[2] floatValue];
-	theRect.size.height = [theArray[3] floatValue];
-	return(theRect);
-	}
-
-- (UIImage *)imageWithObject:(id)inObject error:(NSError **)outError
-	{
-	UIImage *theImage = NULL;
-	if ([inObject isKindOfClass:[NSString class]])
-		{
-		theImage = [UIImage imageNamed:inObject];
-		}
-	else if ([inObject isKindOfClass:[NSDictionary class]])
-		{
-		theImage = [UIImage imageNamed:inObject[@"name"]];
-		NSDictionary *theCapInsetsDictionary = inObject[@"capInsets"];
-		if (theCapInsetsDictionary)
-			{
-			UIEdgeInsets theCapInsets;
-			theCapInsets.left = [theCapInsetsDictionary[@"left"] floatValue];
-			theCapInsets.right = [theCapInsetsDictionary[@"right"] floatValue];
-			theCapInsets.top = [theCapInsetsDictionary[@"top"] floatValue];
-			theCapInsets.bottom = [theCapInsetsDictionary[@"bottom"] floatValue];
-			theImage = [theImage resizableImageWithCapInsets:theCapInsets];
-			}
-		}
-	return(theImage);
 	}
 
 @end

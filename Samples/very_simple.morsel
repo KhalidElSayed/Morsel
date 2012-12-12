@@ -3,10 +3,17 @@
 ################################################################################
 
 root:
-  id: root
   class: UIView
+  id: root
   backgroundColor: redColor
+  children:
+  - class: UILabel
+    id: label1
+    text: 'Hello world'
+    font: { name: 'HelveticaNeue-Bold', size: 17 }
   constraints:
-    - visual: 'H:[root(320)]'
-    - visual: 'V:[root(416)]'
+  - visual: 'H:[root(320)]'
+  - visual: 'V:[root(416)]'
+  - visual: 'H:|-10-[label1]-10-|'
+  - visual: 'V:|-10-[label1]'
 
