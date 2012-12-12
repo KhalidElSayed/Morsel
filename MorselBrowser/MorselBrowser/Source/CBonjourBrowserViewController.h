@@ -1,0 +1,13 @@
+//
+//  CBonjourBrowserViewController.h
+//  LayoutTest
+//
+//  Created by Jonathan Wight on 12/11/12.
+//  Copyright (c) 2012 toxicsoftware. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface CBonjourBrowserViewController : UITableViewController
+
+@end

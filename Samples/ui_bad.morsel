@@ -1,0 +1,162 @@
+# -*- tab-width: 2; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+################################################################################
+
+
+# TBD -- todo this should probably be merged with parameters!
+colors:
+  puce: '#FFFFFF' # this is not puce
+  puce: { red: 1.0, green: 1.0, blue: 0.0, alpha: 1.0 } # this is not puce either
+  puce: { r: 128, g: 128, b: 128, a: 0xFF, type: byte } # this is still not puce
+
+# TBD -- todo this should probably be merged with parameters!
+images:
+  'RedButton.png': { capInsets: { left: 10, right: 10 } }
+  'BlueButton_Normal.png': { capInsets: { left: 10, right: 10 }, state: normal }
+  'BlueButton_Highlighted.png': { capInsets: { left: 10, right: 10 }, state: highlighted }
+
+# TBD
+owner:
+  class: UIViewController
+  view: root
+  outlets:
+    nameLabel: name_label
+
+#### TBD selectors:
+# frame(landscape): [10,10,300,440]
+# frame(iPad): [10,10,300,440]
+# frame(iPhone,landscape): [10,10,300,440]
+
+#### TBD lookups
+# text: $owner.model.title
+# we could even use KVO to watch this value! (poor man's bindings)
+
+#### TBD lookups (with transformers)
+# text: $owner.model.date:dateToString
+
+################################################################################
+# Everything below here is implemented (unless marked otherwise)
+
+parameters:
+  name: "Jonathan Wight"
+  # TBD: default parameters for all objects with an id, TODO this can easily cause collisions
+
+# This is just a convenience. Slightly useless but does expose synonyms to the end-user. T
+class-synonyms:
+  view: UIView
+  label: UILabel
+  button: UIButton
+  shape: CAShapeLayer
+  
+#  red-button: UIButton # you can set up defaults for red-button separately from button # TBD
+
+# This is really key -> keyPaths. And yes it means you can access the layer properties easily.
+# BUG: This wont work if we expose layers, borderColor is what
+key-synonyms:
+  identifier: id
+  borderColor: layer.borderColor # deprecate
+  borderWidth: layer.borderWidth # deprecate
+  cornerRadius: layer.cornerRadius # deprecate
+  # TBD the filter version doesn't work yet
+  borderColor(view): layer.borderColor # TBD
+  borderWidth(view): layer.borderWidth # TBD
+  cornerRadius(view): layer.cornerRadius # TBD
+#  representedObject: associatedObject.representedObject # TBD - example of how to expose an associatedObject?
+
+# Defaults are re-used to pre-populate objects with set values. A good example is setting the clear background colour of UILabels.
+# TODO - need a way to load defaults from a global file (#include style…)
+defaults:
+  - class: view
+    translatesAutoresizingMaskIntoConstraints: false
+  - class: label
+    backgroundColor: clearColor
+    verticalContentHuggingPriority: 1000
+    horizontalContentHuggingPriority: 1000
+    # TBD
+    # contentHuggingPriority: { horizontal: 1000, vertical: 1000 }
+  - ids: [x, y]
+    borderWidth: 1.0
+    borderColor: blackColor
+
+# These are used by the constraint based layers. But can also be accessed as $metrics (TBD)
+metrics:
+  W: 300
+  H: 440
+
+root:
+  class: view
+  id: root # redundant, root object always has an id of 'root'
+  backgroundColor: grayColor
+  frame: [10,10,300,440]
+  cornerRadius: 8.0
+  borderWidth: 1.0
+  borderColor: blackColor
+  children:
+    - class: label
+      id: label1
+      text: 'Name:'
+
+    - class: label
+      id: name_label
+      text: $name # TODO what if i want a label to be a dollar sign?
+
+    - class: label
+      id: label3
+      text: 'Occupation:'
+
+    - class: label
+      id: label4
+#     attributedText: '<b>Software</b> <i>Escapologist</i>' # TBD
+      text: 'Software Escapologist'
+
+    - ok_button
+
+  layer:
+    class: gradientlayer
+    colours: [ '', '' ]
+  
+  # TBD
+#  layer:
+#    mask:
+#      class: shape
+#      path:
+#        rect: root.frame
+
+  constraints:
+    - visual: 'H:[root(W)]'
+    - visual: 'V:[root(H)]'
+    - { visual: 'H:|-[label1]-[name_label]-|', options: baseline }
+    - visual: [ 'H:|-[label3]-[label4]-|', baseline ]
+    - visual: 'V:|-[label1]-[label3]'
+    - visual: [ 'V:|-[name_label]-[label4]', leading ]
+
+  # TBD
+#    - { from: label1@centerY, to: label2@centerY, type: equal, multiplier: 1.0, constant: 0.0 }
+#    - { constraint: label1.centerY >= label2.centerY * 1.0 + 0.0, priority: 1000 }
+
+# We can define our own objects at the root level
+ok_button:
+  # we don't need an id here it is assumed.
+  class: button
+      
+  # We can specify outlets here _or_ in the owner of the outlet, whatever is more convenient
+#  outlet: owner.titleLabel # TBD
+
+  # We default to owner if need be...
+  #     outlet: titleLabel
+
+  # We can specify the event type if we want...
+#TBD
+#  event.touch-up-inside: { action: 'foo', target: owner }
+  ## Or we can use the default event type for whatever class we're in...
+  # event: { action: 'foo', target: owner }
+  ## If we neglect the target we assume it is the owner...
+  # event: { action: 'foo' }
+
+#TBD
+#  title: 'OK'
+  #      title: { text: 'OK', state: normal }
+  #      backgroundImage: { image: 'Foo.png', state: normal }
+  #      backgroundImage: { image: 'Foo.png', capInsets: { left: 10, right: 10 }, state: normal }
+  #  action: 'foo:'
+  #  target: owner

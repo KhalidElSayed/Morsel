@@ -1,0 +1,61 @@
+# -*- tab-width: 2; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+class-synonyms:
+  view: UIView
+  label: UILabel
+  button: UIButton
+  shape: CAShapeLayer
+  
+key-synonyms:
+  borderColor: layer.borderColor # deprecate
+  borderWidth: layer.borderWidth # deprecate
+  cornerRadius: layer.cornerRadius # deprecate
+# TBD the filter version doesn't work yet
+#  borderColor(view): layer.borderColor # TBD
+#  borderWidth(view): layer.borderWidth # TBD
+#  cornerRadius(view): layer.cornerRadius # TBD
+
+value-synonyms:
+  NSLineBreakByWordWrapping: 0
+  NSLineBreakByCharWrapping: 1
+  NSLineBreakByClipping: 2
+  NSLineBreakByTruncatingHead: 3
+  NSLineBreakByTruncatingTail: 4
+  NSLineBreakByTruncatingMiddle: 5
+  wordWrapping: 0
+  charWrapping: 1
+  clipping: 2
+  truncatingHead: 3
+  truncatingTail: 4
+  truncatingMiddle: 5
+
+property-types:
+  - class: UILabel
+    property: font
+    type: UIFont
+  - class: UILabel
+    property: textColor
+    type: UIColor
+  - class: UIView
+    property: backgroundColor
+    type: UIColor
+  - class: UIView
+    property: frame
+    type: CGRect
+  - class: UIImageView
+    property: image
+    type: UIImage
+  - class: UIButton
+    property: backgroundImage
+    type: 'UIImage+UIControlState'
+  - class: UIButton
+    property: titleColor
+    type: 'UIColor+UIControlState'
+
+defaults:
+#  - class: UIView
+#    translatesAutoresizingMaskIntoConstraints: false
+  - class: UILabel
+    backgroundColor: clearColor
+    verticalContentHuggingPriority: 250
+    horizontalContentHuggingPriority: 250

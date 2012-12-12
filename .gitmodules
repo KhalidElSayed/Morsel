@@ -1,0 +1,3 @@
+[submodule "Externals/CocoaYAML"]
+	path = Externals/CocoaYAML
+	url = git@github.com:schwa/CocoaYAML.git
