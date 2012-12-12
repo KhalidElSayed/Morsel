@@ -13,6 +13,9 @@
 - (void)addConverterForSourceType:(NSString *)inSourceType destinationType:(NSString *)inDestinationType block:(id (^)(id inValue, NSError **outError))inBlock;
 - (void)addConverterForSourceClass:(Class)inSourceClass destinationClass:(Class)inDestinationClass block:(id (^)(id inValue, NSError **outError))inBlock;
 
+- (NSString *)typeForClass:(Class)inClass;
+- (NSString *)typeForObject:(id)inObject;
+
 - (id)objectOfType:(NSString *)inDestinationType withObject:(id)inSourceObject error:(NSError **)outError;
 - (id)objectOfClass:(Class)inDestinationClass withObject:(id)inSourceObject error:(NSError **)outError;
 

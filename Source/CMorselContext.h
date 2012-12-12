@@ -11,6 +11,7 @@
 @class CTypeConverter;
 
 @interface CMorselContext : NSObject
+
 @property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readonly, nonatomic, strong) NSMutableArray *propertyHandlers;
 
