@@ -1,0 +1,12 @@
+# -*- tab-width: 2; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+################################################################################
+
+root:
+  id: root
+  class: UIView
+  backgroundColor: redColor
+  constraints:
+    - visual: 'H:[root(320)]'
+    - visual: 'V:[root(416)]'
+

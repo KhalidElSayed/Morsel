@@ -12,8 +12,13 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "CTypeConverter.h"
 #import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
+
+#define IS_STRING(o) [o isKindOfClass:[NSString class]]
+#define IS_ARRAY(o) [o isKindOfClass:[NSArray class]]
+#define IS_DICT(o) [o isKindOfClass:[NSDictionary class]]
 
 @interface CMorsel ()
 @property (readwrite, nonatomic, strong) NSData *data;
@@ -27,6 +32,7 @@
 @property (readonly, nonatomic, strong) NSArray *defaults;
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
 @property (readonly, nonatomic, strong) NSDictionary *keySynonyms;
+@property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 @end
 
 #pragma mark -
@@ -46,6 +52,7 @@
 		_objectsByID = [NSMutableDictionary dictionary];
 		_propertyHandlers = [NSMutableArray array];
 		_typeTransformers = [NSMutableDictionary dictionary];
+		_typeConverter = [[CTypeConverter alloc] init];
 		[self setup:NULL];
 		[self process:NULL];
         }
@@ -163,6 +170,14 @@
 //	[self addHandlerToClass:[UIView view] property:@"children" block:…];
 //	[self addHandlerToClass:[UIView view] property:@"constraints" block:…];
 
+	// #########################################################################
+
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+		return([weak_self colorWithObject:inValue error:NULL]);
+		}];
+
+	// #########################################################################
+
 	[self addTypeTransformersForType:@"UIColor" block:^id(id value) {
 		return([weak_self colorWithObject:value error:NULL]);
 		}];
@@ -192,7 +207,28 @@
 		[(UIButton *)object setTitleColor:specification[@"color"] forState:[specification[@"state"] integerValue]];
 		}];
 
-	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"yaml"];
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
+
+		NSLog(@"IMAGE");
+
+		if (IS_DICT(object))
+			{
+			if (object[@"url"])
+				{
+				id theURL = object[@"url"];
+				if ([theURL isKindOfClass:[NSURL class]])
+					{
+					
+					}
+				}
+			}
+
+
+
+		}];
+
+
+	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
 	self.globalSpecification = [theDeserializer deserializeURL:theURL error:NULL];
 
@@ -208,6 +244,15 @@
 
 	return(YES);
 	}
+
+//- (id)objectOfClass:(Class)inClass withObject:(id)inObject
+//	{
+//	if ([inObject isKindOfClass:inClass])
+//		{
+//		return(inObject);
+//		}
+//	if ()
+//	}
 
 #pragma mark -
 
@@ -233,6 +278,7 @@
 	Class theClass = [self classWithString:theClassName error:outError];
 	if (theClass == NULL)
 		{
+		NSLog(@"Failed to load class of type %@", theClassName);
 		return(NULL);
 		}
 
@@ -302,10 +348,19 @@
 		NSString *theType = [self typeForObject:theObject propertyName:theKeyValuePath];
 		if (theType != NULL)
 			{
-			id (^theTypeTransformer)(id value) = self.typeTransformers[theType];
-			if (theTypeTransformer)
+			id theNewValue = [self.typeConverter objectOfType:theType withObject:theValue error:NULL];
+			if (theNewValue != NULL)
 				{
-				theValue = theTypeTransformer(theValue);
+				NSLog(@"CONVERTED");
+				theValue = theNewValue;
+				}
+			else
+				{
+				id (^theTypeTransformer)(id value) = self.typeTransformers[theType];
+				if (theTypeTransformer)
+					{
+					theValue = theTypeTransformer(theValue);
+					}
 				}
 			}
 

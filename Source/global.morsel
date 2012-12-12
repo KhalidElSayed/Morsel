@@ -38,7 +38,7 @@ property-types:
     type: UIColor
   - class: UIView
     property: backgroundColor
-    type: UIColor
+    type: class:UIColor
   - class: UIView
     property: frame
     type: CGRect
