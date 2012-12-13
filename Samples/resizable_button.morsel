@@ -8,7 +8,7 @@ root:
   subviews:
   - class: UIImageView
     id: image
-    image: { url: 'http://lorempixel.com/320/416/' }
+    image: { name: 'Button.png', capInsets: { left: 7, right: 7, top: 7, bottom: 7 } }
   constraints:
   - visual: 'H:|-0-[image]-0-|'
   - visual: 'V:|-0-[image]-0-|'

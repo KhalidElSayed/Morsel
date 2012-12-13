@@ -22,6 +22,11 @@
 		4507491D1678D4D9009D3C46 /* CMorselClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 4507490F1678D4D9009D3C46 /* CMorselClient.m */; };
 		4507491E1678D4D9009D3C46 /* CMorselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 450749111678D4D9009D3C46 /* CMorselViewController.m */; };
 		4507491F1678D4D9009D3C46 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 450749131678D4D9009D3C46 /* main.m */; };
+		4510114E167A8087007CCEDF /* CResizerThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 4510114D167A8087007CCEDF /* CResizerThumb.m */; };
+		45101150167A8095007CCEDF /* Thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4510114F167A8095007CCEDF /* Thumb.png */; };
+		45101153167A828A007CCEDF /* UIView+ConstraintConveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101152167A828A007CCEDF /* UIView+ConstraintConveniences.m */; };
+		45101155167A8BF4007CCEDF /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 45101154167A8BF4007CCEDF /* Button.png */; };
+		45101157167A8C93007CCEDF /* resizable_button.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45101156167A8C93007CCEDF /* resizable_button.morsel */; };
 		4557B9351678E30700F5E689 /* simple.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 4557B9271678E30700F5E689 /* simple.morsel */; };
 		4557B9361678E30700F5E689 /* ui_bad.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 4557B9281678E30700F5E689 /* ui_bad.morsel */; };
 		4557B9391678E35400F5E689 /* CLocalMorselsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4557B9381678E35400F5E689 /* CLocalMorselsViewController.m */; };
@@ -94,6 +99,13 @@
 		450749121678D4D9009D3C46 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		450749131678D4D9009D3C46 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4510114B167A67C8007CCEDF /* Asserts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asserts.h; sourceTree = "<group>"; };
+		4510114C167A8087007CCEDF /* CResizerThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CResizerThumb.h; sourceTree = "<group>"; };
+		4510114D167A8087007CCEDF /* CResizerThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CResizerThumb.m; sourceTree = "<group>"; };
+		4510114F167A8095007CCEDF /* Thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumb.png; sourceTree = "<group>"; };
+		45101151167A828A007CCEDF /* UIView+ConstraintConveniences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ConstraintConveniences.h"; sourceTree = "<group>"; };
+		45101152167A828A007CCEDF /* UIView+ConstraintConveniences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ConstraintConveniences.m"; sourceTree = "<group>"; };
+		45101154167A8BF4007CCEDF /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
+		45101156167A8C93007CCEDF /* resizable_button.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resizable_button.morsel; sourceTree = "<group>"; };
 		4557B9271678E30700F5E689 /* simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple.morsel; sourceTree = "<group>"; };
 		4557B9281678E30700F5E689 /* ui_bad.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ui_bad.morsel; sourceTree = "<group>"; };
 		4557B9371678E35400F5E689 /* CLocalMorselsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLocalMorselsViewController.h; sourceTree = "<group>"; };
@@ -247,10 +259,13 @@
 				4507490F1678D4D9009D3C46 /* CMorselClient.m */,
 				450749101678D4D9009D3C46 /* CMorselViewController.h */,
 				450749111678D4D9009D3C46 /* CMorselViewController.m */,
+				4510114F167A8095007CCEDF /* Thumb.png */,
 				4557B9371678E35400F5E689 /* CLocalMorselsViewController.h */,
 				4557B9381678E35400F5E689 /* CLocalMorselsViewController.m */,
 				450749121678D4D9009D3C46 /* Prefix.pch */,
 				450749131678D4D9009D3C46 /* main.m */,
+				4510114C167A8087007CCEDF /* CResizerThumb.h */,
+				4510114D167A8087007CCEDF /* CResizerThumb.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -258,6 +273,8 @@
 		4557B9191678E30700F5E689 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				45101156167A8C93007CCEDF /* resizable_button.morsel */,
+				45101154167A8BF4007CCEDF /* Button.png */,
 				45A7A9D916794CC700C5062F /* _test.morsel */,
 				4557B9271678E30700F5E689 /* simple.morsel */,
 				45A0FEBC167939B000FABF57 /* size_and_color.morsel */,
@@ -290,6 +307,8 @@
 			children = (
 				4557B93F1678E87000F5E689 /* NSLayoutConstraint+Conveniences.h */,
 				4557B9401678E87000F5E689 /* NSLayoutConstraint+Conveniences.m */,
+				45101151167A828A007CCEDF /* UIView+ConstraintConveniences.h */,
+				45101152167A828A007CCEDF /* UIView+ConstraintConveniences.m */,
 				4557B9411678E87000F5E689 /* UIView+Conveniences.h */,
 				4557B9421678E87000F5E689 /* UIView+Conveniences.m */,
 				45A7AA0D167954F000C5062F /* UIColor+Conveniences.h */,
@@ -434,6 +453,9 @@
 				4590D89C1679105100CF2473 /* map.morsel in Resources */,
 				45A0FEBD167939B000FABF57 /* size_and_color.morsel in Resources */,
 				45A7A9DA16794CC700C5062F /* _test.morsel in Resources */,
+				45101150167A8095007CCEDF /* Thumb.png in Resources */,
+				45101155167A8BF4007CCEDF /* Button.png in Resources */,
+				45101157167A8C93007CCEDF /* resizable_button.morsel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +502,8 @@
 				4590D8A1167916E400CF2473 /* CTypeConverter.m in Sources */,
 				45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */,
 				45A7AA10167954F400C5062F /* UIColor+Conveniences.m in Sources */,
+				4510114E167A8087007CCEDF /* CResizerThumb.m in Sources */,
+				45101153167A828A007CCEDF /* UIView+ConstraintConveniences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

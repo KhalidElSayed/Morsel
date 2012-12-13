@@ -172,6 +172,12 @@ static CMorselContext *gSharedInstance = NULL;
 				((UIImageView *)object).image = theImage;
 				}
 			}
+		else
+			{
+			UIImage *theImage = AssertCast_(UIImage, specification);
+			UIImageView *theView = AssertCast_(UIImageView, object);
+			theView.image = theImage;
+			}
 		}];
 	}
 

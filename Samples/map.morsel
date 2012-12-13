@@ -3,6 +3,11 @@
 ################################################################################
 
 root:
-  class: MKMapView
+  class: UIView
   size: [ 320, 416 ]
-
+  subviews:
+  - class: MKMapView
+    id: map
+  constraints:
+  - visual: 'H:|-0-[map]-0-|'
+  - visual: 'V:|-0-[map]-0-|'
