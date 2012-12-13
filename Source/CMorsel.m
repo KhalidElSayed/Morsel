@@ -247,7 +247,7 @@
 	[theDefaultSpecification addEntriesFromDictionary:inSpecification];
 	NSDictionary *theSpecification = theDefaultSpecification;
 
-
+	// #########################################################################
 
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		if ([@[@"id", @"class", @"subviews", @"constraints"] containsObject:key])
@@ -271,19 +271,14 @@
 				}
 			}
 
+		// #####################################################################
+
 		id theValue = obj;
 		
-		NSString *theType = [self typeForObject:inObject propertyName:theKeyValuePath];
-		if (theType != NULL)
-			{
-			id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
-			if (theNewValue != NULL)
-				{
-				theValue = theNewValue;
-				}
-			}
 		[self setObject:inObject value:theValue forKeyPath:theKeyValuePath];
 		}];
+
+	// #########################################################################
 
 	for (__strong id theChildSpecification in theSpecification[@"subviews"])
 		{
@@ -304,6 +299,8 @@
 		[self populateObject:theChild withSpecificationDictionary:theChildSpecification error:NULL];
 		}
 
+	// #########################################################################
+
 	for (id theConstraintsSpecification in theSpecification[@"constraints"])
 		{
 		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:NULL];
@@ -318,6 +315,19 @@
 
 - (BOOL)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath
 	{
+	id theValue = inValue;
+
+	NSString *theType = [self typeForObject:inObject propertyName:inKeyPath];
+	if (theType != NULL)
+		{
+		id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
+		if (theNewValue != NULL)
+			{
+			theValue = theNewValue;
+			}
+		}
+
+
 	NSDictionary *theTestDictionary = @{
 		@"class": [inObject class],
 		@"property": inKeyPath
@@ -329,18 +339,18 @@
 		if ([thePredicate evaluateWithObject:theTestDictionary] == YES)
 			{
 			void (^theBlock)(id object, NSString *property, id specification) = theDictionary[@"block"];
-			theBlock(inObject, inKeyPath, inValue);
+			theBlock(inObject, inKeyPath, theValue);
 			return(YES);
 			}
 		}
 
-	if (inValue == NULL)
+	if (theValue == NULL)
 		{
 		NSLog(@"TODO: We want an error param here!");
 		return(NO);
 		}
 
-	[inObject setValue:inValue forKeyPath:inKeyPath];
+	[inObject setValue:theValue forKeyPath:inKeyPath];
 	return(YES);
 	}
 
