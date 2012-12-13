@@ -3,10 +3,7 @@
 ################################################################################
 
 root:
-  id: root
   class: UIImageView
   image: { url: 'http://lorempixel.com/320/416/' }
-  constraints:
-    - visual: 'H:[root(320)]'
-    - visual: 'V:[root(416)]'
+  size: [ 320, 416 ]
 
