@@ -1,11 +1,11 @@
-# -*- tab-width: 2; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
 
 ################################################################################
 
 root:
   class: UIView
   id: root
-  backgroundColor: red2
+  backgroundColor: red
   subviews:
   - class: UILabel
     id: label1
