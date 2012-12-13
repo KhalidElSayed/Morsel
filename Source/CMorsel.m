@@ -148,6 +148,7 @@
 
 #pragma mark -
 
+ 
 - (BOOL)setup:(NSError **)outError
 	{
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
@@ -291,7 +292,7 @@
 	return(theObject);
 	}
 
-- (void)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath
+- (BOOL)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath
 	{
 	NSDictionary *theTestDictionary = @{
 		@"class": [inObject class],
@@ -305,11 +306,18 @@
 			{
 			void (^theBlock)(id object, NSString *property, id specification) = theDictionary[@"block"];
 			theBlock(inObject, inKeyPath, inValue);
-			return;
+			return(YES);
 			}
 		}
 
+	if (inValue == NULL)
+		{
+		NSLog(@"TODO: We want an error param here!");
+		return(NO);
+		}
+
 	[inObject setValue:inValue forKeyPath:inKeyPath];
+	return(YES);
 	}
 
 - (Class)classWithString:(NSString *)inString error:(NSError **)outError

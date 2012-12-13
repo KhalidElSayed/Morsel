@@ -41,6 +41,8 @@
 		4590D8C716791CBF00CF2473 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4590D8A0167916E400CF2473 /* CTypeConverter.m */; };
 		45A0FEBD167939B000FABF57 /* very_simple.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A0FEBC167939B000FABF57 /* very_simple.morsel */; };
 		45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A0FEBF16793CD700FABF57 /* CMorselContext.m */; };
+		45A7A9DA16794CC700C5062F /* _test.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A7A9D916794CC700C5062F /* _test.morsel */; };
+		45A7AA10167954F400C5062F /* UIColor+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,9 @@
 		45A0FEBC167939B000FABF57 /* very_simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = very_simple.morsel; sourceTree = "<group>"; };
 		45A0FEBE16793CD700FABF57 /* CMorselContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselContext.h; sourceTree = "<group>"; };
 		45A0FEBF16793CD700FABF57 /* CMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselContext.m; sourceTree = "<group>"; };
+		45A7A9D916794CC700C5062F /* _test.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _test.morsel; sourceTree = "<group>"; };
+		45A7AA0D167954F000C5062F /* UIColor+Conveniences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Conveniences.h"; sourceTree = "<group>"; };
+		45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Conveniences.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +257,7 @@
 		4557B9191678E30700F5E689 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				45A7A9D916794CC700C5062F /* _test.morsel */,
 				4557B9271678E30700F5E689 /* simple.morsel */,
 				45A0FEBC167939B000FABF57 /* very_simple.morsel */,
 				4590D89B1679105100CF2473 /* map.morsel */,
@@ -284,6 +290,8 @@
 				4557B9401678E87000F5E689 /* NSLayoutConstraint+Conveniences.m */,
 				4557B9411678E87000F5E689 /* UIView+Conveniences.h */,
 				4557B9421678E87000F5E689 /* UIView+Conveniences.m */,
+				45A7AA0D167954F000C5062F /* UIColor+Conveniences.h */,
+				45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -423,6 +431,7 @@
 				4557B9441678E87000F5E689 /* global.morsel in Resources */,
 				4590D89C1679105100CF2473 /* map.morsel in Resources */,
 				45A0FEBD167939B000FABF57 /* very_simple.morsel in Resources */,
+				45A7A9DA16794CC700C5062F /* _test.morsel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +477,7 @@
 				4557B9461678E87000F5E689 /* UIView+Conveniences.m in Sources */,
 				4590D8A1167916E400CF2473 /* CTypeConverter.m in Sources */,
 				45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */,
+				45A7AA10167954F400C5062F /* UIColor+Conveniences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

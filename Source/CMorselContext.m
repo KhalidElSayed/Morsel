@@ -10,6 +10,8 @@
 
 #import "CTypeConverter.h"
 
+#import "UIColor+Conveniences.h"
+
 #define IS_STRING(o) [o isKindOfClass:[NSString class]]
 #define IS_ARRAY(o) [o isKindOfClass:[NSArray class]]
 #define IS_DICT(o) [o isKindOfClass:[NSDictionary class]]
@@ -61,7 +63,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// UIColor
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([weakSelf colorWithObject:inValue error:NULL]);
+		return([UIColor colorwithString:inValue]);
 		}];
 
 	// UIFont

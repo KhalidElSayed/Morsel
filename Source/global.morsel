@@ -56,6 +56,6 @@ defaults:
 #  - class: UIView
 #    translatesAutoresizingMaskIntoConstraints: false
   - class: UILabel
-    backgroundColor: clearColor
+    backgroundColor: clear
     verticalContentHuggingPriority: 250
     horizontalContentHuggingPriority: 250
