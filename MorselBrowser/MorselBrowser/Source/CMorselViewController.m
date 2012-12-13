@@ -42,25 +42,6 @@
 			};
 		[self.morselClient start];
 		}
-
-//
-//	else
-//		{
-//		#if 1
-//
-//			self.morselClient = [[CMorselClient alloc] init];
-//
-//			__weak typeof(self) weakSelf = self;
-//
-//			self.morselClient.morselHandler = ^(CMorsel *morsel, NSError *error) {
-//				weakSelf.morsel = morsel;
-//				};
-//			[self.morselClient start];
-//		#else
-//			NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"profile" withExtension:@"yaml"];
-//			NSError *theError = NULL;
-//		#endif
-//		}
 	}
 
 - (void)setMorsel:(CMorsel *)morsel
@@ -69,20 +50,16 @@
 		{
 		_morsel = morsel;
 
-		[self.view removeConstraints:self.view.constraints];
+//		[self.view removeConstraints:self.view.constraints];
 
-		[self.morselRootView removeFromSuperview];
+//		[self.morselRootView removeFromSuperview];
 
 		self.morselRootView = _morsel.rootObject;
 		if (self.morselRootView != NULL)
 			{
 			[self.view addSubview:self.morselRootView];
-//			NSDictionary *theViews = @{
-//				@"root": self.morselRootView
-//				};
-
-			[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.morselRootView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-			[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.morselRootView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+			[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.morselRootView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+			[self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.morselRootView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
 			}
 		}
 	}

@@ -58,8 +58,9 @@
 	{
 	NSIndexPath *theIndexPath = [self.tableView indexPathForCell:sender];
 	NSURL *theURL = [self.morsels objectAtIndex:theIndexPath.row];
-	CMorselViewController *theViewController =segue.destinationViewController;
-	theViewController.URL = theURL;
+
+	CMorselViewController *theViewController = segue.destinationViewController;
+	theViewController.URL = theURL; // UIStoryboardReplaceSegue
 	}
 
 - (IBAction)flip:(id)sender
