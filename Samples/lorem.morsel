@@ -1,0 +1,27 @@
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+################################################################################
+
+root:
+  class: UIView
+  id: root
+  backgroundColor: gray
+  subviews:
+  - class: UILabel
+    id: label1
+    borderColor: red
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque in nibh orci. Morbi ac dui ligula. Etiam sollicitudin erat sed lacus semper pellentesque elementum metus laoreet. Integer tellus ligula, feugiat in vulputate ac, mollis ut diam. Maecenas enim velit, facilisis et sollicitudin at, gravida nec lacus. Praesent id urna sit amet neque placerat ullamcorper eget nec magna. Suspendisse ipsum ipsum, feugiat nec auctor eget, hendrerit eu quam. Duis interdum eleifend semper. Nulla facilisi.
+
+Duis eros est, varius non semper id, bibendum ac purus. Aliquam tempus ultricies rhoncus. Cras a tellus metus, sit amet faucibus dolor. In tellus erat, dignissim dapibus pulvinar in, vestibulum nec arcu. Curabitur suscipit purus eget ante varius ut hendrerit diam vehicula. Nam sapien neque, condimentum id lobortis ut, molestie ac est. Phasellus vitae est velit.
+
+Nullam ante magna, ullamcorper id dictum at, aliquam eget lorem. Aenean non arcu eget enim porta auctor. Mauris faucibus metus aliquam risus sagittis viverra. Duis vel tortor in neque consequat fermentum. Duis convallis sagittis eros eu dictum. Nunc dignissim ultrices porta. Aenean est lacus, suscipit consectetur pharetra et, rhoncus at ipsum. Aliquam erat volutpat. Aliquam erat volutpat. Sed vel mi lacus. Fusce vel nisi eu ligula interdum sagittis et eu turpis. Nunc lobortis enim nec dolor facilisis eget scelerisque lorem ullamcorper. Mauris a augue turpis. Nulla facilisi.
+
+Suspendisse non vulputate velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed molestie leo sed augue vestibulum auctor. Morbi eu metus nec tortor porta pellentesque eget sit amet tellus. Phasellus suscipit pretium magna, quis auctor nulla lacinia eu. Ut dapibus sollicitudin nibh eu pellentesque. Cras a faucibus diam. Quisque feugiat tortor non neque suscipit a suscipit enim vehicula. Nam ut varius leo. Sed eu enim id augue eleifend malesuada eu in urna. Suspendisse potenti. Integer id lacinia arcu. Curabitur eu magna purus, non feugiat est. In amet.'
+    font: { name: 'HelveticaNeue-Bold', size: 17 }
+    backgroundColor: blueColor
+  constraints:
+  - visual: 'H:[root(320)]'
+  - visual: 'V:[root(416)]'
+  - visual: 'H:|-10-[label1]-10-|'
+  - visual: 'V:|-10-[label1]'
+

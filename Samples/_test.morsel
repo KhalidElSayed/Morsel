@@ -5,8 +5,8 @@
 root:
   class: UIView
   id: root
-  backgroundColor: redColor
-  children:
+  backgroundColor: red2
+  subviews:
   - class: UILabel
     id: label1
     text: 'Hello world'

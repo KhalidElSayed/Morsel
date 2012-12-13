@@ -27,6 +27,7 @@
 		45101153167A828A007CCEDF /* UIView+ConstraintConveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101152167A828A007CCEDF /* UIView+ConstraintConveniences.m */; };
 		45101155167A8BF4007CCEDF /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 45101154167A8BF4007CCEDF /* Button.png */; };
 		45101157167A8C93007CCEDF /* resizable_button.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45101156167A8C93007CCEDF /* resizable_button.morsel */; };
+		45101159167A964C007CCEDF /* lorem.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45101158167A964C007CCEDF /* lorem.morsel */; };
 		4557B9351678E30700F5E689 /* simple.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 4557B9271678E30700F5E689 /* simple.morsel */; };
 		4557B9361678E30700F5E689 /* ui_bad.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 4557B9281678E30700F5E689 /* ui_bad.morsel */; };
 		4557B9391678E35400F5E689 /* CLocalMorselsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4557B9381678E35400F5E689 /* CLocalMorselsViewController.m */; };
@@ -106,6 +107,7 @@
 		45101152167A828A007CCEDF /* UIView+ConstraintConveniences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ConstraintConveniences.m"; sourceTree = "<group>"; };
 		45101154167A8BF4007CCEDF /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
 		45101156167A8C93007CCEDF /* resizable_button.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = resizable_button.morsel; sourceTree = "<group>"; };
+		45101158167A964C007CCEDF /* lorem.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lorem.morsel; sourceTree = "<group>"; };
 		4557B9271678E30700F5E689 /* simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple.morsel; sourceTree = "<group>"; };
 		4557B9281678E30700F5E689 /* ui_bad.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ui_bad.morsel; sourceTree = "<group>"; };
 		4557B9371678E35400F5E689 /* CLocalMorselsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLocalMorselsViewController.h; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		4557B9191678E30700F5E689 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				45101158167A964C007CCEDF /* lorem.morsel */,
 				45101156167A8C93007CCEDF /* resizable_button.morsel */,
 				45101154167A8BF4007CCEDF /* Button.png */,
 				45A7A9D916794CC700C5062F /* _test.morsel */,
@@ -456,6 +459,7 @@
 				45101150167A8095007CCEDF /* Thumb.png in Resources */,
 				45101155167A8BF4007CCEDF /* Button.png in Resources */,
 				45101157167A8C93007CCEDF /* resizable_button.morsel in Resources */,
+				45101159167A964C007CCEDF /* lorem.morsel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
