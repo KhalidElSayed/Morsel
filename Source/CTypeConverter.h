@@ -14,6 +14,7 @@ typedef id (^TypeConverterBlock)(id inValue, NSError **outError);
 
 - (void)addConverterForSourceType:(NSString *)inSourceType destinationType:(NSString *)inDestinationType block:(TypeConverterBlock)inBlock;
 - (void)addConverterForSourceClass:(Class)inSourceClass destinationClass:(Class)inDestinationClass block:(TypeConverterBlock)inBlock;
+- (void)addConverterForSourceClass:(Class)inSourceClass destinationType:(NSString *)inDestinationType block:(TypeConverterBlock)inBlock;
 
 - (NSString *)typeForClass:(Class)inClass;
 - (NSString *)typeForObject:(id)inObject;

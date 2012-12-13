@@ -42,6 +42,12 @@
 	[self addConverterForSourceType:theSourceType destinationType:theDestinationType block:inBlock];
 	}
 
+- (void)addConverterForSourceClass:(Class)inSourceClass destinationType:(NSString *)inDestinationType block:(TypeConverterBlock)inBlock;
+	{
+	NSString *theSourceType = [self typeForClass:inSourceClass createMapping:YES];
+	[self addConverterForSourceType:theSourceType destinationType:inDestinationType block:inBlock];
+	}
+
 #pragma mark -
 
 - (id)objectOfClass:(Class)inDestinationClass withObject:(id)inSourceObject error:(NSError **)outError

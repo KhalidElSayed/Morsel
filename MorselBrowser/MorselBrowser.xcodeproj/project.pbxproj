@@ -93,6 +93,7 @@
 		450749111678D4D9009D3C46 /* CMorselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselViewController.m; sourceTree = "<group>"; };
 		450749121678D4D9009D3C46 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		450749131678D4D9009D3C46 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4510114B167A67C8007CCEDF /* Asserts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asserts.h; sourceTree = "<group>"; };
 		4557B9271678E30700F5E689 /* simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple.morsel; sourceTree = "<group>"; };
 		4557B9281678E30700F5E689 /* ui_bad.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ui_bad.morsel; sourceTree = "<group>"; };
 		4557B9371678E35400F5E689 /* CLocalMorselsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLocalMorselsViewController.h; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 		4557B93A1678E87000F5E689 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4510114B167A67C8007CCEDF /* Asserts.h */,
 				4557B93B1678E87000F5E689 /* CMorsel.h */,
 				4557B93C1678E87000F5E689 /* CMorsel.m */,
 				45A0FEBE16793CD700FABF57 /* CMorselContext.h */,

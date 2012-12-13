@@ -56,28 +56,28 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// #########################################################################
 
-	// NSURL
+	// NSString -> NSURL
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([NSURL URLWithString:inValue]);
 		}];
 
-	// UIColor
+	// NSString -> UIColor
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([UIColor colorwithString:inValue]);
 		}];
 
-	// UIFont
+	// NSDictionary -> UIFont
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIFont class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([weakSelf fontWithSpecification:inValue error:NULL]);
 		}];
 
-	// UIImage
+	// NSString -> UIImage
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 		return([weakSelf imageNamed:inValue]);
 		}];
 
+	// NSDictionary -> UIImage
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-
 		UIImage *theImage = [weakSelf imageNamed:inValue[@"name"]];
 		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
 		if (theCapInsetsDictionary)
@@ -93,19 +93,58 @@ static CMorselContext *gSharedInstance = NULL;
 		return(theImage);
 		}];
 
+	// NSDictionary -> CGSize
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		CGSize theSize = {
+			.width = [inValue[@"width"] doubleValue],
+			.height = [inValue[@"height"] doubleValue],
+			};
+		return([NSValue valueWithCGSize:theSize]);
+		}];
 
 	// #########################################################################
 
+	// UIView.size
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block:^(id object, NSString *property, id specification) {
+		UIView *theView = AssertCast_(UIView, object);
+
+
+		CGSize theSize = [[self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:NULL] CGSizeValue];
+
+		if (theView.translatesAutoresizingMaskIntoConstraints == YES)
+			{
+			AssertUnimplemented_();
+			}
+		else
+			{
+//			NSDictionary *theViews = @{ @"view": theView };
+//			NSDictionary *theMetrics = @{ @"W": @(theSize.width), @"H": @(theSize.height) };
+//			[theView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[view(W)]" options:0 metrics:theMetrics views:theViews]];
+//			[theView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view(H)]" options:0 metrics:theMetrics views:theViews]];
+
+
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.width]];
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.height]];
+			}
+		}];
+
+
+	// UIButton.title
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^(id object, NSString *property, id specification) {
 		[(UIButton *)object setTitle:specification forState:UIControlStateNormal];
 		}];
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^(id object, NSString *property, id specification) {
-		[(UIButton *)object setBackgroundImage:specification[@"image"] forState:[specification[@"state"] integerValue]];
-		}];
+
+	// UIButton.titleColor
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^(id object, NSString *property, id specification) {
 		[(UIButton *)object setTitleColor:specification[@"color"] forState:[specification[@"state"] integerValue]];
 		}];
 
+	// UIButton.backgroundImage
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^(id object, NSString *property, id specification) {
+		[(UIButton *)object setBackgroundImage:specification[@"image"] forState:[specification[@"state"] integerValue]];
+		}];
+
+	// UIImageView.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
 		if (IS_DICT(specification))
 			{

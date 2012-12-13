@@ -171,6 +171,10 @@
 	else
 		{
 		self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] error:outError];
+		if (self.rootObject != NULL)
+			{
+			[self populateObject:self.rootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
+			}
 		return(YES);
 		}
 	}
@@ -187,6 +191,42 @@
 		NSLog(@"Failed to load class of type %@", theClassName);
 		return(NULL);
 		}
+
+	id theObject = NULL;
+	if ([theClass isSubclassOfClass:[UIButton class]])
+		{
+		theObject = [theClass buttonWithType:UIButtonTypeRoundedRect];
+		}
+	else
+		{
+		theObject = [[theClass alloc] init];
+		}
+
+	if ([theClass isSubclassOfClass:[UIView class]])
+		{
+		[theObject setTranslatesAutoresizingMaskIntoConstraints:NO];
+		}
+
+
+	if (theObject == NULL)
+		{
+		NSLog(@"Failed to create object");
+		return(NULL);
+		}
+
+	if (theID != NULL)
+		{
+		self.objectsByID[theID] = theObject;
+		}
+
+
+	return(theObject);
+	}
+
+- (BOOL)populateObject:(id)inObject withSpecificationDictionary:(NSDictionary *)inSpecification error:(NSError **)outError
+	{
+	NSString *theID = inSpecification[@"id"];
+	Class theClass = [inObject class];
 
 	NSMutableDictionary *theDefaultSpecification = [NSMutableDictionary dictionary];
 
@@ -207,25 +247,7 @@
 	[theDefaultSpecification addEntriesFromDictionary:inSpecification];
 	NSDictionary *theSpecification = theDefaultSpecification;
 
-	id theObject = NULL;
-	if ([theClass isSubclassOfClass:[UIButton class]])
-		{
-		theObject = [theClass buttonWithType:UIButtonTypeRoundedRect];
-		}
-	else
-		{
-		theObject = [[theClass alloc] init];
-		}
 
-	if (theObject == NULL)
-		{
-		NSLog(@"Failed to create object");
-		return(NULL);
-		}
-	if (theID != NULL)
-		{
-		self.objectsByID[theID] = theObject;
-		}
 
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		if ([@[@"id", @"class", @"children", @"constraints"] containsObject:key])
@@ -251,7 +273,7 @@
 
 		id theValue = obj;
 		
-		NSString *theType = [self typeForObject:theObject propertyName:theKeyValuePath];
+		NSString *theType = [self typeForObject:inObject propertyName:theKeyValuePath];
 		if (theType != NULL)
 			{
 			id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
@@ -260,7 +282,7 @@
 				theValue = theNewValue;
 				}
 			}
-		[self setObject:theObject value:theValue forKeyPath:theKeyValuePath];
+		[self setObject:inObject value:theValue forKeyPath:theKeyValuePath];
 		}];
 
 	for (__strong id theChildSpecification in theSpecification[@"children"])
@@ -271,25 +293,27 @@
 			}
 		id theChild = [self objectWithSpecificationDictionary:theChildSpecification error:outError];
 
-		if (theChild == NULL || [theObject isKindOfClass:[UIView class]] == NO || [theChild isKindOfClass:[UIView class]] == NO)
+		if (theChild == NULL || [inObject isKindOfClass:[UIView class]] == NO || [theChild isKindOfClass:[UIView class]] == NO)
 			{
-			return(NULL);
+			NSLog(@"WARNING: HUH?");
+			return(NO);
 			}
 
-		[theObject addSubview:theChild];
+		[inObject addSubview:theChild];
+
+		[self populateObject:theChild withSpecificationDictionary:theChildSpecification error:NULL];
 		}
 
-	[theObject setTranslatesAutoresizingMaskIntoConstraints:NO];
 	for (id theConstraintsSpecification in theSpecification[@"constraints"])
 		{
 		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:NULL];
 		if (theConstraints != NULL)
 			{
-			[theObject addConstraints:theConstraints];
+			[inObject addConstraints:theConstraints];
 			}
 		}
 
-	return(theObject);
+	return(YES);
 	}
 
 - (BOOL)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath

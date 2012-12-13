@@ -53,8 +53,8 @@ property-types:
     type: 'UIColor+UIControlState'
 
 defaults:
-#  - class: UIView
-#    translatesAutoresizingMaskIntoConstraints: false
+  - class: UIView
+    translatesAutoresizingMaskIntoConstraints: false
   - class: UILabel
     backgroundColor: clear
     verticalContentHuggingPriority: 250

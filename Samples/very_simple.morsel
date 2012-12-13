@@ -20,6 +20,7 @@ root:
     backgroundColor: '#FF0000'
   - class: UIView
     id: box3
+    size: { width: 50, height: 50 }
     backgroundColor: 'hsl(90,50%,100%)'
 
   constraints:
@@ -28,9 +29,8 @@ root:
   - visual: 'H:|-10-[label1]-10-|'
   - visual: 'V:|-10-[label1]'
 
-  - visual: 'H:|-10-[box1(20)]-0-[box2(20)]-0-[box3(20)]'
+  - visual: 'H:|-10-[box1(20)]-0-[box2(20)]-0-[box3]'
   - align-top: [box1, box2, box3]
   - visual: 'V:[label1]-[box1(20)]'
 
   - visual: 'V:[box2(20)]'
-  - visual: 'V:[box3(20)]'
