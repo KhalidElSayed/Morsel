@@ -102,27 +102,32 @@ static CMorselContext *gSharedInstance = NULL;
 		return([NSValue valueWithCGSize:theSize]);
 		}];
 
+	// NSArray -> CGSize
+	[self.typeConverter addConverterForSourceClass:[NSArray class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		CGSize theSize = {
+			.width = [inValue[0] doubleValue],
+			.height = [inValue[1] doubleValue],
+			};
+		return([NSValue valueWithCGSize:theSize]);
+		}];
+
+
 	// #########################################################################
 
 	// UIView.size
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block:^(id object, NSString *property, id specification) {
 		UIView *theView = AssertCast_(UIView, object);
 
-
 		CGSize theSize = [[self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:NULL] CGSizeValue];
 
 		if (theView.translatesAutoresizingMaskIntoConstraints == YES)
 			{
-			AssertUnimplemented_();
+			CGRect theFrame = theView.frame;
+			theFrame.size = theSize;
+			theView.frame = theFrame;
 			}
 		else
 			{
-//			NSDictionary *theViews = @{ @"view": theView };
-//			NSDictionary *theMetrics = @{ @"W": @(theSize.width), @"H": @(theSize.height) };
-//			[theView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[view(W)]" options:0 metrics:theMetrics views:theViews]];
-//			[theView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view(H)]" options:0 metrics:theMetrics views:theViews]];
-
-
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.width]];
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.height]];
 			}
