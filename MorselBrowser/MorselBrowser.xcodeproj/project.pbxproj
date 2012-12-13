@@ -39,7 +39,7 @@
 		4590D8B416791C6E00CF2473 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4590D8B216791C6E00CF2473 /* InfoPlist.strings */; };
 		4590D8B716791C6E00CF2473 /* CTypeConverterUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4590D8B616791C6E00CF2473 /* CTypeConverterUnitTests.m */; };
 		4590D8C716791CBF00CF2473 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4590D8A0167916E400CF2473 /* CTypeConverter.m */; };
-		45A0FEBD167939B000FABF57 /* very_simple.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A0FEBC167939B000FABF57 /* very_simple.morsel */; };
+		45A0FEBD167939B000FABF57 /* size_and_color.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A0FEBC167939B000FABF57 /* size_and_color.morsel */; };
 		45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A0FEBF16793CD700FABF57 /* CMorselContext.m */; };
 		45A7A9DA16794CC700C5062F /* _test.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A7A9D916794CC700C5062F /* _test.morsel */; };
 		45A7AA10167954F400C5062F /* UIColor+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */; };
@@ -117,7 +117,7 @@
 		4590D8B516791C6E00CF2473 /* CTypeConverterUnitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CTypeConverterUnitTests.h; sourceTree = "<group>"; };
 		4590D8B616791C6E00CF2473 /* CTypeConverterUnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CTypeConverterUnitTests.m; sourceTree = "<group>"; };
 		4590D8B816791C6E00CF2473 /* Unit Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unit Tests-Prefix.pch"; sourceTree = "<group>"; };
-		45A0FEBC167939B000FABF57 /* very_simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = very_simple.morsel; sourceTree = "<group>"; };
+		45A0FEBC167939B000FABF57 /* size_and_color.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = size_and_color.morsel; sourceTree = "<group>"; };
 		45A0FEBE16793CD700FABF57 /* CMorselContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselContext.h; sourceTree = "<group>"; };
 		45A0FEBF16793CD700FABF57 /* CMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselContext.m; sourceTree = "<group>"; };
 		45A7A9D916794CC700C5062F /* _test.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _test.morsel; sourceTree = "<group>"; };
@@ -260,7 +260,7 @@
 			children = (
 				45A7A9D916794CC700C5062F /* _test.morsel */,
 				4557B9271678E30700F5E689 /* simple.morsel */,
-				45A0FEBC167939B000FABF57 /* very_simple.morsel */,
+				45A0FEBC167939B000FABF57 /* size_and_color.morsel */,
 				4590D89B1679105100CF2473 /* map.morsel */,
 				4557B9281678E30700F5E689 /* ui_bad.morsel */,
 			);
@@ -432,7 +432,7 @@
 				4557B9361678E30700F5E689 /* ui_bad.morsel in Resources */,
 				4557B9441678E87000F5E689 /* global.morsel in Resources */,
 				4590D89C1679105100CF2473 /* map.morsel in Resources */,
-				45A0FEBD167939B000FABF57 /* very_simple.morsel in Resources */,
+				45A0FEBD167939B000FABF57 /* size_and_color.morsel in Resources */,
 				45A7A9DA16794CC700C5062F /* _test.morsel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

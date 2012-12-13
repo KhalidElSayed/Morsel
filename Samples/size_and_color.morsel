@@ -1,0 +1,34 @@
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+root:
+  class: UIView                                     # You can use the class name or a defined synonym
+  id: root                                          # id is actually optional for root object
+  backgroundColor: 'rgb(100,200,150)'               # Morsel supports all CSS style colour definitions, see later in this file...
+  size: [ 320, 416 ]                                # If we're using autolayout (which is on by default) this auto-generates constraints 
+
+  subviews:
+  - class: UILabel
+    id: label1
+    text: 'Hello world'                             # Sometimes text is just text
+    font: { name: 'HelveticaNeue-Bold', size: 17 }  # Fonts are just simple dictionaries for now
+
+  - class: UIView
+    id: box1
+    size: { width: 20, height: 20 }                 # Use a more verbose form if you want.
+    backgroundColor: rgb(67%,88%,0%)                # You don't have to quote this if you don't want to
+
+  - class: UIView
+    id: box2
+    size: [ 20, 30 ]
+    backgroundColor: '#FF0000'                      # HTML style colours. Note you must quote this or don't use a #
+
+  - class: UIView
+    id: box3
+    size: [ 20, 40 ]
+    backgroundColor: 'hsl(90,50%,100%)'             # Hue, saturation and brightness.
+
+  constraints:
+  - visual: 'H:|-10-[label1]-10-|'                  # Use standard visual constraint language. Refer to views by their id.
+  - visual: 'V:|-10-[label1]-[box1]'
+  - visual: 'H:|-10-[box1]-0-[box2]-0-[box3]'
+  - align-top: [box1, box2, box3]                   # This builds constraints too!

@@ -170,7 +170,7 @@
 		}
 	else
 		{
-		self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] error:outError];
+		self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
 		if (self.rootObject != NULL)
 			{
 			[self populateObject:self.rootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
@@ -181,9 +181,9 @@
 
 #pragma mark -
 
-- (id)objectWithSpecificationDictionary:(NSDictionary *)inSpecification error:(NSError **)outError
+- (id)objectWithSpecificationDictionary:(NSDictionary *)inSpecification root:(BOOL)inRoot error:(NSError **)outError
 	{
-	NSString *theID = inSpecification[@"id"];
+	NSString *theID = inSpecification[@"id"] ?: @"root";
 	NSString *theClassName = inSpecification[@"class"];
 	Class theClass = [self classWithString:theClassName error:outError];
 	if (theClass == NULL)
@@ -250,7 +250,7 @@
 
 
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		if ([@[@"id", @"class", @"children", @"constraints"] containsObject:key])
+		if ([@[@"id", @"class", @"subviews", @"constraints"] containsObject:key])
 			{
 			return;
 			}
@@ -285,13 +285,13 @@
 		[self setObject:inObject value:theValue forKeyPath:theKeyValuePath];
 		}];
 
-	for (__strong id theChildSpecification in theSpecification[@"children"])
+	for (__strong id theChildSpecification in theSpecification[@"subviews"])
 		{
 		if ([theChildSpecification isKindOfClass:[NSString class]])
 			{
 			theChildSpecification = self.specification[theChildSpecification];
 			}
-		id theChild = [self objectWithSpecificationDictionary:theChildSpecification error:outError];
+		id theChild = [self objectWithSpecificationDictionary:theChildSpecification root:NO error:outError];
 
 		if (theChild == NULL || [inObject isKindOfClass:[UIView class]] == NO || [theChild isKindOfClass:[UIView class]] == NO)
 			{
