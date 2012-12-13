@@ -151,6 +151,9 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// UIImageView.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
+
+		UIImageView *theImageView = AssertCast_(UIImageView, object);
+
 		if (IS_DICT(specification))
 			{
 			if (specification[@"url"])
@@ -162,22 +165,16 @@ static CMorselContext *gSharedInstance = NULL;
 					if (theResponse.statusCode == 200)
 						{
 						UIImage *theImage = [UIImage imageWithData:data];
-						((UIImageView *)object).image = theImage;
+						theImageView.image = theImage;
 						}
 					}];
-				}
-			else
-				{
-				UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
-				((UIImageView *)object).image = theImage;
+
+				return;
 				}
 			}
-		else
-			{
-			UIImage *theImage = AssertCast_(UIImage, specification);
-			UIImageView *theView = AssertCast_(UIImageView, object);
-			theView.image = theImage;
-			}
+
+		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
+		theImageView.image = theImage;
 		}];
 	}
 

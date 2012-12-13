@@ -317,17 +317,6 @@
 	{
 	id theValue = inValue;
 
-	NSString *theType = [self typeForObject:inObject propertyName:inKeyPath];
-	if (theType != NULL)
-		{
-		id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
-		if (theNewValue != NULL)
-			{
-			theValue = theNewValue;
-			}
-		}
-
-
 	NSDictionary *theTestDictionary = @{
 		@"class": [inObject class],
 		@"property": inKeyPath
@@ -348,6 +337,16 @@
 		{
 		NSLog(@"TODO: We want an error param here!");
 		return(NO);
+		}
+
+	NSString *theType = [self typeForObject:inObject propertyName:inKeyPath];
+	if (theType != NULL)
+		{
+		id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
+		if (theNewValue != NULL)
+			{
+			theValue = theNewValue;
+			}
 		}
 
 	[inObject setValue:theValue forKeyPath:inKeyPath];
