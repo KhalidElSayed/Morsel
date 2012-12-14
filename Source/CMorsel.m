@@ -339,7 +339,22 @@
 		return(NO);
 		}
 
-	NSString *theType = [self typeForObject:inObject propertyName:inKeyPath];
+	NSArray *theComponents = [inKeyPath componentsSeparatedByString:@"."];
+	if (theComponents.count > 1)
+		{
+		for (NSString *theComponent in [theComponents subarrayWithRange:(NSRange){ .length = theComponents.count - 1 }])
+			{
+			inObject = [inObject valueForKey:theComponent];
+			if (inObject == NULL)
+				{
+				NSParameterAssert(NO);
+				}
+			}
+		}
+	NSString *theKey = [theComponents lastObject];
+
+
+	NSString *theType = [self typeForObject:inObject propertyName:theKey];
 	if (theType != NULL)
 		{
 		id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
@@ -349,7 +364,7 @@
 			}
 		}
 
-	[inObject setValue:theValue forKeyPath:inKeyPath];
+	[inObject setValue:theValue forKeyPath:theKey];
 	return(YES);
 	}
 
@@ -457,10 +472,30 @@
 		NSArray *theViews = [self objectsWithIDs:theSpecification[@"align-left"]];
 		theConstraints = [NSLayoutConstraint constraintsForViews:theViews alignedOnAttribute:NSLayoutAttributeLeft];
 		}
+	else if (theSpecification[@"align-right"])
+		{
+		NSArray *theViews = [self objectsWithIDs:theSpecification[@"align-right"]];
+		theConstraints = [NSLayoutConstraint constraintsForViews:theViews alignedOnAttribute:NSLayoutAttributeRight];
+		}
 	else if (theSpecification[@"align-top"])
 		{
 		NSArray *theViews = [self objectsWithIDs:theSpecification[@"align-top"]];
 		theConstraints = [NSLayoutConstraint constraintsForViews:theViews alignedOnAttribute:NSLayoutAttributeTop];
+		}
+	else if (theSpecification[@"align-bottom"])
+		{
+		NSArray *theViews = [self objectsWithIDs:theSpecification[@"align-bottom"]];
+		theConstraints = [NSLayoutConstraint constraintsForViews:theViews alignedOnAttribute:NSLayoutAttributeTop];
+		}
+	else if (theSpecification[@"distribute-horizontally"])
+		{
+		NSArray *theViews = [self objectsWithIDs:theSpecification[@"distribute-horizontally"]];
+		theConstraints = [NSLayoutConstraint constraintsForViews:theViews distributed:UILayoutConstraintAxisHorizontal];
+		}
+	else if (theSpecification[@"distribute-vertically"])
+		{
+		NSArray *theViews = [self objectsWithIDs:theSpecification[@"distribute-vertically"]];
+		theConstraints = [NSLayoutConstraint constraintsForViews:theViews distributed:UILayoutConstraintAxisVertical];
 		}
 	else
 		{
