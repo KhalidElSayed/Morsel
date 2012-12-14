@@ -13,6 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "CTypeConverter.h"
+#import "Support.h"
 #import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
@@ -585,6 +586,17 @@
 		{
 		NSArray *theViews = [self objectsWithIDs:theSpecification[@"distribute-vertically"]];
 		theConstraints = [NSLayoutConstraint constraintsForViews:theViews distributed:UILayoutConstraintAxisVertical];
+		}
+	else if (theSpecification[@"center-y"])
+		{
+		id theValue = theSpecification[@"center-y"];
+		if (IS_STRING(theValue))
+			{
+			UIView *theView = self.objectsByID[theValue];
+
+			NSLayoutConstraint *theConstraint = [NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+			theConstraints = @[theConstraint];
+			}
 		}
 	else
 		{

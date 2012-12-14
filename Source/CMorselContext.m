@@ -11,10 +11,7 @@
 #import "CTypeConverter.h"
 #import "CYAMLDeserializer.h"
 #import "UIColor+Conveniences.h"
-
-#define IS_STRING(o) [o isKindOfClass:[NSString class]]
-#define IS_ARRAY(o) [o isKindOfClass:[NSArray class]]
-#define IS_DICT(o) [o isKindOfClass:[NSDictionary class]]
+#import "Support.h"
 
 @interface CMorselContext ()
 @property (readwrite, nonatomic, strong) CTypeConverter *typeConverter;
@@ -150,6 +147,43 @@ static CMorselContext *gSharedInstance = NULL;
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.height]];
 			}
 		}];
+
+	// UIView.width
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"width"] block:^(id object, NSString *property, id specification) {
+		UIView *theView = AssertCast_(UIView, object);
+
+		CGFloat theScalar = [specification floatValue];
+
+		if (theView.translatesAutoresizingMaskIntoConstraints == YES)
+			{
+			CGRect theFrame = theView.frame;
+			theFrame.size.width = theScalar;
+			theView.frame = theFrame;
+			}
+		else
+			{
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theScalar]];
+			}
+		}];
+
+	// UIView.height
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"height"] block:^(id object, NSString *property, id specification) {
+		UIView *theView = AssertCast_(UIView, object);
+
+		CGFloat theScalar = [specification floatValue];
+
+		if (theView.translatesAutoresizingMaskIntoConstraints == YES)
+			{
+			CGRect theFrame = theView.frame;
+			theFrame.size.height = theScalar;
+			theView.frame = theFrame;
+			}
+		else
+			{
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theScalar]];
+			}
+		}];
+
 
 	// UIButton.title
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^(id object, NSString *property, id specification) {

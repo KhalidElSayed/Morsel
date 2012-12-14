@@ -5,10 +5,13 @@
 root:
   class: UIView
   size: [ 320, 416 ]
+  backgroundColor: white
   subviews:
   - class: UIImageView
     id: image
-    image: { name: 'Button.png', capInsets: { left: 7, right: 7, top: 7, bottom: 7 } }
+    image: { name: 'ButtonPressed.png', capInsets: { left: 14, right: 14, top: 26, bottom: 26 } }
+    height: 52
   constraints:
-  - visual: 'H:|-0-[image]-0-|'
-  - visual: 'V:|-0-[image]-0-|'
+  - visual: 'H:|-10-[image]-10-|'
+  - visual: 'V:[image(52)]'
+  - center-y: image
