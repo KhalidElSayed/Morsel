@@ -1,0 +1,29 @@
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+################################################################################
+
+root:
+  class: UIView
+  id: root
+  backgroundColor: white
+  subviews:
+  - class: UILabel
+    id: label1
+    text: 'Hello world'
+    font: { name: 'HelveticaNeue', size: 17 }
+    borderColor: red
+    borderWidth: 1
+  - class: UILabel
+    id: label2
+    text: 'Hello world'
+    font: { name: 'HelveticaNeue', size: 17 }
+    textAlignment: right
+    borderColor: red
+    borderWidth: 1
+  constraints:
+  - visual: 'H:[root(320)]'
+  - visual: 'V:[root(416)]'
+  - visual: 'H:|-10-[label1]-10-|'
+  - visual: 'H:|-10-[label2]-10-|'
+  - visual: 'V:|-10-[label1]'
+  - distribute-vertically: [ label1, label2 ]

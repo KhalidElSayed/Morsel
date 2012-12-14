@@ -19,16 +19,20 @@
 #import "NSObject+Hacks.h"
 
 @interface CMorsel ()
+// Morsel properties...
 @property (readwrite, nonatomic, strong) NSData *data;
-@property (readwrite, nonatomic, strong) id rootObject;
 @property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
-@property (readwrite, nonatomic, strong) NSMutableDictionary *objectsByID;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
 @property (readonly, nonatomic, strong) NSDictionary *keySynonyms;
 @property (readwrite, nonatomic, strong) CMorselContext *context;
+
+// Session properties...
+@property (readwrite, nonatomic, strong) id rootObject;
+@property (readwrite, nonatomic, strong) id owner;
+@property (readwrite, nonatomic, strong) NSMutableDictionary *objectsByID;
 @end
 
 #pragma mark -
@@ -47,8 +51,6 @@
 		_data = inData;
 		_objectsByID = [NSMutableDictionary dictionary];
 		_context = [CMorselContext defaultContext];
-		[self setup:NULL];
-		[self process:NULL];
         }
     return self;
 	}
@@ -67,6 +69,12 @@
         }
     return self;
     }
+
+- (id)initWithName:(NSString *)inName error:(NSError **)outError;
+	{
+	NSURL *theURL = [[NSBundle mainBundle] URLForResource:inName withExtension:@"morsel"];
+	return([self initWithURL:theURL error:outError]);
+	}
 
 #pragma mark -
 
@@ -141,7 +149,6 @@
 				@"type": thePropertyType,
 				}];
 			}
-
 		_propertyTypes = [thePropertyTypes copy];
 		}
 	return(_propertyTypes);
@@ -151,7 +158,20 @@
 
 - (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil;
 	{
-	return(@[[self rootObject]]);
+	#warning TODO Deprecate root object
+
+
+	self.owner = ownerOrNil;
+
+	[self setup:NULL];
+	[self process:NULL];
+
+
+	id theRootObject = [self rootObject];
+
+
+
+	return(@[theRootObject]);
 	}
  
 - (BOOL)setup:(NSError **)outError
@@ -173,15 +193,38 @@
 		NSLog(@"%@", theError);
 		return(NO);
 		}
-	else
+
+	self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
+	if (self.rootObject != NULL)
 		{
-		self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
-		if (self.rootObject != NULL)
-			{
-			[self populateObject:self.rootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
-			}
-		return(YES);
+		[self populateObject:self.rootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
 		}
+
+	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
+	if (self.owner && theOwnerDictionary != NULL)
+		{
+		if (theOwnerDictionary[@"view"])
+			{
+			NSString *theViewID = theOwnerDictionary[@"view"];
+			id theView = self.objectsByID[theViewID];
+			AssertCast_(UIViewController, self.owner).view = theView;
+			}
+
+		NSDictionary *theOutlets = theOwnerDictionary[@"outlets"];
+		[theOutlets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+
+			id theOutletObject = self.objectsByID[obj];
+			[self.owner setValue:theOutletObject forKey:key];
+
+
+			}];
+
+
+
+		}
+
+
+	return(YES);
 	}
 
 #pragma mark -
@@ -255,7 +298,7 @@
 	// #########################################################################
 
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		if ([@[@"id", @"class", @"subviews", @"constraints"] containsObject:key])
+		if ([@[@"id", @"class", @"subviews", @"constraints", @"action", @"target"] containsObject:key])
 			{
 			return;
 			}
@@ -297,6 +340,37 @@
 			}
 		}
 
+	// #########################################################################
+	NSString *theActionName = theSpecification[@"action"];
+	if (theActionName != NULL)
+		{
+		id theTarget = self.owner;
+		UIControlEvents theControlEvents = UIControlEventTouchUpInside;
+
+		if ([theActionName isKindOfClass:[NSString class]])
+			{
+			SEL theAction = NSSelectorFromString(theActionName);
+			if ([theTarget respondsToSelector:theAction] == NO)
+				{
+				if ([theActionName characterAtIndex:theActionName.length - 1] == ':')
+					{
+					theActionName = [theActionName substringToIndex:theActionName.length - 1];
+					}
+				else
+					{
+					theActionName = [theActionName stringByAppendingString:@":"];
+					}
+				theAction = NSSelectorFromString(theActionName);
+				if ([theTarget respondsToSelector:theAction] == NO)
+					{
+					NSLog(@"Does not support selector");
+					return(NO);
+					}
+				}
+		
+			[(UIControl *)inObject addTarget:theTarget action:theAction forControlEvents:theControlEvents];
+			}
+		}
 	return(YES);
 	}
 
