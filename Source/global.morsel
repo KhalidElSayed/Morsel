@@ -5,7 +5,105 @@ class-synonyms:
   label: UILabel
   button: UIButton
   shape: CAShapeLayer
-  
+
+defaults:
+# TODO - this should probably go into property-types
+  - class: UIView
+    translatesAutoresizingMaskIntoConstraints: false
+  - class: UILabel
+    backgroundColor: clear
+#    verticalContentHuggingPriority: 250
+#    horizontalContentHuggingPriority: 250
+
+
+property-types:
+# TODO - replace property types with a dictionary of classes containing a dictionary of properties
+
+#### UIView
+
+  - class: UIView
+    property: borderColor
+    type: 'special:CGColor'
+    keyPath: layer.borderColor
+
+  - class: UIView
+    property: borderWidth
+    keyPath: layer.borderWidth
+
+  - class: UIView
+    property: contentMode
+    type: 'enum:UIViewContentMode'
+
+  - class: UIView
+    property: backgroundColor
+    type: 'class:UIColor'
+
+  - class: UIView
+    property: frame
+    type: 'struct:CGRect'
+
+#### UILabel
+
+  - class: UILabel
+    property: font
+    type: 'class:UIFont'
+
+  - class: UILabel
+    property: textColor
+    type: 'class:UIColor'
+
+  - class: UILabel
+    property: lineBreakMode
+    type: 'enum:NSLineBreakMode'
+
+  - class: UILabel
+    property: textAlignment
+    type: 'enum:NSTextAlignment'
+
+#### UIImageView
+
+  - class: UIImageView
+    property: image
+    type: 'class:UIImage'
+
+#### UIButton
+
+  - class: UIButton
+    property: backgroundImage
+    type: 'UIImage+UIControlState'
+
+  - class: UIButton
+    property: titleColor
+    type: 'UIColor'
+    keyPath: titleLabel.textColor
+
+  - class: UIButton
+    property: titleFont
+    type: 'UIFont'
+    keyPath: titleLabel.font
+
+#### UITextField
+
+  - class: UITextField
+    property: borderStyle
+    type: 'enum:UITextBorderStyle'
+
+  - class: UITextField
+    property: returnKeyType
+    type: 'enum:UIReturnKeyType'
+    keyPath: textInputTraits.returnKeyType    # WARNING: textInputTraits isn't a public class and exposes an implementation detail...
+
+  - class: UITextField
+    property: keyboardType
+    type: 'enum:UIKeyboardType'
+    keyPath: textInputTraits.keyboardType     # WARNING: textInputTraits isn't a public class and exposes an implementation detail...
+
+#### CALayer
+
+  - class: CALayer
+    property: borderColor
+    type: 'special:CGColor'
+
 enums:
   UIViewContentMode:
     UIViewContentModeScaleToFill: 0
@@ -108,75 +206,3 @@ enums:
     UITextAutocapitalizationTypeWords: 1
     UITextAutocapitalizationTypeSentences: 2
     UITextAutocapitalizationTypeAllCharacters: 3
-
-
-property-types:
-  - class: UIView
-    property: contentMode
-    type: 'enum:UIViewContentMode'
-  - class: UIView
-    property: backgroundColor
-    type: 'class:UIColor'
-  - class: UIView
-    property: frame
-    type: 'struct:CGRect'
-
-  - class: UILabel
-    property: font
-    type: 'class:UIFont'
-  - class: UILabel
-    property: textColor
-    type: 'class:UIColor'
-  - class: UILabel
-    property: lineBreakMode
-    type: 'enum:NSLineBreakMode'
-  - class: UILabel
-    property: textAlignment
-    type: 'enum:NSTextAlignment'
-
-  - class: UIImageView
-    property: image
-    type: 'class:UIImage'
-
-  - class: UIButton
-    property: backgroundImage
-    type: 'UIImage+UIControlState'
-  - class: UIButton
-    property: titleColor
-    type: 'UIColor+UIControlState'
-
-  - class: UITextField
-    property: borderStyle
-    type: 'enum:UITextBorderStyle'
-
-  - class: UITextField
-    property: returnKeyType
-    type: 'enum:UIReturnKeyType'
-    # WARNING: textInputTraits isn't a public class and exposes an implementation detail...
-    keyPath: textInputTraits.returnKeyType
-  - class: UITextField
-    property: keyboardType
-    type: 'enum:UIKeyboardType'
-    # WARNING: textInputTraits isn't a public class and exposes an implementation detail...
-    keyPath: textInputTraits.keyboardType
-
-  - class: CALayer
-    property: borderColor
-    type: 'special:CGColor'
-
-  - class: UIView
-    property: borderColor
-    type: 'special:CGColor'
-    keyPath: layer.borderColor
-
-  - class: UIView
-    property: borderWidth
-    keyPath: layer.borderWidth
-
-defaults:
-  - class: UIView
-    translatesAutoresizingMaskIntoConstraints: false
-  - class: UILabel
-    backgroundColor: clear
-#    verticalContentHuggingPriority: 250
-#    horizontalContentHuggingPriority: 250
