@@ -16,7 +16,11 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Morsel" id="d1t-Xq-1Zy">
                         <barButtonItem key="leftBarButtonItem" title="Master" id="A22-Ff-BcD"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="qfH-Ha-zVi"/>
+                        <barButtonItem key="rightBarButtonItem" title="Test" id="qfH-Ha-zVi">
+                            <connections>
+                                <action selector="test:" destination="fRq-fD-Qwc" id="EJT-CV-aGh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRq-fD-Qwc" userLabel="First Responder" sceneMemberID="firstResponder"/>

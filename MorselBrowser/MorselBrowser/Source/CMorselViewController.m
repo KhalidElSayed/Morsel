@@ -54,10 +54,10 @@
 		{
 		_morsel = morsel;
 
-//		[self.view removeConstraints:self.view.constraints];
-//		[self.morselRootView removeFromSuperview];
+		[self.view removeConstraints:self.view.constraints];
+		[self.morselRootView removeFromSuperview];
 
-		self.morselRootView = _morsel.rootObject;
+		self.morselRootView = [_morsel instantiateWithOwner:NULL options:NULL][0];
 		if (self.morselRootView != NULL)
 			{
 			[self.view addSubview:self.morselRootView];
