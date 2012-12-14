@@ -11,5 +11,5 @@
 @interface NSLayoutConstraint (Conveniences)
 
 + (NSArray *)constraintsForViews:(NSArray *)inViews alignedOnAttribute:(NSLayoutAttribute)inAttribute;
-
++ (NSArray *)constraintsForViews:(NSArray *)inViews distributed:(UILayoutConstraintAxis)inAxis;
 @end
