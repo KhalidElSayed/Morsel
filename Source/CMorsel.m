@@ -27,7 +27,6 @@
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
-@property (readonly, nonatomic, strong) NSDictionary *keySynonyms;
 @property (readwrite, nonatomic, strong) CMorselContext *context;
 
 // Session properties...
@@ -42,7 +41,6 @@
 
 @synthesize defaults = _defaults;
 @synthesize classSynonyms = _classSynonyms;
-@synthesize keySynonyms = _keySynonyms;
 @synthesize propertyTypes = _propertyTypes;
 
 - (id)initWithData:(NSData *)inData error:(NSError **)outError;
@@ -114,24 +112,6 @@
 		_classSynonyms = [theClassSynonyms copy];
 		}
 	return(_classSynonyms);
-	}
-
-- (NSDictionary *)keySynonyms
-	{
-	if (_keySynonyms == NULL)
-		{
-		NSMutableDictionary *theKeySynonyms = [NSMutableDictionary dictionary];
-		if (self.globalSpecification[@"key-synonyms"])
-			{
-			[theKeySynonyms addEntriesFromDictionary:self.globalSpecification[@"key-synonyms"]];
-			}
-		if (self.specification[@"key-synonyms"])
-			{
-			[theKeySynonyms addEntriesFromDictionary:self.specification[@"key-synonyms"]];
-			}
-		_keySynonyms = [theKeySynonyms copy];
-		}
-	return(_keySynonyms);
 	}
 
 - (NSArray *)propertyTypes
@@ -458,12 +438,6 @@
 	inString = self.classSynonyms[inString] ?: inString;
 	Class theClass = NSClassFromString(inString);
 	return(theClass);
-	}
-
-- (NSString *)expandKey:(NSString *)inKey error:(NSError **)outError
-	{
-	inKey = self.keySynonyms[inKey] ?: inKey;
-	return(inKey);
 	}
 
 - (NSArray *)objectsWithIDs:(NSArray *)inIDs
