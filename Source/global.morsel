@@ -1,4 +1,4 @@
-# -*- tab-width: 2; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
 
 class-synonyms:
   view: UIView
@@ -10,47 +10,135 @@ key-synonyms:
   borderColor: layer.borderColor # deprecate
   borderWidth: layer.borderWidth # deprecate
   cornerRadius: layer.cornerRadius # deprecate
+
+  # WARNING: This isn't a public class and exposes an implementation detail...
+  returnKeyType: textInputTraits.returnKeyType
 # TBD the filter version doesn't work yet
 #  borderColor(view): layer.borderColor # TBD
 #  borderWidth(view): layer.borderWidth # TBD
 #  cornerRadius(view): layer.cornerRadius # TBD
 
-value-synonyms:
-  NSLineBreakByWordWrapping: 0
-  NSLineBreakByCharWrapping: 1
-  NSLineBreakByClipping: 2
-  NSLineBreakByTruncatingHead: 3
-  NSLineBreakByTruncatingTail: 4
-  NSLineBreakByTruncatingMiddle: 5
-  wordWrapping: 0
-  charWrapping: 1
-  clipping: 2
-  truncatingHead: 3
-  truncatingTail: 4
-  truncatingMiddle: 5
+enums:
+  UIViewContentMode:
+    UIViewContentModeScaleToFill: 0
+    UIViewContentModeScaleAspectFit: 1
+    UIViewContentModeScaleAspectFill: 2
+    UIViewContentModeRedraw: 3
+    UIViewContentModeCenter: 4
+    UIViewContentModeTop: 5
+    UIViewContentModeBottom: 6
+    UIViewContentModeLeft: 7
+    UIViewContentModeRight: 8
+    UIViewContentModeTopLeft: 9
+    UIViewContentModeTopRight: 10
+    UIViewContentModeBottomLeft: 11
+    UIViewContentModeBottomRight: 12
+    fill: 0
+    aspect-fit: 1
+    aspect-fill: 2
+    center: 4
+  NSLineBreakMode:
+    NSLineBreakByWordWrapping: 0
+    NSLineBreakByCharWrapping: 1
+    NSLineBreakByClipping: 2
+    NSLineBreakByTruncatingHead: 3
+    NSLineBreakByTruncatingTail: 4
+    NSLineBreakByTruncatingMiddle: 5
+    word-wrap: 0
+    character-wrap: 1
+    clip: 2
+    truncate-head: 3
+    truncate-tail: 4
+    truncate-middle: 5
+  NSTextAlignment:
+    NSTextAlignmentLeft: 0
+    NSTextAlignmentCenter: 1
+    NSTextAlignmentRight: 2
+    NSTextAlignmentJustified: 3
+    NSTextAlignmentNatural: 4
+    left: 0
+    center: 1
+    right: 2
+    justified: 3
+    natural: 4
+  UITextBorderStyle:
+    UITextBorderStyleNone: 0
+    UITextBorderStyleLine: 1
+    UITextBorderStyleBezel: 2
+    UITextBorderStyleRoundedRect: 3
+    line: 1
+    bezel: 2
+    rounded-rect: 3
+  UIReturnKeyType:
+    UIReturnKeyDefault: 0
+    UIReturnKeyGo: 1
+    UIReturnKeyGoogle: 2
+    UIReturnKeyJoin: 3
+    UIReturnKeyNext: 4
+    UIReturnKeyRoute: 5
+    UIReturnKeySearch: 6
+    UIReturnKeySend: 7
+    UIReturnKeyYahoo: 8
+    UIReturnKeyDone: 9
+    UIReturnKeyEmergencyCall: 10
+    default: 0
+    go: 1
+    google: 2
+    join: 3
+    next: 4
+    route: 5
+    search: 6
+    send: 7
+    yahoo: 8
+    done: 9
+    emergency-call: 10
 
 property-types:
-  - class: UILabel
-    property: font
-    type: 'class:UIFont'
-  - class: UILabel
-    property: textColor
-    type: 'class:UIColor'
+  - class: UIView
+    property: contentMode
+    type: 'enum:UIViewContentMode'
   - class: UIView
     property: backgroundColor
     type: 'class:UIColor'
   - class: UIView
     property: frame
     type: 'struct:CGRect'
+
+  - class: UILabel
+    property: font
+    type: 'class:UIFont'
+  - class: UILabel
+    property: textColor
+    type: 'class:UIColor'
+  - class: UILabel
+    property: lineBreakMode
+    type: 'enum:NSLineBreakMode'
+  - class: UILabel
+    property: textAlignment
+    type: 'enum:NSTextAlignment'
+
   - class: UIImageView
     property: image
     type: 'class:UIImage'
+
   - class: UIButton
     property: backgroundImage
     type: 'UIImage+UIControlState'
   - class: UIButton
     property: titleColor
     type: 'UIColor+UIControlState'
+
+  - class: UITextField
+    property: borderStyle
+    type: 'enum:UITextBorderStyle'
+
+  # WARNING: This isn't a public class and exposes an implementation detail...
+  - class: UITextInputTraits
+    property: returnKeyType
+    type: 'enum:UIReturnKeyType'
+#	keyPath; textInputTraits.returnKeyType # TODO not implemented yet
+
+
   - class: CALayer
     property: borderColor
     type: 'special:CGColor'
@@ -60,5 +148,5 @@ defaults:
     translatesAutoresizingMaskIntoConstraints: false
   - class: UILabel
     backgroundColor: clear
-    verticalContentHuggingPriority: 250
-    horizontalContentHuggingPriority: 250
+#    verticalContentHuggingPriority: 250
+#    horizontalContentHuggingPriority: 250

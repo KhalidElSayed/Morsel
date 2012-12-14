@@ -9,7 +9,7 @@
 #import "CMorselContext.h"
 
 #import "CTypeConverter.h"
-
+#import "CYAMLDeserializer.h"
 #import "UIColor+Conveniences.h"
 
 #define IS_STRING(o) [o isKindOfClass:[NSString class]]
@@ -68,7 +68,8 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// NSDictionary -> UIFont
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIFont class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([weakSelf fontWithSpecification:inValue error:NULL]);
+		UIFont *theFont = [UIFont fontWithName:inValue[@"name"] size:[inValue[@"size"] floatValue]];
+		return(theFont);
 		}];
 
 	// NSString -> UIImage
@@ -123,6 +124,11 @@ static CMorselContext *gSharedInstance = NULL;
 		return((__bridge id)theColor.CGColor);
 		}];
 
+	// #########################################################################
+
+
+
+
 
 	// #########################################################################
 
@@ -161,6 +167,15 @@ static CMorselContext *gSharedInstance = NULL;
 		[(UIButton *)object setBackgroundImage:specification[@"image"] forState:[specification[@"state"] integerValue]];
 		}];
 
+//	// UITextField.returnKeyType:
+//	// This gets around a bug, UITextField.returnKeyType is NOT KVC compliant.
+//	[self addPropertyHandlerForPredicate:[self predicateForClass:[UITextField class] property:@"returnKeyType"] block:^(id object, NSString *property, id specification) {
+//		UITextField *theTextField = AssertCast_(UITextField, object);
+//		specification = [self.typeConverter objectOfType:@"enum:UIReturnKeyType" withObject:specification error:NULL];
+//		theTextField.returnKeyType = [specification integerValue];
+//		}];
+
+
 	// UIImageView.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
 
@@ -188,7 +203,42 @@ static CMorselContext *gSharedInstance = NULL;
 		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
 		theImageView.image = theImage;
 		}];
+
+	[self loadEnumerations];
 	}
+
+- (void)loadEnumerations
+	{
+	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
+	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
+	NSDictionary *theSpecification = [theDeserializer deserializeURL:theURL error:NULL];
+
+	NSDictionary *theEnumerations = theSpecification[@"enums"];
+	[theEnumerations enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+
+		NSString *theEnumerationName = key;
+		NSDictionary *theEnumerationKeyValues = obj;
+		NSString *theEnumerationType = [NSString stringWithFormat:@"enum:%@", theEnumerationName];
+
+		[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError) {
+			NSLog(@"ENUM");
+			id theValue = theEnumerationKeyValues[inValue];
+			if (theValue == NULL)
+				{
+				AssertUnimplemented_();
+				}
+			return(theValue);
+			}];
+
+		[self.typeConverter addConverterForSourceClass:[NSNumber class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError) {
+			NSLog(@"NUMBER TO ENUM");
+			return(inValue);
+			}];
+		}];
+
+	}
+
+#pragma mark -
 
 - (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(void (^)(id object, NSString *property, id specification))inBlock
 	{
@@ -211,23 +261,6 @@ static CMorselContext *gSharedInstance = NULL;
 - (UIImage *)imageNamed:(NSString *)inName
 	{
 	return([UIImage imageNamed:inName]);
-	}
-
-- (UIFont *)fontWithSpecification:(id)inSpecification error:(NSError **)outError
-	{
-	UIFont *theFont = [UIFont fontWithName:inSpecification[@"name"] size:[inSpecification[@"size"] floatValue]];
-	return(theFont);
-	}
-
-- (CGRect)rectWithObject:(id)inObject error:(NSError **)outError
-	{
-	NSArray *theArray = inObject;
-	CGRect theRect;
-	theRect.origin.x = [theArray[0] floatValue];
-	theRect.origin.y = [theArray[1] floatValue];
-	theRect.size.width = [theArray[2] floatValue];
-	theRect.size.height = [theArray[3] floatValue];
-	return(theRect);
 	}
 
 @end

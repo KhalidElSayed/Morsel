@@ -16,6 +16,7 @@
 #import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
+#import "NSObject+Hacks.h"
 
 @interface CMorsel ()
 @property (readwrite, nonatomic, strong) NSData *data;
@@ -148,6 +149,10 @@
 
 #pragma mark -
 
+- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil;
+	{
+	return(@[[self rootObject]]);
+	}
  
 - (BOOL)setup:(NSError **)outError
 	{
@@ -264,7 +269,7 @@
 		if ([obj isKindOfClass:[NSString class]])
 			{
 			NSString *theParameterName = obj;
-			if ([theParameterName characterAtIndex:0] == '$')
+			if (theParameterName.length > 1 && [theParameterName characterAtIndex:0] == '$')
 				{
 				theParameterName = [theParameterName substringFromIndex:1];
 				obj = self.specification[@"parameters"][theParameterName];
@@ -364,7 +369,23 @@
 			}
 		}
 
-	[inObject setValue:theValue forKeyPath:theKey];
+	@try
+		{
+		[inObject setValue:theValue forKeyPath:theKey];
+		}
+	@catch (NSException *exception)
+		{
+//
+//		NSString *theSelector = [NSString stringWithFormat:@"set%@%@:", [[theKey substringToIndex:1] uppercaseString], [theKey substringFromIndex:1]];
+//		NSLog(@"%d", [inObject respondsToSelector:NSSelectorFromString(theSelector)]);
+//
+//		[inObject setValue:@(0) forKey:@"returnKeyType"];
+
+		NSLog(@"%@", exception);
+//NSLog(@"WHAT: %@", [inObject valueForKey:theKey]);
+//		[inObject setPropertyValue:NULL forKey:theKey];
+		return(NO);
+		}
 	return(YES);
 	}
 
@@ -486,6 +507,11 @@
 		{
 		NSArray *theViews = [self objectsWithIDs:theSpecification[@"align-bottom"]];
 		theConstraints = [NSLayoutConstraint constraintsForViews:theViews alignedOnAttribute:NSLayoutAttributeTop];
+		}
+	else if (theSpecification[@"align-baseline"])
+		{
+		NSArray *theViews = [self objectsWithIDs:theSpecification[@"align-baseline"]];
+		theConstraints = [NSLayoutConstraint constraintsForViews:theViews alignedOnAttribute:NSLayoutAttributeBaseline];
 		}
 	else if (theSpecification[@"distribute-horizontally"])
 		{

@@ -49,6 +49,7 @@
 		45A0FEC016793CD700FABF57 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A0FEBF16793CD700FABF57 /* CMorselContext.m */; };
 		45A7A9DA16794CC700C5062F /* _test.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45A7A9D916794CC700C5062F /* _test.morsel */; };
 		45A7AA10167954F400C5062F /* UIColor+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */; };
+		45E2B874167ADEF2007498DB /* NSObject+Hacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E2B873167ADEF2007498DB /* NSObject+Hacks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,8 @@
 		45A7A9D916794CC700C5062F /* _test.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _test.morsel; sourceTree = "<group>"; };
 		45A7AA0D167954F000C5062F /* UIColor+Conveniences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Conveniences.h"; sourceTree = "<group>"; };
 		45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Conveniences.m"; sourceTree = "<group>"; };
+		45E2B872167ADEF2007498DB /* NSObject+Hacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Hacks.h"; sourceTree = "<group>"; };
+		45E2B873167ADEF2007498DB /* NSObject+Hacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Hacks.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +319,8 @@
 				4557B9421678E87000F5E689 /* UIView+Conveniences.m */,
 				45A7AA0D167954F000C5062F /* UIColor+Conveniences.h */,
 				45A7AA0E167954F000C5062F /* UIColor+Conveniences.m */,
+				45E2B872167ADEF2007498DB /* NSObject+Hacks.h */,
+				45E2B873167ADEF2007498DB /* NSObject+Hacks.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -508,6 +513,7 @@
 				45A7AA10167954F400C5062F /* UIColor+Conveniences.m in Sources */,
 				4510114E167A8087007CCEDF /* CResizerThumb.m in Sources */,
 				45101153167A828A007CCEDF /* UIView+ConstraintConveniences.m in Sources */,
+				45E2B874167ADEF2007498DB /* NSObject+Hacks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

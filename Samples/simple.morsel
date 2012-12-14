@@ -5,9 +5,11 @@
 root:
   class: UIView
   size: [ 320, 416 ]
+  backgroundColor: black
   subviews:
   - class: UIImageView
     id: image
+    contentMode: UIViewContentModeScaleAspectFill
     image: { url: 'http://lorempixel.com/320/416/' }
   constraints:
   - visual: 'H:|-0-[image]-0-|'
