@@ -100,19 +100,19 @@ static int hexdec(const char *hex, int len);
 		if ([theResult rangeAtIndex:1].location != NSNotFound)
 			{
 			NSString *theHex = [inString substringWithRange:[theResult rangeAtIndex:1]];
-			int D = hexdec([theHex UTF8String], 0);
-			CGFloat R = (CGFloat)((D & 0xF00) >> 8) / 15.0;
-			CGFloat G = (CGFloat)((D & 0x0F0) >> 4) / 15.0;
-			CGFloat B = (CGFloat)((D & 0x00F) >> 0) / 15.0;
+			UInt32 D = hexdec([theHex UTF8String], 0);
+			CGFloat R = (CGFloat)((D & 0x0F00) >> 8) / 15.0;
+			CGFloat G = (CGFloat)((D & 0x00F0) >> 4) / 15.0;
+			CGFloat B = (CGFloat)((D & 0x000F) >> 0) / 15.0;
 			theColor = [UIColor colorWithRed:R green:G blue:B alpha:1.0];
 			}
 		else
 			{
 			NSString *theHex = [inString substringWithRange:[theResult rangeAtIndex:2]];
-			int D = hexdec([theHex UTF8String], 0);
-			CGFloat R = (CGFloat)((D & 0xFF0000) >> 16) / 255.0;
-			CGFloat G = (CGFloat)((D & 0x00FF00) >> 8) / 255.0;
-			CGFloat B = (CGFloat)((D & 0x00FF00) >> 0) / 255.0;
+			UInt32 D = (UInt32)hexdec([theHex UTF8String], 0);
+			CGFloat R = (CGFloat)((D & 0x00FF0000) >> 16) / 255.0;
+			CGFloat G = (CGFloat)((D & 0x0000FF00) >> 8) / 255.0;
+			CGFloat B = (CGFloat)((D & 0x000000FF) >> 0) / 255.0;
 			theColor = [UIColor colorWithRed:R green:G blue:B alpha:1.0];
 			}
 		return(theColor);
