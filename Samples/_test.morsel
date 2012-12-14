@@ -17,11 +17,9 @@ root:
   - class: UILabel
     id: nameLabel
     text: 'Name:'
-    font: { name: 'HelveticaNeue', size: 17 }
 
   - class: UITextField
     id: nameField
-    text: ''
     placeholder: 'name'
     borderStyle: bezel
     returnKeyType: next
@@ -29,11 +27,9 @@ root:
   - class: UILabel
     id: passwordLabel
     text: 'Password:'
-    font: { name: 'HelveticaNeue', size: 17 }
 
   - class: UITextField
     id: passwordField
-    text: ''
     placeholder: 'password'
     borderStyle: bezel
     secureTextEntry: true
