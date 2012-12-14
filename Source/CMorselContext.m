@@ -111,6 +111,18 @@ static CMorselContext *gSharedInstance = NULL;
 		return([NSValue valueWithCGSize:theSize]);
 		}];
 
+	// UIColor -> CGColor
+	[self.typeConverter addConverterForSourceClass:[UIColor class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		UIColor *theColor = AssertCast_(UIColor, inValue);
+		return((__bridge id)theColor.CGColor);
+		}];
+
+	// NSString -> CGColor
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:inValue error:outError];
+		return((__bridge id)theColor.CGColor);
+		}];
+
 
 	// #########################################################################
 
