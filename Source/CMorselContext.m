@@ -221,7 +221,6 @@ static CMorselContext *gSharedInstance = NULL;
 		NSString *theEnumerationType = [NSString stringWithFormat:@"enum:%@", theEnumerationName];
 
 		[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError) {
-			NSLog(@"ENUM");
 			id theValue = theEnumerationKeyValues[inValue];
 			if (theValue == NULL)
 				{
@@ -231,7 +230,6 @@ static CMorselContext *gSharedInstance = NULL;
 			}];
 
 		[self.typeConverter addConverterForSourceClass:[NSNumber class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError) {
-			NSLog(@"NUMBER TO ENUM");
 			return(inValue);
 			}];
 		}];

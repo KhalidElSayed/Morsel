@@ -138,7 +138,7 @@
 			NSPredicate *thePredicate = [self predicateForClass:theClass property:thePropertyType[@"property"]];
 			[thePropertyTypes addObject:@{
 				@"predicate": thePredicate,
-				@"type": thePropertyType[@"type"],
+				@"type": thePropertyType,
 				}];
 			}
 
@@ -260,27 +260,9 @@
 			return;
 			}
 
-		NSString *theKeyValuePath = [self expandKey:key error:NULL];
-		if (theKeyValuePath == NULL)
-			{
-			return;
-			}
-
-		if ([obj isKindOfClass:[NSString class]])
-			{
-			NSString *theParameterName = obj;
-			if (theParameterName.length > 1 && [theParameterName characterAtIndex:0] == '$')
-				{
-				theParameterName = [theParameterName substringFromIndex:1];
-				obj = self.specification[@"parameters"][theParameterName];
-				}
-			}
-
-		// #####################################################################
-
 		id theValue = obj;
 		
-		[self setObject:inObject value:theValue forKeyPath:theKeyValuePath];
+		[self setObject:inObject value:theValue forKeyPath:key];
 		}];
 
 	// #########################################################################
@@ -322,6 +304,20 @@
 	{
 	id theValue = inValue;
 
+	NSDictionary *theTypeDictionary = [self typeForObject:inObject propertyName:inKeyPath];
+	inKeyPath = theTypeDictionary[@"keyPath"] ?: inKeyPath;
+
+	if ([inValue isKindOfClass:[NSString class]])
+		{
+		NSString *theParameterName = inValue;
+		if (theParameterName.length > 1 && [theParameterName characterAtIndex:0] == '$')
+			{
+			theParameterName = [theParameterName substringFromIndex:1];
+			inValue = self.specification[@"parameters"][theParameterName];
+			}
+		}
+
+
 	NSDictionary *theTestDictionary = @{
 		@"class": [inObject class],
 		@"property": inKeyPath
@@ -358,8 +354,8 @@
 		}
 	NSString *theKey = [theComponents lastObject];
 
-
-	NSString *theType = [self typeForObject:inObject propertyName:theKey];
+	theTypeDictionary = [self typeForObject:inObject propertyName:theKey];
+	NSString *theType = theTypeDictionary[@"type"];
 	if (theType != NULL)
 		{
 		id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
@@ -375,15 +371,8 @@
 		}
 	@catch (NSException *exception)
 		{
-//
-//		NSString *theSelector = [NSString stringWithFormat:@"set%@%@:", [[theKey substringToIndex:1] uppercaseString], [theKey substringFromIndex:1]];
-//		NSLog(@"%d", [inObject respondsToSelector:NSSelectorFromString(theSelector)]);
-//
-//		[inObject setValue:@(0) forKey:@"returnKeyType"];
-
+		NSLog(@"Cannot set %@ to %@ on %@", theKey, theValue, inObject);
 		NSLog(@"%@", exception);
-//NSLog(@"WHAT: %@", [inObject valueForKey:theKey]);
-//		[inObject setPropertyValue:NULL forKey:theKey];
 		return(NO);
 		}
 	return(YES);
@@ -417,7 +406,7 @@
 	return(inSpecification);
 	}
 
-- (NSString *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName
+- (NSDictionary *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName
 	{
 	for (NSDictionary *thePropertyType in self.propertyTypes)
 		{

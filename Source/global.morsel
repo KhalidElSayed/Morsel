@@ -6,18 +6,6 @@ class-synonyms:
   button: UIButton
   shape: CAShapeLayer
   
-key-synonyms:
-  borderColor: layer.borderColor # deprecate
-  borderWidth: layer.borderWidth # deprecate
-  cornerRadius: layer.cornerRadius # deprecate
-
-  # WARNING: This isn't a public class and exposes an implementation detail...
-  returnKeyType: textInputTraits.returnKeyType
-# TBD the filter version doesn't work yet
-#  borderColor(view): layer.borderColor # TBD
-#  borderWidth(view): layer.borderWidth # TBD
-#  cornerRadius(view): layer.cornerRadius # TBD
-
 enums:
   UIViewContentMode:
     UIViewContentModeScaleToFill: 0
@@ -92,6 +80,35 @@ enums:
     yahoo: 8
     done: 9
     emergency-call: 10
+  UIKeyboardType:
+    UIKeyboardTypeDefault: 0
+    UIKeyboardTypeASCIICapable: 1
+    UIKeyboardTypeNumbersAndPunctuation: 2
+    UIKeyboardTypeURL: 3
+    UIKeyboardTypeNumberPad: 4
+    UIKeyboardTypePhonePad: 5
+    UIKeyboardTypeNamePhonePad: 6
+    UIKeyboardTypeEmailAddress: 7
+    UIKeyboardTypeDecimalPad: 8
+    UIKeyboardTypeTwitter: 9
+    UIKeyboardTypeAlphabet: 1
+  UIKeyboardAppearance:
+    UIKeyboardAppearanceDefault: 0
+    UIKeyboardAppearanceAlert: 1
+  UITextSpellCheckingType:
+    UITextSpellCheckingTypeDefault: 0
+    UITextSpellCheckingTypeNo: 1
+    UITextSpellCheckingTypeYes: 2
+  UITextAutocorrectionType:
+    UITextAutocorrectionTypeDefault: 0
+    UITextAutocorrectionTypeNo: 1
+    UITextAutocorrectionTypeYes: 2
+  UITextAutocapitalizationType:
+    UITextAutocapitalizationTypeNone: 0
+    UITextAutocapitalizationTypeWords: 1
+    UITextAutocapitalizationTypeSentences: 2
+    UITextAutocapitalizationTypeAllCharacters: 3
+
 
 property-types:
   - class: UIView
@@ -132,16 +149,29 @@ property-types:
     property: borderStyle
     type: 'enum:UITextBorderStyle'
 
-  # WARNING: This isn't a public class and exposes an implementation detail...
-  - class: UITextInputTraits
+  - class: UITextField
     property: returnKeyType
     type: 'enum:UIReturnKeyType'
-#	keyPath; textInputTraits.returnKeyType # TODO not implemented yet
-
+    # WARNING: textInputTraits isn't a public class and exposes an implementation detail...
+    keyPath: textInputTraits.returnKeyType
+  - class: UITextField
+    property: keyboardType
+    type: 'enum:UIKeyboardType'
+    # WARNING: textInputTraits isn't a public class and exposes an implementation detail...
+    keyPath: textInputTraits.keyboardType
 
   - class: CALayer
     property: borderColor
     type: 'special:CGColor'
+
+  - class: UIView
+    property: borderColor
+    type: 'special:CGColor'
+    keyPath: layer.borderColor
+
+  - class: UIView
+    property: borderWidth
+    keyPath: layer.borderWidth
 
 defaults:
   - class: UIView
