@@ -190,24 +190,12 @@ static CMorselContext *gSharedInstance = NULL;
 		[(UIButton *)object setTitle:specification forState:UIControlStateNormal];
 		}];
 
-	// UIButton.titleColor
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^(id object, NSString *property, id specification) {
-		[(UIButton *)object setTitleColor:specification[@"color"] forState:[specification[@"state"] integerValue]];
-		}];
-
 	// UIButton.backgroundImage
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^(id object, NSString *property, id specification) {
-		[(UIButton *)object setBackgroundImage:specification[@"image"] forState:[specification[@"state"] integerValue]];
+		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
+		UIButton *theButton = AssertCast_(UIButton, object);
+		[theButton setBackgroundImage:theImage forState:UIControlStateNormal];
 		}];
-
-//	// UITextField.returnKeyType:
-//	// This gets around a bug, UITextField.returnKeyType is NOT KVC compliant.
-//	[self addPropertyHandlerForPredicate:[self predicateForClass:[UITextField class] property:@"returnKeyType"] block:^(id object, NSString *property, id specification) {
-//		UITextField *theTextField = AssertCast_(UITextField, object);
-//		specification = [self.typeConverter objectOfType:@"enum:UIReturnKeyType" withObject:specification error:NULL];
-//		theTextField.returnKeyType = [specification integerValue];
-//		}];
-
 
 	// UIImageView.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
