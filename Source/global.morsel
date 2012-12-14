@@ -51,6 +51,9 @@ property-types:
   - class: UIButton
     property: titleColor
     type: 'UIColor+UIControlState'
+  - class: CALayer
+    property: borderColor
+    type: 'special:CGColor'
 
 defaults:
   - class: UIView

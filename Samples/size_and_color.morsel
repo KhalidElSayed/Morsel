@@ -2,8 +2,8 @@
 
 root:
   class: UIView                                     # You can use the class name or a defined synonym
-  id: root                                          # id is actually optional for root object
-  backgroundColor: 'rgb(100,200,150)'               # Morsel supports all CSS style colour definitions, see later in this file...
+  id: root                                          # id is actually optional for root objects
+  backgroundColor: 'rgb(100,200,150)'               # Morsel supports all CSS style colour definitions, see more examples later.
   size: [ 320, 416 ]                                # If we're using autolayout (which is on by default) this auto-generates constraints 
 
   subviews:
@@ -20,15 +20,35 @@ root:
   - class: UIView
     id: box2
     size: [ 20, 30 ]
-    backgroundColor: '#FF0000'                      # HTML style colours. Note you must quote this or don't use a #
+    backgroundColor: '#FF0000'                      # HTML style colours. Note you must quote this.
 
   - class: UIView
     id: box3
     size: [ 20, 40 ]
     backgroundColor: 'hsl(90,50%,100%)'             # Hue, saturation and brightness.
 
+  - class: UIView
+    id: box4
+    size: [ 20, 60 ]
+    backgroundColor: '#F00'                         # Short hex
+
+  - class: UIView
+    id: box5
+    size: [ 20, 80 ]
+    backgroundColor: '#0F0'                         
+
+  - class: UIView
+    id: box6
+    size: [ 20, 100 ]
+    backgroundColor: '#00F'                         
+
   constraints:
   - visual: 'H:|-10-[label1]-10-|'                  # Use standard visual constraint language. Refer to views by their id.
-  - visual: 'V:|-10-[label1]-[box1]'
-  - visual: 'H:|-10-[box1]-0-[box2]-0-[box3]'
-  - align-top: [box1, box2, box3]                   # This builds constraints too!
+  - visual: 'V:|-10-[label1]'
+  - visual: 'H:|-10-[box1]'
+  - distribute-vertically: [ label1, box1 ]
+
+  - align-top: [ box1, box2, box3, box4,		    # This builds constraints too!
+      box5, box6 ]
+  - distribute-horizontally: [ box1, box2, box3,
+      box4, box5, box6 ]
