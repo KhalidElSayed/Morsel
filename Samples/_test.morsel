@@ -39,6 +39,10 @@ root:
     id: ok_button
     title: 'OK'
     action: ok
+    size: [ 120, 52 ]
+    titleFont: { name: 'HelveticaNeue-Bold', size: 18 }
+    titleColor: white
+    backgroundImage: { name: 'ButtonPressed.png', capInsets: { left: 14, right: 14 } }
 
   constraints:
   - visual: 'H:|-[nameLabel]-[nameField]-|'
