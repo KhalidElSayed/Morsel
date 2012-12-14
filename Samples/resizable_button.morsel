@@ -9,7 +9,7 @@ root:
   subviews:
   - class: UIImageView
     id: image
-    image: { name: 'ButtonPressed.png', capInsets: { left: 14, right: 14, top: 26, bottom: 26 } }
+    image: { name: 'ButtonPressed.png', capInsets: { left: 14, right: 14 } }
     height: 52
   constraints:
   - visual: 'H:|-10-[image]-10-|'
