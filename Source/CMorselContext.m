@@ -207,19 +207,6 @@ static CMorselContext *gSharedInstance = NULL;
 	return(theFont);
 	}
 
-- (UIColor *)colorWithObject:(id)inObject error:(NSError **)outError
-	{
-	NSDictionary *theColors = @{
-		@"clearColor": [UIColor clearColor],
-		@"redColor": [UIColor redColor],
-		@"greenColor": [UIColor greenColor],
-		@"grayColor": [UIColor grayColor],
-		@"blueColor": [UIColor blueColor],
-		@"whiteColor": [UIColor whiteColor],
-		};
-	return(theColors[inObject]);
-	}
-
 - (CGRect)rectWithObject:(id)inObject error:(NSError **)outError
 	{
 	NSArray *theArray = inObject;
