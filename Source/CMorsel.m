@@ -224,7 +224,13 @@
 	id theObject = NULL;
 	if ([theClass isSubclassOfClass:[UIButton class]])
 		{
-		theObject = [theClass buttonWithType:UIButtonTypeRoundedRect];
+		// TODO - this is a total hack
+		UIButtonType theButtonType = UIButtonTypeRoundedRect;
+		if (inSpecification[@"backgroundImage"] != NULL)
+			{
+			theButtonType = UIButtonTypeCustom;
+			}
+		theObject = [theClass buttonWithType:theButtonType];
 		}
 	else
 		{
@@ -235,7 +241,6 @@
 		{
 		[theObject setTranslatesAutoresizingMaskIntoConstraints:NO];
 		}
-
 
 	if (theObject == NULL)
 		{
