@@ -13,4 +13,8 @@
 @property (readwrite, nonatomic, assign) UILayoutPriority horizontalContentHuggingPriority;
 @property (readwrite, nonatomic, assign) UILayoutPriority verticalContentHuggingPriority;
 
+@property (readwrite, nonatomic, assign) UILayoutPriority horizontalContentCompressionResistancePriority;
+@property (readwrite, nonatomic, assign) UILayoutPriority verticalContentCompressionResistancePriority;
+
+
 @end

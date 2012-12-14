@@ -30,4 +30,28 @@
 	[self setContentHuggingPriority:priority forAxis:UILayoutConstraintAxisVertical];
 	}
 
+#pragma mark -
+
+- (UILayoutPriority)horizontalContentCompressionResistancePriority
+	{
+	return([self contentCompressionResistancePriorityForAxis:UILayoutConstraintAxisHorizontal]);
+	}
+
+- (void)setHorizontalContentCompressionResistancePriority:(UILayoutPriority)priority
+	{
+	[self setContentCompressionResistancePriority:priority forAxis:UILayoutConstraintAxisHorizontal];
+	}
+
+- (UILayoutPriority)verticalContentCompressionResistancePriority
+	{
+	return([self contentCompressionResistancePriorityForAxis:UILayoutConstraintAxisVertical]);
+	}
+
+- (void)setVerticalContentCompressionResistancePriority:(UILayoutPriority)priority
+	{
+	[self setContentCompressionResistancePriority:priority forAxis:UILayoutConstraintAxisVertical];
+	}
+
+
+
 @end
