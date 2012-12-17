@@ -63,7 +63,7 @@
 	if (theDictionary[@"url"] != NULL)
 		{
 		NSString *theURLString = [[NSString alloc] initWithData:theDictionary[@"url"] encoding:NSUTF8StringEncoding];
-		theURL = [NSURL URLWithString:theURLString];
+		self.URL = [NSURL URLWithString:theURLString];
 		}
 	else if (theDictionary[@"path"] != NULL)
 		{
@@ -74,7 +74,7 @@
 			theScheme = [[NSString alloc] initWithData:theDictionary[@"scheme"] encoding:NSUTF8StringEncoding];
 			}
 
-		theURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d/%@", sender.hostName, sender.port, thePath]];
+		self.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d/%@", sender.hostName, sender.port, thePath]];
 		}
 
 	[self start];

@@ -37,7 +37,7 @@
     [super viewWillDisappear:animated];
 
 	[self.serviceBrowser stop];
-
+	self.serviceBrowser = NULL;
 	}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
