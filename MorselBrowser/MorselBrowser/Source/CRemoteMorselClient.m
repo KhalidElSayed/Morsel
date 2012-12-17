@@ -13,6 +13,7 @@
 #import "CRemoteMorselContext.h"
 
 @interface CRemoteMorselClient () <NSNetServiceDelegate>
+@property (readwrite, nonatomic, assign) NSUInteger lastContentHash;
 @end
 
 @implementation CRemoteMorselClient
@@ -41,17 +42,22 @@
       timeoutInterval:0.0];
 
 	[NSURLConnection sendAsynchronousRequest:theRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-		NSLog(@"SUCCESS");
 		NSHTTPURLResponse *theResponse = (NSHTTPURLResponse *)response;
 		if (theResponse.statusCode == 200)
 			{
-			CRemoteMorselContext *theContext = [[CRemoteMorselContext alloc] init];
-			theContext.URL = self.URL;
-			CMorsel *theMorsel = [[CMorsel alloc] initWithData:data error:NULL];
-			theMorsel.context = theContext;
-			if (self.morselHandler)
+			NSLog(@"SUCCESS");
+			NSLog(@"%d", [data hash]);
+			if (self.lastContentHash != [data hash])
 				{
-				self.morselHandler(theMorsel, NULL);
+				CRemoteMorselContext *theContext = [[CRemoteMorselContext alloc] init];
+				theContext.URL = self.URL;
+				CMorsel *theMorsel = [[CMorsel alloc] initWithData:data error:NULL];
+				theMorsel.context = theContext;
+				if (self.morselHandler)
+					{
+					self.morselHandler(theMorsel, NULL);
+					}
+				self.lastContentHash = [data hash];
 				}
 			}
 
