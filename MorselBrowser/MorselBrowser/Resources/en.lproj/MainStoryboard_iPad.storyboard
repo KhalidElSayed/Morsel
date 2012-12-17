@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="kpw-tG-eDE" customClass="CMorselViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="loc-0a-fZT">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
@@ -25,14 +25,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRq-fD-Qwc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1560" y="745"/>
+            <point key="canvasLocation" x="1956" y="625"/>
         </scene>
         <!--Local Morsels View Controller - Local Morsels-->
         <scene sceneID="teK-lK-X81">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="5HV-Js-6Os" customClass="CLocalMorselsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="R6q-iU-g4B">
-                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="739"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -65,12 +65,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exS-tN-sjr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="672" y="-728"/>
+            <point key="canvasLocation" x="926" y="-1394"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Local Morsels-->
         <scene sceneID="viX-rv-aY3">
             <objects>
                 <navigationController id="87e-hv-GSM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Local Morsels" id="xVm-Rs-4hR"/>
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fZz-Oo-vOy">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -80,7 +81,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hq3-lm-EAY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="-728"/>
+            <point key="canvasLocation" x="-186" y="-1394"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="SXh-2D-S6F">
@@ -88,13 +89,13 @@
                 <splitViewController id="J2z-U6-QsW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
-                        <segue destination="87e-hv-GSM" kind="relationship" relationship="masterViewController" id="MtH-2S-AEz"/>
                         <segue destination="kTC-pK-VDS" kind="relationship" relationship="detailViewController" id="08d-kK-dXw"/>
+                        <segue destination="K9i-zW-OTa" kind="relationship" relationship="masterViewController" id="X5F-yU-ivO"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5w-9t-hdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-844" y="-259"/>
+            <point key="canvasLocation" x="-2988" y="-251"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1kW-ZR-Y7u">
@@ -112,10 +113,93 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pyg-9d-WHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="374" y="745"/>
+            <point key="canvasLocation" x="-1626" y="793"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="SVE-0T-WN7">
+            <objects>
+                <tabBarController id="K9i-zW-OTa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="wXr-5u-A4m">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="87e-hv-GSM" kind="relationship" relationship="viewControllers" id="ucP-Os-kzp"/>
+                        <segue destination="2kC-eL-LCB" kind="relationship" relationship="viewControllers" id="gYd-6s-hZi"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v2a-6y-ZvK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1336" y="-706"/>
+        </scene>
+        <!--Navigation Controller - Remote Morsels-->
+        <scene sceneID="tCb-mW-PLM">
+            <objects>
+                <navigationController id="2kC-eL-LCB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Remote Morsels" id="Rki-Sw-O0t"/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3KO-z9-CTv">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jhf-kG-p3Q" kind="relationship" relationship="rootViewController" id="wTU-BK-wEt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OiA-WS-nxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162" y="-208"/>
+        </scene>
+        <!--Bonjour Browser View Controller - Local Morsels-->
+        <scene sceneID="clt-wv-I5x">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="jhf-kG-p3Q" customClass="CBonjourBrowserViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Klb-ob-RT5">
+                        <rect key="frame" x="0.0" y="64" width="320" height="739"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="ruQ-xx-S4S" style="IBUITableViewCellStyleDefault" id="ufr-b8-2at">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ruQ-xx-S4S">
+                                            <rect key="frame" x="10" y="0.0" width="300" height="43"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="kpw-tG-eDE" kind="replace" splitViewControllerTargetIndex="1" id="cor-KD-OR5"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jhf-kG-p3Q" id="JiF-TF-Wpl"/>
+                            <outlet property="delegate" destination="jhf-kG-p3Q" id="GUP-Dz-fJ6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Local Morsels" id="Bbs-sZ-MDc"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KUL-bx-aiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="478" y="-174"/>
         </scene>
     </scenes>
     <classes>
+        <class className="CBonjourBrowserViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CBonjourBrowserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="more:"/>
+            </relationships>
+        </class>
         <class className="CLocalMorselsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CLocalMorselsViewController.h"/>
             <relationships>
@@ -135,6 +219,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mA6-bK-ohS"/>
+        <segue reference="cor-KD-OR5"/>
     </inferredMetricsTieBreakers>
 </document>
