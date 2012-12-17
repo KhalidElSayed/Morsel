@@ -27,7 +27,6 @@
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
-@property (readwrite, nonatomic, strong) CMorselContext *context;
 
 // Session properties...
 @property (readwrite, nonatomic, strong) id rootObject;
@@ -39,6 +38,7 @@
 
 @implementation CMorsel
 
+@synthesize context = _context;
 @synthesize defaults = _defaults;
 @synthesize classSynonyms = _classSynonyms;
 @synthesize propertyTypes = _propertyTypes;
@@ -49,7 +49,6 @@
         {
 		_data = inData;
 		_objectsByID = [NSMutableDictionary dictionary];
-		_context = [CMorselContext defaultContext];
         }
     return self;
 	}
@@ -76,6 +75,15 @@
 	}
 
 #pragma mark -
+
+- (CMorselContext *)context
+	{
+	if (_context == NULL)
+		{
+		_context = [CMorselContext defaultContext];
+		}
+	return(_context);
+	}
 
 - (NSArray *)defaults
 	{

@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class CMorselContext;
+
 @interface CMorsel : NSObject
 
-@property (readonly, nonatomic, strong) id rootObject;
+@property (readwrite, nonatomic, strong) CMorselContext *context;
 
 - (id)initWithData:(NSData *)inData error:(NSError **)outError;
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError;

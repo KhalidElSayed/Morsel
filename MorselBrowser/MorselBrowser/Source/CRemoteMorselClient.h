@@ -10,7 +10,7 @@
 
 @class CMorsel;
 
-@interface CMorselClient : NSObject
+@interface CRemoteMorselClient : NSObject
 
 @property (readwrite, nonatomic, strong) NSNetService *service;
 @property (readwrite, nonatomic, strong) NSURL *URL;

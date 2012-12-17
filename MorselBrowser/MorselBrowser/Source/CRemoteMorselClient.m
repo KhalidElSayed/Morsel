@@ -6,14 +6,16 @@
 //  Copyright (c) 2012 toxicsoftware. All rights reserved.
 //
 
-#import "CMorselClient.h"
+#import "CRemoteMorselClient.h"
 
 #import "CMorsel.h"
 
-@interface CMorselClient () <NSNetServiceDelegate>
+#import "CRemoteMorselContext.h"
+
+@interface CRemoteMorselClient () <NSNetServiceDelegate>
 @end
 
-@implementation CMorselClient
+@implementation CRemoteMorselClient
 
 - (void)start
 	{
@@ -43,7 +45,10 @@
 		NSHTTPURLResponse *theResponse = (NSHTTPURLResponse *)response;
 		if (theResponse.statusCode == 200)
 			{
+			CRemoteMorselContext *theContext = [[CRemoteMorselContext alloc] init];
+			theContext.URL = self.URL;
 			CMorsel *theMorsel = [[CMorsel alloc] initWithData:data error:NULL];
+			theMorsel.context = theContext;
 			if (self.morselHandler)
 				{
 				self.morselHandler(theMorsel, NULL);
@@ -59,7 +64,6 @@
 - (void)netServiceDidResolveAddress:(NSNetService *)sender
 	{
 	NSDictionary *theDictionary = [NSNetService dictionaryFromTXTRecordData:sender.TXTRecordData];
-	NSURL *theURL = NULL;
 	if (theDictionary[@"url"] != NULL)
 		{
 		NSString *theURLString = [[NSString alloc] initWithData:theDictionary[@"url"] encoding:NSUTF8StringEncoding];

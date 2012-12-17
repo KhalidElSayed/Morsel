@@ -17,4 +17,6 @@
 
 + (CMorselContext *)defaultContext;
 
+- (UIImage *)imageNamed:(NSString *)inName;
+
 @end

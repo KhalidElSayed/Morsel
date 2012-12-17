@@ -9,12 +9,12 @@
 #import "CMorselViewController.h"
 
 #import "CMorsel.h"
-#import "CMorselClient.h"
+#import "CRemoteMorselClient.h"
 #import "CResizerThumb.h"
 #import "UIView+ConstraintConveniences.h"
 
 @interface CMorselViewController ()
-@property (readwrite, nonatomic, strong) CMorselClient *morselClient;
+@property (readwrite, nonatomic, strong) CRemoteMorselClient *morselClient;
 @property (readwrite, nonatomic, strong) CMorsel *morsel;
 @property (readwrite, nonatomic, strong) UIView *morselRootView;
 @end
@@ -35,7 +35,7 @@
 		}
 	else
 		{
-		self.morselClient = [[CMorselClient alloc] init];
+		self.morselClient = [[CRemoteMorselClient alloc] init];
 		self.morselClient.URL = self.URL;
 		self.morselClient.service = self.service;
 
