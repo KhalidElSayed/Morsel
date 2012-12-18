@@ -47,12 +47,17 @@ static CMorselContext *gSharedInstance = NULL;
 		_typeConverter = [[CTypeConverter alloc] init];
 		_propertyHandlers = [NSMutableArray array];
 
-		[self setup];
+		NSError *theError = NULL;
+		if ([self setup:&theError] == NO)
+			{
+			NSLog(@"ERROR: Could not create CMorselContext due to: %@", theError);
+			self = NULL;
+			}
         }
     return self;
     }
 
-- (void)setup
+- (BOOL)setup:(NSError **)outError
 	{
 	__weak typeof(self) weakSelf = self;
 
@@ -60,7 +65,11 @@ static CMorselContext *gSharedInstance = NULL;
 
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-	self.globalSpecification = [theDeserializer deserializeURL:theURL error:NULL];
+	self.globalSpecification = [theDeserializer deserializeURL:theURL error:outError];
+	if (self.globalSpecification == NULL)
+		{
+		return(NO);
+		}
 
 	// #########################################################################
 
@@ -141,7 +150,7 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	// UIView.size
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block:^(id object, NSString *property, id specification) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
 		CGSize theSize = [[self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:NULL] CGSizeValue];
@@ -157,10 +166,12 @@ static CMorselContext *gSharedInstance = NULL;
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.width]];
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.height]];
 			}
+
+		return(YES);
 		}];
 
 	// UIView.width
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"width"] block:^(id object, NSString *property, id specification) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"width"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
 		CGFloat theScalar = [specification floatValue];
@@ -175,10 +186,11 @@ static CMorselContext *gSharedInstance = NULL;
 			{
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theScalar]];
 			}
+		return(YES);
 		}];
 
 	// UIView.height
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"height"] block:^(id object, NSString *property, id specification) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"height"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
 		CGFloat theScalar = [specification floatValue];
@@ -193,10 +205,11 @@ static CMorselContext *gSharedInstance = NULL;
 			{
 			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theScalar]];
 			}
+		return(YES);
 		}];
 
 	// UIView.edge-constraints
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"edge-constraints"] block:^(id object, NSString *property, id specification) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"edge-constraints"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 		UIView *theSuperview = theView.superview;
 		NSDictionary *theDictionary = AssertCast_(NSDictionary, specification);
@@ -221,23 +234,26 @@ static CMorselContext *gSharedInstance = NULL;
 			CGFloat theScalar = -[theDictionary[@"bottom"] floatValue];
 			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:theSuperview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:theScalar]];
 			}
+		return(YES);
 		}];
 
 
 	// UIButton.title
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^(id object, NSString *property, id specification) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		[(UIButton *)object setTitle:specification forState:UIControlStateNormal];
+		return(YES);
 		}];
 
 	// UIButton.backgroundImage
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^(id object, NSString *property, id specification) {
-		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theButton setBackgroundImage:theImage forState:UIControlStateNormal];
+		return(YES);
 		}];
 
 	// UIImageView.image
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^(id object, NSString *property, id specification) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 
 		UIImageView *theImageView = AssertCast_(UIImageView, object);
 
@@ -246,8 +262,8 @@ static CMorselContext *gSharedInstance = NULL;
 			if (specification[@"url"])
 				{
 				NSURL *theURL = [self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:NULL];
-				NSURLRequest *theREquest = [NSURLRequest requestWithURL:theURL];
-				[NSURLConnection sendAsynchronousRequest:theREquest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+				NSURLRequest *theRequest = [NSURLRequest requestWithURL:theURL];
+				[NSURLConnection sendAsynchronousRequest:theRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
 					NSHTTPURLResponse *theResponse = (NSHTTPURLResponse *)response;
 					if (theResponse.statusCode == 200)
 						{
@@ -256,18 +272,24 @@ static CMorselContext *gSharedInstance = NULL;
 						}
 					}];
 
-				return;
+				return(YES);
 				}
 			}
 
 		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
 		theImageView.image = theImage;
+		return(YES);
 		}];
 
-	[self loadEnumerations];
+	if ([self loadEnumerations:outError] == NO)
+		{
+		return(NO);
+		}
+
+	return(YES);
 	}
 
-- (void)loadEnumerations
+- (BOOL)loadEnumerations:(NSError **)outError
 	{
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
@@ -294,6 +316,7 @@ static CMorselContext *gSharedInstance = NULL;
 			}];
 		}];
 
+	return(YES);
 	}
 
 - (NSArray *)defaults
@@ -347,7 +370,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 #pragma mark -
 
-- (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(void (^)(id object, NSString *property, id specification))inBlock
+- (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(BOOL (^)(id object, NSString *property, id specification, NSError **outError))inBlock
 	{
 	[self.propertyHandlers addObject:@{
 		@"predicate": inPredicate,

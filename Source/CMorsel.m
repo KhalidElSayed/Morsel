@@ -145,18 +145,21 @@
 
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
 
-	NSError *theError = NULL;
-	self.specification = [theDeserializer deserializeData:self.data error:&theError];
+	self.specification = [theDeserializer deserializeData:self.data error:outError];
 	if (self.specification == NULL)
 		{
-		NSLog(@"%@", theError);
 		return(NO);
 		}
 
 	id theRootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
-	if (theRootObject != NULL)
+	if (theRootObject == NULL)
 		{
-		[self populateObject:theRootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
+		return(NULL);
+		}
+
+	if ([self populateObject:theRootObject withSpecificationDictionary:self.specification[@"root"] error:outError] == NO)
+		{
+		return(NULL);
 		}
 
 	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
@@ -179,6 +182,7 @@
 			}];
 		}
 
+	// At the moment we just care about the root object...
 	NSArray *theObjects = @[ theRootObject ];
 
 	return(theObjects);
@@ -265,6 +269,7 @@
 
 	// #########################################################################
 
+	__block NSError *theError = NULL;
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		if ([@[@"id", @"class", @"subviews", @"constraints", @"action", @"target"] containsObject:key])
 			{
@@ -273,8 +278,19 @@
 
 		id theValue = obj;
 		
-		[self setObject:inObject value:theValue forKeyPath:key];
+		if ([self setObject:inObject value:theValue forKeyPath:key error:&theError] == NO)
+			{
+			*stop = YES;
+			}
 		}];
+	if (theError != NULL)
+		{
+		if (outError)
+			{
+			*outError = theError;
+			}
+		return(NO);
+		}
 
 	// #########################################################################
 
@@ -294,18 +310,23 @@
 
 		[inObject addSubview:theChild];
 
-		[self populateObject:theChild withSpecificationDictionary:theChildSpecification error:NULL];
+		if ([self populateObject:theChild withSpecificationDictionary:theChildSpecification error:outError] == NO)
+			{
+			return(NO);
+			}
 		}
 
 	// #########################################################################
 
 	for (id theConstraintsSpecification in theSpecification[@"constraints"])
 		{
-		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:NULL];
-		if (theConstraints != NULL)
+		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:outError];
+		if (theConstraints == NULL)
 			{
-			[inObject addConstraints:theConstraints];
+			return(NO);
 			}
+
+		[inObject addConstraints:theConstraints];
 		}
 
 	// #########################################################################
@@ -314,36 +335,45 @@
 	if (theActionName != NULL)
 		{
 		id theTarget = self.owner;
-		UIControlEvents theControlEvents = UIControlEventTouchUpInside;
-
-		if ([theActionName isKindOfClass:[NSString class]])
+		if (theTarget == NULL)
 			{
-			SEL theAction = NSSelectorFromString(theActionName);
-			if ([theTarget respondsToSelector:theAction] == NO)
+			NSLog(@"WARNING: Could not find a default target");
+			}
+		else
+			{
+			UIControlEvents theControlEvents = UIControlEventTouchUpInside;
+
+			if ([theActionName isKindOfClass:[NSString class]])
 				{
-				if ([theActionName characterAtIndex:theActionName.length - 1] == ':')
-					{
-					theActionName = [theActionName substringToIndex:theActionName.length - 1];
-					}
-				else
-					{
-					theActionName = [theActionName stringByAppendingString:@":"];
-					}
-				theAction = NSSelectorFromString(theActionName);
+				SEL theAction = NSSelectorFromString(theActionName);
 				if ([theTarget respondsToSelector:theAction] == NO)
 					{
-					NSLog(@"%@ does not support selector: %@", theTarget, theActionName);
-					return(NO);
+					if ([theActionName characterAtIndex:theActionName.length - 1] == ':')
+						{
+						theActionName = [theActionName substringToIndex:theActionName.length - 1];
+						}
+					else
+						{
+						theActionName = [theActionName stringByAppendingString:@":"];
+						}
+					theAction = NSSelectorFromString(theActionName);
+					if ([theTarget respondsToSelector:theAction] == NO)
+						{
+						NSLog(@"WARNING: %@ does not support selector: %@", theTarget, theActionName);
+						}
+					}
+
+				if (theTarget != NULL && theAction != NULL)
+					{
+					[(UIControl *)inObject addTarget:theTarget action:theAction forControlEvents:theControlEvents];
 					}
 				}
-		
-			[(UIControl *)inObject addTarget:theTarget action:theAction forControlEvents:theControlEvents];
 			}
 		}
 	return(YES);
 	}
 
-- (BOOL)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath
+- (BOOL)setObject:(id)inObject value:(id)inValue forKeyPath:(NSString *)inKeyPath error:(NSError **)outError
 	{
 	id theValue = inValue;
 
@@ -359,7 +389,6 @@
 			inValue = self.specification[@"parameters"][theParameterName];
 			}
 		}
-
 
 	NSDictionary *theTestDictionary = @{
 		@"class": [inObject class],

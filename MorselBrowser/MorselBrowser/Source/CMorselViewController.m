@@ -77,17 +77,17 @@
 			}
 		}
 
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
-		{
-		CResizerThumb *theThumb = [[CResizerThumb alloc] initWithFrame:CGRectZero];
-		theThumb.translatesAutoresizingMaskIntoConstraints = NO;
-		[self.morselRootView addSubview:theThumb];
-		theThumb.widthConstraint = [self.morselRootView constantWidthConstraint];
-		theThumb.heightConstraint = [self.morselRootView constantHeightConstraint];
-		NSDictionary *theViews = @{ @"thumb": theThumb };
-		[theThumb.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[thumb(16)]-0-|" options:0 metrics:NULL views:theViews]];
-		[theThumb.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[thumb(16)]-0-|" options:0 metrics:NULL views:theViews]];
-		}
+//	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+//		{
+//		CResizerThumb *theThumb = [[CResizerThumb alloc] initWithFrame:CGRectZero];
+//		theThumb.translatesAutoresizingMaskIntoConstraints = NO;
+//		[self.morselRootView addSubview:theThumb];
+//		theThumb.widthConstraint = [self.morselRootView constantWidthConstraint];
+//		theThumb.heightConstraint = [self.morselRootView constantHeightConstraint];
+//		NSDictionary *theViews = @{ @"thumb": theThumb };
+//		[theThumb.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[thumb(16)]-0-|" options:0 metrics:NULL views:theViews]];
+//		[theThumb.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[thumb(16)]-0-|" options:0 metrics:NULL views:theViews]];
+//		}
 	}
 
 - (IBAction)reload:(id)sender
