@@ -24,20 +24,19 @@
 
 @implementation CMorselViewController
 
-- (void)awakeFromNib
-	{
-	[super awakeFromNib];
-
-	if (self.splitViewController)
-		{
-		self.splitViewController.delegate = self;
-		}
-	}
+//- (void)awakeFromNib
+//	{
+//	[super awakeFromNib];
+//
+//	if (self.splitViewController)
+//		{
+//		self.splitViewController.delegate = self;
+//		}
+//	}
 
 - (void)viewDidLoad
 	{
     [super viewDidLoad];
-
 
 	if (self.URL.isFileURL == YES)
 		{
@@ -66,7 +65,7 @@
 		{
 		_morsel = morsel;
 
-		[self.view removeConstraints:self.view.constraints];
+		[self.view removeConstraints:[self.view recursiveConstraintsMatchingPredicate:[NSPredicate predicateWithFormat:@"firstItem == %@ OR secondItem == %@", self.morselRootView, self.morselRootView]]];
 		[self.morselRootView removeFromSuperview];
 
 		self.morselRootView = [_morsel instantiateWithOwner:NULL options:NULL][0];
