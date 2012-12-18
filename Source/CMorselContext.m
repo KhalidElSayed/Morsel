@@ -184,6 +184,34 @@ static CMorselContext *gSharedInstance = NULL;
 			}
 		}];
 
+	// UIView.edge-constraints
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"edge-constraints"] block:^(id object, NSString *property, id specification) {
+		UIView *theView = AssertCast_(UIView, object);
+		UIView *theSuperview = theView.superview;
+		NSDictionary *theDictionary = AssertCast_(NSDictionary, specification);
+
+		if (theDictionary[@"left"])
+			{
+			CGFloat theScalar = [theDictionary[@"left"] floatValue];
+			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:theSuperview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:theScalar]];
+			}
+		if (theDictionary[@"right"])
+			{
+			CGFloat theScalar = -[theDictionary[@"right"] floatValue];
+			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:theSuperview attribute:NSLayoutAttributeRight multiplier:1.0 constant:theScalar]];
+			}
+		if (theDictionary[@"top"])
+			{
+			CGFloat theScalar = [theDictionary[@"top"] floatValue];
+			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:theSuperview attribute:NSLayoutAttributeTop multiplier:1.0 constant:theScalar]];
+			}
+		if (theDictionary[@"bottom"])
+			{
+			CGFloat theScalar = -[theDictionary[@"bottom"] floatValue];
+			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:theSuperview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:theScalar]];
+			}
+		}];
+
 
 	// UIButton.title
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^(id object, NSString *property, id specification) {

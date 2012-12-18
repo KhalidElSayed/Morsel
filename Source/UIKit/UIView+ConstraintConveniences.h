@@ -10,6 +10,8 @@
 
 @interface UIView (ConstraintConveniences)
 
+- (NSArray *)recursiveConstraints;
+- (NSArray *)recursiveConstraintsMatchingPredicate:(NSPredicate *)inPredicate;
 - (NSLayoutConstraint *)constantWidthConstraint;
 - (NSLayoutConstraint *)constantHeightConstraint;
 

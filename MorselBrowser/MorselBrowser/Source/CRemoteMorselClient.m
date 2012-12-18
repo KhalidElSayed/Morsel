@@ -13,7 +13,7 @@
 #import "CRemoteMorselContext.h"
 
 @interface CRemoteMorselClient () <NSNetServiceDelegate>
-@property (readwrite, nonatomic, assign) NSUInteger lastContentHash;
+@property (readwrite, nonatomic, strong) NSData *lastData;
 @end
 
 @implementation CRemoteMorselClient
@@ -36,8 +36,6 @@
 
 - (void)fetch
 	{
-	NSLog(@"FETCHING");
-
 	NSURLRequest *theRequest = [NSURLRequest requestWithURL:self.URL cachePolicy:NSURLRequestReloadIgnoringCacheData
       timeoutInterval:0.0];
 
@@ -45,10 +43,10 @@
 		NSHTTPURLResponse *theResponse = (NSHTTPURLResponse *)response;
 		if (theResponse.statusCode == 200)
 			{
-			NSLog(@"SUCCESS");
-			NSLog(@"%d", [data hash]);
-			if (self.lastContentHash != [data hash])
+			if ([data isEqualToData:self.lastData] == NO)
 				{
+				NSLog(@"Change detected… loading…");
+
 				CRemoteMorselContext *theContext = [[CRemoteMorselContext alloc] init];
 				theContext.URL = self.URL;
 				CMorsel *theMorsel = [[CMorsel alloc] initWithData:data error:NULL];
@@ -57,7 +55,7 @@
 					{
 					self.morselHandler(theMorsel, NULL);
 					}
-				self.lastContentHash = [data hash];
+				self.lastData = data;
 				}
 			}
 
@@ -86,6 +84,8 @@
 
 		self.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d/%@", sender.hostName, sender.port, thePath]];
 		}
+
+	NSLog(@"> %@", self.URL);
 
 	[self start];
 	}

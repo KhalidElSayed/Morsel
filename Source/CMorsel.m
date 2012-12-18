@@ -18,6 +18,8 @@
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
 #import "NSObject+Hacks.h"
+#import "UIView+MorselExtensions.h"
+#import "NSLayoutConstraint+MorselExtensions.h"
 
 @interface CMorsel ()
 // Morsel properties...
@@ -245,6 +247,12 @@
 		theObject = [[theClass alloc] init];
 		}
 
+	if ([theObject respondsToSelector:@selector(setMorselID:)])
+		{
+		[theObject setMorselID:theID];
+		}
+
+
 	if ([theClass isSubclassOfClass:[UIView class]])
 		{
 		[theObject setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -333,6 +341,7 @@
 			[inObject addConstraints:theConstraints];
 			}
 		}
+	[inObject dumpConstraints];
 
 	// #########################################################################
 	NSString *theActionName = theSpecification[@"action"];

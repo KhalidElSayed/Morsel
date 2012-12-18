@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45001963167FE7D200C04480 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45001962167FE7D200C04480 /* UIView+MorselExtensions.m */; };
+		45001966167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45001965167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.m */; };
 		4501823E1670133000CCEF25 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4501823D1670133000CCEF25 /* UIKit.framework */; };
 		450182401670133000CCEF25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4501823F1670133000CCEF25 /* Foundation.framework */; };
 		450182421670133000CCEF25 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450182411670133000CCEF25 /* CoreGraphics.framework */; };
@@ -80,6 +82,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45001952167FD05500C04480 /* MorselBrowser.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MorselBrowser.entitlements; sourceTree = "<group>"; };
+		45001961167FE7D200C04480 /* UIView+MorselExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MorselExtensions.h"; sourceTree = "<group>"; };
+		45001962167FE7D200C04480 /* UIView+MorselExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MorselExtensions.m"; sourceTree = "<group>"; };
+		45001964167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MorselExtensions.h"; sourceTree = "<group>"; };
+		45001965167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MorselExtensions.m"; sourceTree = "<group>"; };
 		4501099216769AE900ECAAB8 /* CYAMLDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYAMLDeserializer.h; sourceTree = "<group>"; };
 		450182391670133000CCEF25 /* MorselBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4501823D1670133000CCEF25 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -242,6 +249,7 @@
 		450748FD1678D4D9009D3C46 /* MorselBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				45001952167FD05500C04480 /* MorselBrowser.entitlements */,
 				450749091678D4D9009D3C46 /* Source */,
 				450748FE1678D4D9009D3C46 /* Resources */,
 			);
@@ -316,6 +324,10 @@
 				45A0FEBF16793CD700FABF57 /* CMorselContext.m */,
 				4590D89F167916E400CF2473 /* CTypeConverter.h */,
 				4590D8A0167916E400CF2473 /* CTypeConverter.m */,
+				45001961167FE7D200C04480 /* UIView+MorselExtensions.h */,
+				45001962167FE7D200C04480 /* UIView+MorselExtensions.m */,
+				45001964167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.h */,
+				45001965167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.m */,
 				4557B93D1678E87000F5E689 /* global.morsel */,
 				4557B93E1678E87000F5E689 /* UIKit */,
 			);
@@ -532,6 +544,8 @@
 				45DD7325167BBAB00086A2CC /* CTestLoginViewController.m in Sources */,
 				45B895B1167BCFED004E2FF1 /* Support.m in Sources */,
 				4514F750167FB452001CA318 /* CRemoteMorselContext.m in Sources */,
+				45001963167FE7D200C04480 /* UIView+MorselExtensions.m in Sources */,
+				45001966167FE8AA00C04480 /* NSLayoutConstraint+MorselExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +661,7 @@
 		450182611670133000CCEF25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MorselBrowser/MorselBrowser.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MorselBrowser/Source/Prefix.pch;
 				INFOPLIST_FILE = MorselBrowser/Resources/Info.plist;
@@ -658,6 +673,7 @@
 		450182621670133000CCEF25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MorselBrowser/MorselBrowser.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MorselBrowser/Source/Prefix.pch;
 				INFOPLIST_FILE = MorselBrowser/Resources/Info.plist;
