@@ -10,6 +10,8 @@
 
 @class CTypeConverter;
 
+typedef BOOL (^MorselPropertyHandler)(id object, NSString *property, id specification, NSError **outError);
+
 /// CMorselContexts are global objects used to configure and extend morsel processing.
 @interface CMorselContext : NSObject
 
@@ -22,5 +24,7 @@
 + (CMorselContext *)defaultContext;
 
 - (UIImage *)imageNamed:(NSString *)inName;
+
+- (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(MorselPropertyHandler)inBlock;
 
 @end

@@ -400,8 +400,8 @@
 		NSPredicate *thePredicate = theDictionary[@"predicate"];
 		if ([thePredicate evaluateWithObject:theTestDictionary] == YES)
 			{
-			void (^theBlock)(id object, NSString *property, id specification) = theDictionary[@"block"];
-			theBlock(inObject, inKeyPath, theValue);
+			MorselPropertyHandler theBlock = theDictionary[@"block"];
+			theBlock(inObject, inKeyPath, theValue, outError);
 			return(YES);
 			}
 		}

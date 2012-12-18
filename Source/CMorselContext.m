@@ -373,7 +373,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 #pragma mark -
 
-- (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(BOOL (^)(id object, NSString *property, id specification, NSError **outError))inBlock
+- (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(MorselPropertyHandler)inBlock
 	{
 	[self.propertyHandlers addObject:@{
 		@"predicate": inPredicate,
