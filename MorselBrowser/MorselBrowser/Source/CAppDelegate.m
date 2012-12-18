@@ -14,17 +14,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
-    return YES;
+    return(YES);
 	}
 
 - (IBAction)test:(id)sender
 	{
-
-CTestLoginViewController *theViewController = [[CTestLoginViewController alloc] init];
-
-
-[self.window.rootViewController presentViewController:theViewController animated:YES completion:NULL];
-
+	CTestLoginViewController *theViewController = [[CTestLoginViewController alloc] init];
+	[self.window.rootViewController presentViewController:theViewController animated:YES completion:NULL];
 	}
 
 @end

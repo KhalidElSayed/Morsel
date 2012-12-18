@@ -59,7 +59,18 @@
 	NSIndexPath *theIndexPath = [self.tableView indexPathForCell:sender];
 	NSURL *theURL = [self.morsels objectAtIndex:theIndexPath.row];
 
-	CMorselViewController *theViewController = segue.destinationViewController;
+
+	CMorselViewController *theViewController = NULL;
+	if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+		{
+		theViewController = AssertCast_(CMorselViewController, [(UINavigationController *)(segue.destinationViewController) topViewController]);
+		}
+	else
+		{
+		theViewController = AssertCast_(CMorselViewController, segue.destinationViewController);
+		}
+
+
 	theViewController.URL = theURL; // UIStoryboardReplaceSegue
 	}
 

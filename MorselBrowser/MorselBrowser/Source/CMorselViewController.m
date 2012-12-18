@@ -13,19 +13,31 @@
 #import "CResizerThumb.h"
 #import "UIView+ConstraintConveniences.h"
 
-@interface CMorselViewController ()
+@interface CMorselViewController () <UISplitViewControllerDelegate>
 @property (readwrite, nonatomic, strong) CRemoteMorselClient *morselClient;
 @property (readwrite, nonatomic, strong) CMorsel *morsel;
 @property (readwrite, nonatomic, strong) UIView *morselRootView;
+@property (readwrite, nonatomic, strong) UIPopoverController *masterPopoverController;
 @end
 
 #pragma mark -
 
 @implementation CMorselViewController
 
+- (void)awakeFromNib
+	{
+	[super awakeFromNib];
+
+	if (self.splitViewController)
+		{
+		self.splitViewController.delegate = self;
+		}
+	}
+
 - (void)viewDidLoad
 	{
     [super viewDidLoad];
+
 
 	if (self.URL.isFileURL == YES)
 		{
@@ -77,13 +89,29 @@
 		[theThumb.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[thumb(16)]-0-|" options:0 metrics:NULL views:theViews]];
 		[theThumb.superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[thumb(16)]-0-|" options:0 metrics:NULL views:theViews]];
 		}
-
-
-
 	}
 
 - (IBAction)reload:(id)sender
 	{
+	}
+
+- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
+	{
+	NSLog(@"WILL HIDE");
+
+    barButtonItem.title = @"Morsels";
+    self.masterPopoverController = pc;
+
+	[self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+	}
+
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)button
+	{
+	NSLog(@"WILL SHOW: %@", button);
+
+    self.masterPopoverController = NULL;
+
+	[self.navigationItem setLeftBarButtonItem:NULL animated:YES];
 	}
 
 @end

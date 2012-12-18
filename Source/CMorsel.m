@@ -341,9 +341,9 @@
 			[inObject addConstraints:theConstraints];
 			}
 		}
-	[inObject dumpConstraints];
 
 	// #########################################################################
+
 	NSString *theActionName = theSpecification[@"action"];
 	if (theActionName != NULL)
 		{
@@ -366,7 +366,7 @@
 				theAction = NSSelectorFromString(theActionName);
 				if ([theTarget respondsToSelector:theAction] == NO)
 					{
-					NSLog(@"Does not support selector");
+					NSLog(@"%@ does not support selector: %@", theTarget, theActionName);
 					return(NO);
 					}
 				}
