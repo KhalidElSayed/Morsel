@@ -19,15 +19,12 @@
 - (void)loadView
 	{
 	CMorsel *theMorsel = [[CMorsel alloc] initWithName:@"_test" error:NULL];
-	NSArray *theObjects = [theMorsel instantiateWithOwner:self options:NULL];
+	NSArray *theObjects = [theMorsel instantiateWithOwner:self options:NULL error:NULL];
 	self.view = [theObjects objectAtIndex:0];
-	NSLog(@"%@", self.view);
-	NSLog(@"%@", self.nameField);
 	}
 
 - (IBAction)ok:(id)sender
 	{
-	NSLog(@"OK:");
 	NSString *theMessage = [NSString stringWithFormat:@"Hello %@", self.nameField.text];
 	UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:NULL message:theMessage delegate:self cancelButtonTitle:NULL otherButtonTitles:@"OK", NULL];
 	[theAlert show];
@@ -37,9 +34,5 @@
 	{
 	[self dismissViewControllerAnimated:YES completion:NULL];
 	}
-//- (IBAction)ok
-//	{
-//	NSLog(@"OK");
-//	}
 
 @end

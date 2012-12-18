@@ -15,6 +15,9 @@
 
 @property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readonly, nonatomic, strong) NSMutableArray *propertyHandlers;
+@property (readonly, nonatomic, strong) NSArray *defaults;
+@property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
+@property (readonly, nonatomic, strong) NSArray *propertyTypes;
 
 + (CMorselContext *)defaultContext;
 

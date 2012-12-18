@@ -18,6 +18,6 @@
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError;
 - (id)initWithName:(NSString *)inName error:(NSError **)outError;
 
-- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil;
+- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
 
 @end

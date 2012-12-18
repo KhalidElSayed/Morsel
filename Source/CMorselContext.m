@@ -14,6 +14,7 @@
 #import "Support.h"
 
 @interface CMorselContext ()
+@property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
 @property (readwrite, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readwrite, nonatomic, strong) NSMutableArray *propertyHandlers;
 @end
@@ -21,6 +22,10 @@
 #pragma mark -
 
 @implementation CMorselContext
+
+@synthesize defaults = _defaults;
+@synthesize classSynonyms = _classSynonyms;
+@synthesize propertyTypes = _propertyTypes;
 
 static CMorselContext *gSharedInstance = NULL;
 
@@ -50,6 +55,12 @@ static CMorselContext *gSharedInstance = NULL;
 - (void)setup
 	{
 	__weak typeof(self) weakSelf = self;
+
+	// #########################################################################
+
+	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
+	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
+	self.globalSpecification = [theDeserializer deserializeURL:theURL error:NULL];
 
 	// #########################################################################
 
@@ -284,6 +295,55 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	}
+
+- (NSArray *)defaults
+	{
+	if (_defaults == NULL)
+		{
+		NSMutableArray *theDefaults = [NSMutableArray array];
+		if (self.globalSpecification[@"defaults"])
+			{
+			[theDefaults addObjectsFromArray:self.globalSpecification[@"defaults"]];
+			}
+		_defaults = [theDefaults copy];
+		}
+	return(_defaults);
+	}
+
+- (NSDictionary *)classSynonyms
+	{
+	if (_classSynonyms == NULL)
+		{
+		NSMutableDictionary *theClassSynonyms = [NSMutableDictionary dictionary];
+		if (self.globalSpecification[@"class-synonyms"])
+			{
+			[theClassSynonyms addEntriesFromDictionary:self.globalSpecification[@"class-synonyms"]];
+			}
+		}
+	return(_classSynonyms);
+	}
+
+- (NSArray *)propertyTypes
+	{
+	if (_propertyTypes == NULL)
+		{
+		NSMutableArray *thePropertyTypes = [NSMutableArray array];
+
+		for (NSDictionary *thePropertyType in self.globalSpecification[@"property-types"])
+			{
+			Class theClass = NSClassFromString(thePropertyType[@"class"]);
+
+			NSPredicate *thePredicate = [self predicateForClass:theClass property:thePropertyType[@"property"]];
+			[thePropertyTypes addObject:@{
+				@"predicate": thePredicate,
+				@"type": thePropertyType,
+				}];
+			}
+		_propertyTypes = [thePropertyTypes copy];
+		}
+	return(_propertyTypes);
+	}
+
 
 #pragma mark -
 

@@ -24,7 +24,6 @@
 @interface CMorsel ()
 // Morsel properties...
 @property (readwrite, nonatomic, strong) NSData *data;
-@property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
@@ -49,7 +48,6 @@
     if ((self = [super init]) != NULL)
         {
 		_data = inData;
-		_objectsByID = [NSMutableDictionary dictionary];
         }
     return self;
 	}
@@ -91,10 +89,7 @@
 	if (_defaults == NULL)
 		{
 		NSMutableArray *theDefaults = [NSMutableArray array];
-		if (self.globalSpecification[@"defaults"])
-			{
-			[theDefaults addObjectsFromArray:self.globalSpecification[@"defaults"]];
-			}
+		[theDefaults addObjectsFromArray:self.context.defaults];
 		if (self.specification[@"defaults"])
 			{
 			[theDefaults addObjectsFromArray:self.specification[@"defaults"]];
@@ -110,10 +105,7 @@
 	if (_classSynonyms == NULL)
 		{
 		NSMutableDictionary *theClassSynonyms = [NSMutableDictionary dictionary];
-		if (self.globalSpecification[@"class-synonyms"])
-			{
-			[theClassSynonyms addEntriesFromDictionary:self.globalSpecification[@"class-synonyms"]];
-			}
+		[theClassSynonyms addEntriesFromDictionary:self.context.classSynonyms];
 		if (self.specification[@"class-synonyms"])
 			{
 			[theClassSynonyms addEntriesFromDictionary:self.specification[@"class-synonyms"]];
@@ -127,9 +119,9 @@
 	{
 	if (_propertyTypes == NULL)
 		{
-		NSMutableArray *thePropertyTypes = [NSMutableArray array];
+		NSMutableArray *thePropertyTypes = [self.context.propertyTypes mutableCopy];
 
-		for (NSDictionary *thePropertyType in self.globalSpecification[@"property-types"])
+		for (NSDictionary *thePropertyType in self.specification[@"property-types"])
 			{
 			Class theClass = NSClassFromString(thePropertyType[@"class"]);
 
@@ -146,18 +138,12 @@
 
 #pragma mark -
 
-- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil;
+- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
 	{
+	self.objectsByID = [NSMutableDictionary dictionary];
 	self.owner = ownerOrNil;
-	NSArray *theObjects = [self process:NULL];
-	return(theObjects);
-	}
- 
-- (NSArray *)process:(NSError **)outError
-	{
-	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
+
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-	self.globalSpecification = [theDeserializer deserializeURL:theURL error:NULL];
 
 	NSError *theError = NULL;
 	self.specification = [theDeserializer deserializeData:self.data error:&theError];
