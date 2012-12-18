@@ -143,17 +143,16 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// #########################################################################
 
-
-
-
-
-	// #########################################################################
-
 	// UIView.size
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
-		CGSize theSize = [[self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:NULL] CGSizeValue];
+		NSValue *theSizeValue = [self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:outError];
+		if (theSizeValue == NULL)
+			{
+			return(NO);
+			}
+		CGSize theSize = [theSizeValue CGSizeValue];
 
 		if (theView.translatesAutoresizingMaskIntoConstraints == YES)
 			{
@@ -261,7 +260,11 @@ static CMorselContext *gSharedInstance = NULL;
 			{
 			if (specification[@"url"])
 				{
-				NSURL *theURL = [self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:NULL];
+				NSURL *theURL = [self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:outError];
+				if (theURL == NULL)
+					{
+					return(NO);
+					}
 				NSURLRequest *theRequest = [NSURLRequest requestWithURL:theURL];
 				[NSURLConnection sendAsynchronousRequest:theRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
 					NSHTTPURLResponse *theResponse = (NSHTTPURLResponse *)response;
@@ -276,7 +279,11 @@ static CMorselContext *gSharedInstance = NULL;
 				}
 			}
 
-		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:NULL];
+		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
+		if (theImage == NULL)
+			{
+			return(NO);
+			}
 		theImageView.image = theImage;
 		return(YES);
 		}];
@@ -291,11 +298,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 - (BOOL)loadEnumerations:(NSError **)outError
 	{
-	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
-	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-	NSDictionary *theSpecification = [theDeserializer deserializeURL:theURL error:NULL];
-
-	NSDictionary *theEnumerations = theSpecification[@"enums"];
+	NSDictionary *theEnumerations = self.globalSpecification[@"enums"];
 	[theEnumerations enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 
 		NSString *theEnumerationName = key;
