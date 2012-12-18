@@ -31,7 +31,6 @@
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
 
 // Session properties...
-@property (readwrite, nonatomic, strong) id rootObject;
 @property (readwrite, nonatomic, strong) id owner;
 @property (readwrite, nonatomic, strong) NSMutableDictionary *objectsByID;
 @end
@@ -149,34 +148,17 @@
 
 - (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil;
 	{
-	#warning TODO Deprecate root object
-
-
 	self.owner = ownerOrNil;
-
-	[self setup:NULL];
-	[self process:NULL];
-
-
-	id theRootObject = [self rootObject];
-
-
-
-	return(@[theRootObject]);
+	NSArray *theObjects = [self process:NULL];
+	return(theObjects);
 	}
  
-- (BOOL)setup:(NSError **)outError
+- (NSArray *)process:(NSError **)outError
 	{
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
 	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
 	self.globalSpecification = [theDeserializer deserializeURL:theURL error:NULL];
 
-	return(YES);
-	}
-
-- (BOOL)process:(NSError **)outError
-	{
-	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
 	NSError *theError = NULL;
 	self.specification = [theDeserializer deserializeData:self.data error:&theError];
 	if (self.specification == NULL)
@@ -185,10 +167,10 @@
 		return(NO);
 		}
 
-	self.rootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
-	if (self.rootObject != NULL)
+	id theRootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
+	if (theRootObject != NULL)
 		{
-		[self populateObject:self.rootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
+		[self populateObject:theRootObject withSpecificationDictionary:self.specification[@"root"] error:outError];
 		}
 
 	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
@@ -209,13 +191,11 @@
 
 
 			}];
-
-
-
 		}
 
+	NSArray *theObjects = @[ theRootObject ];
 
-	return(YES);
+	return(theObjects);
 	}
 
 #pragma mark -

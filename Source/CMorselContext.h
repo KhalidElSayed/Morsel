@@ -10,6 +10,7 @@
 
 @class CTypeConverter;
 
+/// CMorselContexts are global objects used to configure and extend morsel processing.
 @interface CMorselContext : NSObject
 
 @property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
