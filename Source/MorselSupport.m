@@ -6,5 +6,4 @@
 //  Copyright (c) 2012 toxicsoftware. All rights reserved.
 //
 
-#import "Support.h"
 

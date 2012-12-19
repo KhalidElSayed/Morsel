@@ -9,11 +9,12 @@
 #import "CMorsel.h"
 
 #import <objc/runtime.h>
-
 #import <QuartzCore/QuartzCore.h>
 
+#import "MorselSupport.h"
+#import "MorselAsserts.h"
+
 #import "CTypeConverter.h"
-#import "Support.h"
 #import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
@@ -67,9 +68,10 @@
     return self;
     }
 
-- (id)initWithName:(NSString *)inName error:(NSError **)outError;
+- (id)initWithName:(NSString *)inName bundle:(NSBundle *)inBundle error:(NSError **)outError;
 	{
-	NSURL *theURL = [[NSBundle mainBundle] URLForResource:inName withExtension:@"morsel"];
+	inBundle = inBundle ?: [NSBundle mainBundle];
+	NSURL *theURL = [inBundle URLForResource:inName withExtension:@"morsel"];
 	return([self initWithURL:theURL error:outError]);
 	}
 

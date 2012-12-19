@@ -8,10 +8,12 @@
 
 #import "CMorselContext.h"
 
+#import "MorselSupport.h"
+#import "MorselAsserts.h"
+
 #import "CTypeConverter.h"
 #import "CYAMLDeserializer.h"
 #import "UIColor+Conveniences.h"
-#import "Support.h"
 
 @interface CMorselContext ()
 @property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
