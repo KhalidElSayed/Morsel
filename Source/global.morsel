@@ -77,11 +77,6 @@ property-types:
     type: 'UIImage+UIControlState'
 
   - class: UIButton
-    property: titleColor
-    type: 'UIColor'
-    keyPath: titleLabel.textColor
-
-  - class: UIButton
     property: titleFont
     type: 'UIFont'
     keyPath: titleLabel.font

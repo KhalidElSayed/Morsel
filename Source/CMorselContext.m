@@ -300,6 +300,15 @@ static CMorselContext *gSharedInstance = NULL;
 		return(YES);
 		}];
 
+	// UIButton.titleColor
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+		UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:specification error:outError];
+		UIButton *theButton = AssertCast_(UIButton, object);
+		[theButton setTitleColor:theColor forState:UIControlStateNormal];
+		return(YES);
+		}];
+
+
 	// UIImageView.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 
