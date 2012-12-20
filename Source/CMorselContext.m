@@ -113,6 +113,26 @@ static CMorselContext *gSharedInstance = NULL;
 		return(theImage);
 		}];
 
+	// NSDictionary -> CGPoint
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		CGPoint thePoint = {
+			.x = [inValue[@"x"] doubleValue],
+			.y = [inValue[@"y"] doubleValue],
+			};
+		return([NSValue valueWithCGPoint:thePoint]);
+		}];
+
+	// NSArray -> CGPoint
+	[self.typeConverter addConverterForSourceClass:[NSArray class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		CGPoint thePoint = {
+			.x = [inValue[0] doubleValue],
+			.y = [inValue[1] doubleValue],
+			};
+		return([NSValue valueWithCGPoint:thePoint]);
+		}];
+
+
+
 	// NSDictionary -> CGSize
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError) {
 		CGSize theSize = {
@@ -146,6 +166,33 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	// UIView.size
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"position"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
+		UIView *theView = AssertCast_(UIView, object);
+
+		NSValue *thePointValue = [self.typeConverter objectOfType:@"struct:CGPoint" withObject:specification error:outError];
+		if (thePointValue == NULL)
+			{
+			return(NO);
+			}
+		CGPoint thePoint = [thePointValue CGPointValue];
+
+		if (theView.translatesAutoresizingMaskIntoConstraints == YES)
+			{
+			CGRect theFrame = theView.frame;
+			theFrame.origin = thePoint;
+			theView.frame = theFrame;
+			}
+		else
+			{
+			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:thePoint.x]];
+			[theView.superview addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:thePoint.y]];
+			}
+
+		return(YES);
+		}];
+
+
+	// UIView.size
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
@@ -164,8 +211,8 @@ static CMorselContext *gSharedInstance = NULL;
 			}
 		else
 			{
-			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.width]];
-			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theSize.height]];
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:theSize.width]];
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:theSize.height]];
 			}
 
 		return(YES);
@@ -185,7 +232,7 @@ static CMorselContext *gSharedInstance = NULL;
 			}
 		else
 			{
-			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theScalar]];
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:theScalar]];
 			}
 		return(YES);
 		}];
@@ -204,7 +251,7 @@ static CMorselContext *gSharedInstance = NULL;
 			}
 		else
 			{
-			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:0.0 constant:theScalar]];
+			[theView addConstraint:[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:NULL attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:theScalar]];
 			}
 		return(YES);
 		}];
