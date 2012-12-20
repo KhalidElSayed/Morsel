@@ -178,7 +178,14 @@
 		[theOutlets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 
 			id theOutletObject = self.objectsByID[obj];
-			[self.owner setValue:theOutletObject forKey:key];
+			@try
+				{
+				[self.owner setValue:theOutletObject forKey:key];
+				}
+			@catch (NSException *exception)
+				{
+				NSLog(@"ERROR: Could not find an outlet property called %@ on %@", key, self.owner);
+				}
 
 
 			}];
