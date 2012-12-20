@@ -31,6 +31,10 @@ property-types:
     keyPath: layer.borderWidth
 
   - class: UIView
+    property: cornerRadius
+    keyPath: layer.cornerRadius
+
+  - class: UIView
     property: contentMode
     type: 'enum:UIViewContentMode'
 
