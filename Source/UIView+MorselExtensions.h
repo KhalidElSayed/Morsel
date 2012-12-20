@@ -12,6 +12,17 @@
 
 @property (readwrite, nonatomic, copy) NSString *morselID;
 
+@property (readwrite, nonatomic, assign) UILayoutPriority horizontalContentHuggingPriority;
+@property (readwrite, nonatomic, assign) UILayoutPriority verticalContentHuggingPriority;
+
+@property (readwrite, nonatomic, assign) UILayoutPriority horizontalContentCompressionResistancePriority;
+@property (readwrite, nonatomic, assign) UILayoutPriority verticalContentCompressionResistancePriority;
+
+- (NSArray *)recursiveConstraints;
+- (NSArray *)recursiveConstraintsMatchingPredicate:(NSPredicate *)inPredicate;
+- (NSLayoutConstraint *)constantWidthConstraint;
+- (NSLayoutConstraint *)constantHeightConstraint;
+
 - (void)dumpConstraints;
 
 @end
