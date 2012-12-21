@@ -374,7 +374,7 @@
 	for (id theConstraintsSpecification in theSpecification[@"constraints"])
 		{
 		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:outError];
-		if (theConstraints == NULL)
+		if (theConstraints.count == 0)
 			{
 			return(NO);
 			}
