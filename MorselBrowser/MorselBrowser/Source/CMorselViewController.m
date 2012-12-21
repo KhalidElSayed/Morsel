@@ -11,7 +11,7 @@
 #import "CMorsel.h"
 #import "CRemoteMorselClient.h"
 #import "CResizerThumb.h"
-#import "UIView+ConstraintConveniences.h"
+#import "UIView+MorselExtensions.h"
 
 @interface CMorselViewController () <UISplitViewControllerDelegate>
 @property (readwrite, nonatomic, strong) CRemoteMorselClient *morselClient;

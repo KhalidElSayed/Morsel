@@ -9,6 +9,7 @@
 #import "CLocalMorselsViewController.h"
 
 #import "CMorselViewController.h"
+#import "MorselAsserts.h"
 
 @interface CLocalMorselsViewController ()
 @property (readwrite, nonatomic, strong) NSArray *morsels;

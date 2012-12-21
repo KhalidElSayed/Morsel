@@ -68,8 +68,6 @@ static CMorselContext *gSharedInstance = NULL;
 
 - (BOOL)setup:(NSError **)outError
 	{
-	__weak typeof(self) weakSelf = self;
-
 	// #########################################################################
 
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
@@ -78,6 +76,10 @@ static CMorselContext *gSharedInstance = NULL;
 		{
 		return(NO);
 		}
+
+	// #########################################################################
+
+	__weak __typeof(self) weak_self = self;
 
 	// #########################################################################
 
@@ -99,12 +101,12 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// NSString -> UIImage
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([weakSelf imageNamed:inValue]);
+		return([weak_self imageNamed:inValue]);
 		}];
 
 	// NSDictionary -> UIImage
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		UIImage *theImage = [weakSelf imageNamed:inValue[@"name"]];
+		UIImage *theImage = [weak_self imageNamed:inValue[@"name"]];
 		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
 		if (theCapInsetsDictionary)
 			{
@@ -137,8 +139,6 @@ static CMorselContext *gSharedInstance = NULL;
 		return([NSValue valueWithCGPoint:thePoint]);
 		}];
 
-
-
 	// NSDictionary -> CGSize
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError) {
 		CGSize theSize = {
@@ -165,7 +165,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// NSString -> CGColor
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError) {
-		UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:inValue error:outError];
+		UIColor *theColor = [weak_self.typeConverter objectOfClass:[UIColor class] withObject:inValue error:outError];
 		return((__bridge id)theColor.CGColor);
 		}];
 
@@ -175,7 +175,7 @@ static CMorselContext *gSharedInstance = NULL;
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"position"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
-		NSValue *thePointValue = [self.typeConverter objectOfType:@"struct:CGPoint" withObject:specification error:outError];
+		NSValue *thePointValue = [weak_self.typeConverter objectOfType:@"struct:CGPoint" withObject:specification error:outError];
 		if (thePointValue == NULL)
 			{
 			return(NO);
@@ -202,7 +202,7 @@ static CMorselContext *gSharedInstance = NULL;
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
 
-		NSValue *theSizeValue = [self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:outError];
+		NSValue *theSizeValue = [weak_self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:outError];
 		if (theSizeValue == NULL)
 			{
 			return(NO);

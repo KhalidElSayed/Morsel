@@ -653,6 +653,21 @@
 			theConstraints = @[theConstraint];
 			}
 		}
+//	else if (theSpecification[@"position"])
+//		{
+//		id theValue = theSpecification[@"position"];
+//		NSValue *thePointValue = [self.context.typeConverter objectOfType:@"struct:CGPoint" withObject:theValue error:outError];
+//		if (thePointValue == NULL)
+//			{
+//			return(NULL);
+//			}
+//		CGPoint thePoint = [thePointValue CGPointValue];
+//		UIView *theView = self.objectsByID[theValue];
+//		theConstraints = @[
+//			[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:thePoint.x],
+//			[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:thePoint.y],
+//			];
+//		}
 	else
 		{
 		NSLog(@"Do not understand constraint: %@", inObject);

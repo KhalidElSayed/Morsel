@@ -18,7 +18,7 @@
 
 - (void)loadView
 	{
-	CMorsel *theMorsel = [[CMorsel alloc] initWithName:@"_test" error:NULL];
+	CMorsel *theMorsel = [[CMorsel alloc] initWithName:@"_test" bundle:NULL error:NULL];
 	NSArray *theObjects = [theMorsel instantiateWithOwner:self options:NULL error:NULL];
 	self.view = [theObjects objectAtIndex:0];
 	}
