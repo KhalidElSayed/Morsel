@@ -197,6 +197,53 @@
 	return(theObjects);
 	}
 
+- (BOOL)instantiateWithRoot:(id)root owner:(id)owner  options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
+	{
+	self.objectsByID = [NSMutableDictionary dictionary];
+	self.owner = owner;
+
+	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
+	self.specification = [theDeserializer deserializeData:self.data error:outError];
+	if (self.specification == NULL)
+		{
+		return(NO);
+		}
+
+	if ([self populateObject:root withSpecificationDictionary:self.specification[@"root"] error:outError] == NO)
+		{
+		return(NO);
+		}
+
+	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
+	if (self.owner && theOwnerDictionary != NULL)
+		{
+		if (theOwnerDictionary[@"view"])
+			{
+			NSString *theViewID = theOwnerDictionary[@"view"];
+			id theView = self.objectsByID[theViewID];
+			AssertCast_(UIViewController, self.owner).view = theView;
+			}
+
+		NSDictionary *theOutlets = theOwnerDictionary[@"outlets"];
+		[theOutlets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+
+			id theOutletObject = self.objectsByID[obj];
+			@try
+				{
+				[self.owner setValue:theOutletObject forKey:key];
+				}
+			@catch (NSException *exception)
+				{
+				NSLog(@"ERROR: Could not find an outlet property called %@ on %@", key, self.owner);
+				}
+
+
+			}];
+		}
+
+	return(YES);
+	}
+
 #pragma mark -
 
 - (id)objectWithSpecificationDictionary:(NSDictionary *)inSpecification root:(BOOL)inRoot error:(NSError **)outError
@@ -206,7 +253,7 @@
 	Class theClass = [self classWithString:theClassName error:outError];
 	if (theClass == NULL)
 		{
-		NSLog(@"Failed to load class of type %@", theClassName);
+		NSLog(@"Failed to load class of type %@ (%@)", theClassName, inSpecification);
 		return(NULL);
 		}
 
