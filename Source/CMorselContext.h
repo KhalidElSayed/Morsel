@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class CTypeConverter;
+@class CYAMLDeserializer;
 
 typedef BOOL (^MorselPropertyHandler)(id object, NSString *property, id specification, NSError **outError);
 
 /// CMorselContexts are global objects used to configure and extend morsel processing.
 @interface CMorselContext : NSObject
 
+@property (readonly, nonatomic, strong) CYAMLDeserializer *deserializer;
 @property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readonly, nonatomic, strong) NSMutableArray *propertyHandlers;
 @property (readonly, nonatomic, strong) NSArray *defaults;

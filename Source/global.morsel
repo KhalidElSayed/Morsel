@@ -12,6 +12,8 @@ defaults:
     translatesAutoresizingMaskIntoConstraints: false
   - class: UILabel
     backgroundColor: clear
+  - class: CCoreTextLabel
+    backgroundColor: clear
 #    verticalContentHuggingPriority: 250
 #    horizontalContentHuggingPriority: 250
 
@@ -63,6 +65,26 @@ property-types:
   - class: UILabel
     property: textAlignment
     type: 'enum:NSTextAlignment'
+
+#### CCoreTextLabel
+
+  - class: CCoreTextLabel
+    property: font
+    type: 'class:UIFont'
+
+  - class: CCoreTextLabel
+    property: textColor
+    type: 'class:UIColor'
+
+  - class: CCoreTextLabel
+    property: lineBreakMode
+    type: 'enum:NSLineBreakMode'
+
+  - class: CCoreTextLabel
+    property: textAlignment
+    type: 'enum:NSTextAlignment'
+
+
 
 #### UIImageView
 

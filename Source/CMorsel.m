@@ -145,9 +145,7 @@
 	self.objectsByID = [NSMutableDictionary dictionary];
 	self.owner = ownerOrNil;
 
-	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-
-	self.specification = [theDeserializer deserializeData:self.data error:outError];
+	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
 	if (self.specification == NULL)
 		{
 		return(NO);
@@ -202,8 +200,7 @@
 	self.objectsByID = [NSMutableDictionary dictionary];
 	self.owner = owner;
 
-	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-	self.specification = [theDeserializer deserializeData:self.data error:outError];
+	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
 	if (self.specification == NULL)
 		{
 		return(NO);

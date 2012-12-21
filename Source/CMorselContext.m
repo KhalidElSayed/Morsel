@@ -48,6 +48,13 @@ static CMorselContext *gSharedInstance = NULL;
         {
 		_typeConverter = [[CTypeConverter alloc] init];
 		_propertyHandlers = [NSMutableArray array];
+		_deserializer = [[CYAMLDeserializer alloc] init];
+
+		[_deserializer registerHandlerForTag:@"!UIColor" block:^id (id value, NSError *__autoreleasing *error) {
+
+			UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:value error:error];
+			return(theColor);
+			}];
 
 		NSError *theError = NULL;
 		if ([self setup:&theError] == NO)
@@ -66,8 +73,7 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
-	CYAMLDeserializer *theDeserializer = [[CYAMLDeserializer alloc] init];
-	self.globalSpecification = [theDeserializer deserializeURL:theURL error:outError];
+	self.globalSpecification = [self.deserializer deserializeURL:theURL error:outError];
 	if (self.globalSpecification == NULL)
 		{
 		return(NO);
