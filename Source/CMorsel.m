@@ -18,7 +18,6 @@
 #import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
-#import "NSObject+Hacks.h"
 #import "UIView+MorselExtensions.h"
 #import "NSLayoutConstraint+MorselExtensions.h"
 
