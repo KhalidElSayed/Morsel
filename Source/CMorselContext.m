@@ -13,7 +13,7 @@
 
 #import "CTypeConverter.h"
 #import "CYAMLDeserializer.h"
-#import "UIColor+Conveniences.h"
+#import "CColorConverter.h"
 
 @interface CMorselContext ()
 @property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
@@ -90,7 +90,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// NSString -> UIColor
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([UIColor colorwithString:inValue]);
+		return([UIColor colorWithString:inValue error:outError]);
 		}];
 
 	// NSDictionary -> UIFont

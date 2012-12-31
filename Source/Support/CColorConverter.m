@@ -6,43 +6,33 @@
 //  Copyright (c) 2012 toxicsoftware. All rights reserved.
 //
 
-#import "UIColor+Conveniences.h"
+#import "CColorConverter.h"
 
 static CGFloat StringToFloat(NSString *inString, CGFloat base);
 static int hexdec(const char *hex, int len);
 
-@implementation UIColor (Conveniences)
+@interface CColorConverter ()
+@property (readwrite, nonatomic, strong) NSDictionary *namedColors;
+@end
 
-+ (UIColor *)colorwithString:(NSString *)inString
+#pragma mark -
+
+@implementation CColorConverter
+
+static CColorConverter *gSharedInstance = NULL;
+
++ (instancetype)sharedInstance
+    {
+    static dispatch_once_t sOnceToken = 0;
+    dispatch_once(&sOnceToken, ^{
+        gSharedInstance = [[CColorConverter alloc] init];
+        });
+    return(gSharedInstance);
+    }
+
+- (NSDictionary *)colorDictionaryWithString:(NSString *)inString error:(NSError **)outError
 	{
-	// ### Find colour by color name...
-	static NSDictionary *sColorNames = NULL;
-	static dispatch_once_t sColorNamesOnceToken;
-	dispatch_once(&sColorNamesOnceToken, ^{
-		sColorNames = @{
-			@"black": [UIColor blackColor],
-			@"darkGray": [UIColor darkGrayColor],
-			@"lightGray": [UIColor lightGrayColor],
-			@"white": [UIColor whiteColor],
-			@"gray": [UIColor grayColor],
-			@"red": [UIColor redColor],
-			@"green": [UIColor greenColor],
-			@"blue": [UIColor blueColor],
-			@"cyan": [UIColor cyanColor],
-			@"yellow": [UIColor yellowColor],
-			@"magenta": [UIColor magentaColor],
-			@"orange": [UIColor orangeColor],
-			@"purple": [UIColor purpleColor],
-			@"brown": [UIColor brownColor],
-			@"clear": [UIColor clearColor],
-			};
-		});
-
-	UIColor *theColor = sColorNames[inString];
-	if (theColor)
-		{
-		return(theColor);
-		}
+	NSDictionary *theColor = NULL;
 
 	// ### Find rgb(), rgba(), hsl(), and hsla() style colours with values provided as integers or percentages.
 	static NSRegularExpression *sRGBRegex = NULL;
@@ -67,7 +57,7 @@ static int hexdec(const char *hex, int len);
 				A = StringToFloat([inString substringWithRange:[theResult rangeAtIndex:5]], 255.0);
 				}
 
-			theColor = [UIColor colorWithRed:R green:G blue:B alpha:A];
+			theColor = @{ @"type": @"RGB", @"red":@(R), @"green":@(G), @"blue":@(B), @"alpha":@(A) };
 			}
 		else if ([[theType substringToIndex:3] isEqualToString:@"hsl"])
 			{
@@ -80,7 +70,7 @@ static int hexdec(const char *hex, int len);
 				A = StringToFloat([inString substringWithRange:[theResult rangeAtIndex:5]], 255.0);
 				}
 
-			theColor = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:A];
+			theColor = @{ @"type": @"HSB", @"hue":@(hue), @"saturation":@(saturation), @"brightness":@(brightness), @"alpha":@(A) };
 			}
 
 		return(theColor);
@@ -104,7 +94,7 @@ static int hexdec(const char *hex, int len);
 			CGFloat R = (CGFloat)((D & 0x0F00) >> 8) / 15.0;
 			CGFloat G = (CGFloat)((D & 0x00F0) >> 4) / 15.0;
 			CGFloat B = (CGFloat)((D & 0x000F) >> 0) / 15.0;
-			theColor = [UIColor colorWithRed:R green:G blue:B alpha:1.0];
+			theColor = @{ @"type": @"RGB", @"red":@(R), @"green":@(G), @"blue":@(B), @"alpha":@(1.0) };
 			}
 		else
 			{
@@ -113,20 +103,103 @@ static int hexdec(const char *hex, int len);
 			CGFloat R = (CGFloat)((D & 0x00FF0000) >> 16) / 255.0;
 			CGFloat G = (CGFloat)((D & 0x0000FF00) >> 8) / 255.0;
 			CGFloat B = (CGFloat)((D & 0x000000FF) >> 0) / 255.0;
-			theColor = [UIColor colorWithRed:R green:G blue:B alpha:1.0];
+			theColor = @{ @"type": @"RGB", @"red":@(R), @"green":@(G), @"blue":@(B), @"alpha":@(1.0) };
 			}
 		return(theColor);
-		}
-
-	if (theColor == NULL)
-		{
-		theColor = [UIColor clearColor];
 		}
 
 	return(theColor);
 	}
 
+- (NSDictionary *)colorDictionaryWithRed:(CGFloat)R green:(CGFloat)G blue:(CGFloat)B alpha:(CGFloat)A
+	{
+	NSDictionary *theColor = @{ @"type": @"RGB", @"red":@(R), @"green":@(G), @"blue":@(B), @"alpha":@(A) };
+	return(theColor);
+	}
+
 @end
+
+#pragma mark -
+
+#if TARGET_OS_IPHONE == 1
+
+@implementation CColorConverter (UIColor)
+
+- (UIColor *)colorWithString:(NSString *)inString error:(NSError **)outError
+	{
+	UIColor *theColor = NULL;
+
+	if (self.namedColors == NULL)
+		{
+	// ### Find colour by color name...
+		self.namedColors = @{
+			@"black": [UIColor blackColor],
+			@"darkGray": [UIColor darkGrayColor],
+			@"lightGray": [UIColor lightGrayColor],
+			@"white": [UIColor whiteColor],
+			@"gray": [UIColor grayColor],
+			@"red": [UIColor redColor],
+			@"green": [UIColor greenColor],
+			@"blue": [UIColor blueColor],
+			@"cyan": [UIColor cyanColor],
+			@"yellow": [UIColor yellowColor],
+			@"magenta": [UIColor magentaColor],
+			@"orange": [UIColor orangeColor],
+			@"purple": [UIColor purpleColor],
+			@"brown": [UIColor brownColor],
+			@"clear": [UIColor clearColor],
+			};
+		}
+
+	theColor = self.namedColors[inString];
+	if (theColor)
+		{
+		return(theColor);
+		}
+
+	CColorConverter *theConverter = [[CColorConverter alloc] init];
+	NSDictionary *theDictionary = [theConverter colorDictionaryWithString:inString error:outError];
+	if ([theDictionary[@"type"] isEqualToString:@"RGB"])
+		{
+		const CGFloat R = [theDictionary[@"red"] floatValue];
+		const CGFloat G = [theDictionary[@"green"] floatValue];
+		const CGFloat B = [theDictionary[@"blue"] floatValue];
+		const CGFloat A = theDictionary[@"alpha"] ? [theDictionary[@"alpha"] floatValue] : 1.0f;
+
+		theColor = [UIColor colorWithRed:R green:G blue:B alpha:A];
+		}
+	else if ([theDictionary[@"type"] isEqualToString:@"HSB"])
+		{
+		const CGFloat H = [theDictionary[@"hue"] floatValue];
+		const CGFloat S = [theDictionary[@"saturation"] floatValue];
+		const CGFloat B = [theDictionary[@"brightness"] floatValue];
+		const CGFloat A = theDictionary[@"alpha"] ? [theDictionary[@"alpha"] floatValue] : 1.0f;
+
+		theColor = [UIColor colorWithHue:H saturation:S brightness:B alpha:A];
+		}
+	else
+		{
+		return(NULL);
+		}
+	return(theColor);
+	}
+
+@end
+
+#pragma mark -
+
+@implementation UIColor (CColorConverter)
+
++ (UIColor *)colorWithString:(NSString *)inString error:(NSError **)outError
+	{
+	return([[CColorConverter sharedInstance] colorWithString:inString error:outError]);
+	}
+
+@end
+
+#endif /* TARGET_OS_IPHONE == 1 */
+
+#pragma mark -
 
 // Adapted from http://stackoverflow.com/a/11068850
 /** 
