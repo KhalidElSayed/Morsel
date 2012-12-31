@@ -87,8 +87,11 @@
 		NSIndexPath *theIndexPath = [self.tableView indexPathForCell:sender];
 		NSString *theDomain = self.domains[theIndexPath.section];
 		NSNetService *theService = self.servicesByDomain[theDomain][theIndexPath.row];
-		CMorselViewController *theViewController = segue.destinationViewController;
-		theViewController.service = theService;
+		if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
+			{
+			CMorselViewController *theViewController = ((UINavigationController *)(segue.destinationViewController)).topViewController;
+			theViewController.service = theService;
+			}
 		}
 	}
 
