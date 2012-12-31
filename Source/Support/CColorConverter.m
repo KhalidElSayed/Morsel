@@ -12,7 +12,7 @@ static CGFloat StringToFloat(NSString *inString, CGFloat base);
 static int hexdec(const char *hex, int len);
 
 @interface CColorConverter ()
-@property (readwrite, nonatomic, strong) NSDictionary *namedColors;
+@property (readwrite, atomic, strong) NSDictionary *namedColors;
 @end
 
 #pragma mark -
@@ -25,7 +25,7 @@ static CColorConverter *gSharedInstance = NULL;
     {
     static dispatch_once_t sOnceToken = 0;
     dispatch_once(&sOnceToken, ^{
-        gSharedInstance = [[CColorConverter alloc] init];
+        gSharedInstance = [[self alloc] init];
         });
     return(gSharedInstance);
     }
