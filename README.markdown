@@ -6,6 +6,8 @@ TODO
 
 ## Why is this needed?
 
+TODO
+
 	                 | Code                     | Interface Builder           |
 	-----------------+--------------------------+-----------------------------+
 	Springs & Struts | Springs & Struts in code | Springs & Struts in NIBs    |
@@ -22,11 +24,30 @@ TODO
 
 ## What else is out there like this?
 
-TODO. Pixate
+[Pixate](Pixate) seems to be doing at least superficially something similar, but using CSS and SVG instead of it's own file format. They made a rather healthy [$61K on Kickstart](Kicketstarter) so there must be at least _some_ demand for this kind of technology.
+
+  [Pixate]: http://www.pixate.com
+  [Kickstarter]: http://www.kickstarter.com/projects/pixate/beautiful-native-mobile-apps?ref=live
 
 ## What's with the name "Morsel"?
 
-It's a play on the word "Nib". It's amusing. Laugh.
+It's a play on the word "[Nib](Nib)". It's amusing. Laugh.
+
+  [Nib]: http://en.wikipedia.org/wiki/Nib_file
+
+## Why YAML?
+
+TODO
+
+## Editing YAML
+
+YAML does not allow tab characters to be used for indentation and by convention you should be using 2 character soft tabs. The following modeline works in both BBEdit and Sublime Text (although Sublime Text doesn't recognise the mode: yaml part).
+
+	# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+TextMate doesn't understand modelines at all without a plugin (which doesn't work in TextMate 2).
+
+Xcode needs to be configured on a per file basis. In the Text Editing section of the file inspectors set it to indent via spaces and use 2 space tabs and indents.
 
 ## Examples
 
@@ -36,7 +57,7 @@ TODO
 
 TODO
 
-## Live Preview
+## Live Editing & Preview
 
 TODO
 
@@ -87,8 +108,9 @@ This is a list of features that may make it into Morsel some day.
 * Animation support (CoreAnimation…)
 * SceneKits support (Kitchen Sink mode)
 * UIGestureRecognizer support (might not be useful without some kind of scripting system)
+* Creating (simple) bezier paths in code. (Handy for clipping and shadow paths)
 
 ## License
 
-TODO (BSD 2 clause).
+Morsel is released under the 2-clause BSD license. See the LICENSE file accompanying the source code and the header comments in the source.
 
