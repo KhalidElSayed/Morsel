@@ -112,7 +112,7 @@
 		NSNetService *theService = self.servicesByDomain[theDomain][theIndexPath.row];
 		if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
 			{
-			CMorselViewController *theViewController = ((UINavigationController *)(segue.destinationViewController)).topViewController;
+			CMorselViewController *theViewController = (CMorselViewController *)((UINavigationController *)(segue.destinationViewController)).topViewController;
 			theViewController.service = theService;
 			}
 		}

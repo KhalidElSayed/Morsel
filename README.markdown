@@ -51,11 +51,61 @@ Xcode needs to be configured on a per file basis. In the Text Editing section of
 
 ## Examples
 
-TODO
+### Example #1: Creating a view without an owning view controller.
+
+#### Morsel Specification File
+
+	# Example_1.yaml
+	# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+	objects:
+	- class: UIView
+	  id: root
+	  backgroundColor: green 
+	  size: [ 320, 416 ]
+
+#### Objective-C
+
+	// Example_1.m
+	NSError *theError = NULL;
+	CMorsel *theMorsel = [[CMorsel alloc] initWithName:@"_test" bundle:NULL error:&theError];
+	// Handle errors here.
+	NSDictionary *theObjects = [theMorsel instantiateWithOwner:NULL options:NULL error:&theError];
+	// Handle errors here.
+	UIView *theView = theObjects[@"root"];
+
+### Example #2
+
+#### Morsel Specification File
+
+	owner:
+	  class: CExampleViewController
+	  view: root
+
+	objects:
+	- class: UIView
+	  subviews:
+	  - class: UILabel
+	    id: nameLabel
+	    text: 'Name:'
+	    outlet: 'nameLabel'
 
 ## Tutorial
 
 TODO
+
+## Types
+
+### UIColor
+
+	backgroundColor: red
+	backgroundColor: ff0000
+	backgroundColor: rgb(100%, 0%, 0%)
+
+### Points
+
+	point: [0, 0]
+	point: { x: 0, y: 0 }
+	
 
 ## Live Editing & Preview
 

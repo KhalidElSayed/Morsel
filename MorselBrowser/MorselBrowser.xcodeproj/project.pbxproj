@@ -30,6 +30,8 @@
 		4514F750167FB452001CA318 /* CRemoteMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 4514F74F167FB452001CA318 /* CRemoteMorselContext.m */; };
 		4516506516920DA200E2DC62 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4516506416920DA200E2DC62 /* CColorConverter.m */; };
 		4516506616920DA200E2DC62 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4516506416920DA200E2DC62 /* CColorConverter.m */; };
+		452B9EC01693F3E2001A6194 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 452B9EBF1693F3E2001A6194 /* CDebugDictionary.m */; };
+		452B9EE21693FCB3001A6194 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 452B9EE11693FCB3001A6194 /* CDebugYAMLDeserializer.m */; };
 		4557B9351678E30700F5E689 /* simple.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 4557B9271678E30700F5E689 /* simple.morsel */; };
 		4557B9391678E35400F5E689 /* CLocalMorselsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4557B9381678E35400F5E689 /* CLocalMorselsViewController.m */; };
 		4557B9431678E87000F5E689 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4557B93C1678E87000F5E689 /* CMorsel.m */; };
@@ -113,6 +115,10 @@
 		4514F74F167FB452001CA318 /* CRemoteMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRemoteMorselContext.m; sourceTree = "<group>"; };
 		4516506316920DA200E2DC62 /* CColorConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CColorConverter.h; sourceTree = "<group>"; };
 		4516506416920DA200E2DC62 /* CColorConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CColorConverter.m; sourceTree = "<group>"; };
+		452B9EBE1693F3E2001A6194 /* CDebugDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDebugDictionary.h; sourceTree = "<group>"; };
+		452B9EBF1693F3E2001A6194 /* CDebugDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDebugDictionary.m; sourceTree = "<group>"; };
+		452B9EE01693FCB3001A6194 /* CDebugYAMLDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDebugYAMLDeserializer.h; sourceTree = "<group>"; };
+		452B9EE11693FCB3001A6194 /* CDebugYAMLDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDebugYAMLDeserializer.m; sourceTree = "<group>"; };
 		4557B9271678E30700F5E689 /* simple.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = simple.morsel; sourceTree = "<group>"; };
 		4557B9371678E35400F5E689 /* CLocalMorselsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLocalMorselsViewController.h; sourceTree = "<group>"; };
 		4557B9381678E35400F5E689 /* CLocalMorselsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLocalMorselsViewController.m; sourceTree = "<group>"; };
@@ -285,6 +291,17 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		452B9EBD1693F374001A6194 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				452B9EBE1693F3E2001A6194 /* CDebugDictionary.h */,
+				452B9EBF1693F3E2001A6194 /* CDebugDictionary.m */,
+				452B9EE01693FCB3001A6194 /* CDebugYAMLDeserializer.h */,
+				452B9EE11693FCB3001A6194 /* CDebugYAMLDeserializer.m */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
 		4557B9191678E30700F5E689 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +330,7 @@
 				45A0FEBF16793CD700FABF57 /* CMorselContext.m */,
 				4590D89F167916E400CF2473 /* CTypeConverter.h */,
 				4590D8A0167916E400CF2473 /* CTypeConverter.m */,
+				452B9EBD1693F374001A6194 /* Debug */,
 				45AB4FA316853D4200F368C7 /* Support */,
 				45AB4F5E1685387100F368C7 /* UIKit */,
 			);
@@ -534,6 +552,8 @@
 				45AB4F6C1685387100F368C7 /* NSLayoutConstraint+MorselExtensions.m in Sources */,
 				45AB4F701685387100F368C7 /* UIView+MorselExtensions.m in Sources */,
 				4516506516920DA200E2DC62 /* CColorConverter.m in Sources */,
+				452B9EC01693F3E2001A6194 /* CDebugDictionary.m in Sources */,
+				452B9EE21693FCB3001A6194 /* CDebugYAMLDeserializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

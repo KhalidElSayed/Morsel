@@ -38,6 +38,13 @@
 #import "CYAMLDeserializer.h"
 #import "CColorConverter.h"
 
+#define USE_DEBUG_DICTIONARY 0
+
+#if USE_DEBUG_DICTIONARY == 1
+#import "CDebugYAMLDeserializer.h"
+#endif
+
+
 @interface CMorselContext ()
 @property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
 @property (readwrite, nonatomic, strong) CTypeConverter *typeConverter;
@@ -71,10 +78,14 @@ static CMorselContext *gSharedInstance = NULL;
         {
 		_typeConverter = [[CTypeConverter alloc] init];
 		_propertyHandlers = [NSMutableArray array];
+
+		#if USE_DEBUG_DICTIONARY == 1
+		_deserializer = [[CDebugYAMLDeserializer alloc] init];
+		#else
 		_deserializer = [[CYAMLDeserializer alloc] init];
+		#endif
 
 		[_deserializer registerHandlerForTag:@"!UIColor" block:^id (id value, NSError *__autoreleasing *error) {
-
 			UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:value error:error];
 			return(theColor);
 			}];
