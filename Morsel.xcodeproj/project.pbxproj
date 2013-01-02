@@ -53,6 +53,8 @@
 		45B581431694C1E300153631 /* NSLayoutConstraint+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC51694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m */; };
 		45B581441694C1E700153631 /* global.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B57FC11694B83A00153631 /* global.morsel */; };
 		45B581451694C1EE00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
+		45B581481694C3EA00153631 /* ButtonPressed.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B581471694C3EA00153631 /* ButtonPressed.png */; };
+		45B5814A1694C3F000153631 /* ButtonPressed@2x.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B581491694C3F000153631 /* ButtonPressed@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,17 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45B581461694C3D800153631 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				45B581481694C3EA00153631 /* ButtonPressed.png in CopyFiles */,
+				45B5814A1694C3F000153631 /* ButtonPressed@2x.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +169,8 @@
 		45B581181694BE4700153631 /* test.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = test.dat; sourceTree = "<group>"; };
 		45B581191694BE4700153631 /* Thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumb.png; sourceTree = "<group>"; };
 		45B581391694C10600153631 /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
+		45B581471694C3EA00153631 /* ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = file; name = ButtonPressed.png; path = MorselBrowser/Samples/ButtonPressed.png; sourceTree = "<group>"; };
+		45B581491694C3F000153631 /* ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ButtonPressed@2x.png"; path = "MorselBrowser/Samples/ButtonPressed@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +199,8 @@
 		45B57F8E1694B7B800153631 = {
 			isa = PBXGroup;
 			children = (
+				45B581491694C3F000153631 /* ButtonPressed@2x.png */,
+				45B581471694C3EA00153631 /* ButtonPressed.png */,
 				45B57FAE1694B83A00153631 /* Source */,
 				45B580F71694BE4700153631 /* MorselBrowser */,
 				45B57FD51694B90E00153631 /* Externals */,
@@ -399,6 +416,7 @@
 				45B580D71694BDB300153631 /* Sources */,
 				45B580D81694BDB300153631 /* Frameworks */,
 				45B580D91694BDB300153631 /* Resources */,
+				45B581461694C3D800153631 /* CopyFiles */,
 			);
 			buildRules = (
 			);

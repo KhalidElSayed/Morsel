@@ -255,8 +255,6 @@
 				{
 				NSLog(@"ERROR: Could not find an outlet property called %@ on %@", key, self.owner);
 				}
-
-
 			}];
 		}
 
