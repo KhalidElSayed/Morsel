@@ -37,8 +37,6 @@
 - (IBAction)ok:(id)sender
     {
     NSLog(@"OK!: %@", self.nameField.text);
-
-    [self.view dumpConstraints];
     }
 
 @end

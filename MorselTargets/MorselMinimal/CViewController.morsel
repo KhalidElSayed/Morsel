@@ -3,10 +3,7 @@
 ################################################################################
 
 owner:
-  class: CTestLoginViewController
   view: root
-#  outlets:
-#    nameField: nameField
 
 objects:
 - id: root
@@ -24,7 +21,7 @@ objects:
     placeholder: 'name'
     borderStyle: bezel
     returnKeyType: next
-#    outlet: nameField
+    outlet: nameField
 
   - class: UILabel
     id: password_label

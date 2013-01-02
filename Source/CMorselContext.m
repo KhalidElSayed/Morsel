@@ -38,7 +38,9 @@
 #import "CYAMLDeserializer.h"
 #import "CColorConverter.h"
 
+#if !defined(USE_DEBUG_DICTIONARY)
 #define USE_DEBUG_DICTIONARY 0
+#endif
 
 #if USE_DEBUG_DICTIONARY == 1
 #import "CDebugYAMLDeserializer.h"

@@ -55,6 +55,7 @@
 // Session properties...
 @property (readwrite, nonatomic, strong) id owner;
 @property (readwrite, nonatomic, strong) NSMutableDictionary *objectsByID;
+@property (readwrite, nonatomic, strong) NSMutableDictionary *outletIDs;
 @end
 
 #pragma mark -
@@ -164,7 +165,8 @@
 
 - (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
 	{
-	self.objectsByID = [NSMutableDictionary dictionary];
+    [self prepare];
+
 	self.owner = ownerOrNil;
 
 	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
@@ -202,7 +204,7 @@
 
 - (BOOL)instantiateWithRoot:(id)root owner:(id)owner options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
 	{
-	self.objectsByID = [NSMutableDictionary dictionary];
+    [self prepare];
 	self.owner = owner;
 
 	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
@@ -233,33 +235,59 @@
 
 - (BOOL)configureOwner:(NSError **)outError
     {
+	if (self.owner == NULL)
+        {
+        return(YES);
+        }
+
 	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
-	if (self.owner && theOwnerDictionary != NULL)
-		{
-		if (theOwnerDictionary[@"view"])
-			{
-			NSString *theViewID = theOwnerDictionary[@"view"];
-			id theView = self.objectsByID[theViewID];
-			AssertCast_(UIViewController, self.owner).view = theView;
-			}
 
-		NSDictionary *theOutlets = theOwnerDictionary[@"outlets"];
-		[theOutlets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    if (theOwnerDictionary[@"class"])
+        {
+        Class theOwnerClass = NSClassFromString(theOwnerDictionary[@"class"]);
+        if ([self.owner isKindOfClass:theOwnerClass] == NO)
+            {
+            NSLog(@"Warning: Owner class does not match class");
+            }
+        }
 
-			id theOutletObject = self.objectsByID[obj];
-			@try
-				{
-				[self.owner setValue:theOutletObject forKey:key];
-				}
-			@catch (NSException *exception)
-				{
-				NSLog(@"ERROR: Could not find an outlet property called %@ on %@", key, self.owner);
-				}
-			}];
-		}
+    if (theOwnerDictionary[@"view"])
+        {
+        NSString *theViewID = theOwnerDictionary[@"view"];
+        id theView = self.objectsByID[theViewID];
+        AssertCast_(UIViewController, self.owner).view = theView;
+        }
+
+    NSMutableDictionary *theOutlets = [NSMutableDictionary dictionary];
+    if (theOwnerDictionary[@"outlets"] != NULL)
+        {
+        [theOutlets addEntriesFromDictionary:theOwnerDictionary[@"outlets"]];
+        }
+    [theOutlets addEntriesFromDictionary:self.outletIDs];
+
+    [theOutlets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        id theOutletObject = self.objectsByID[obj];
+        @try
+            {
+            [self.owner setValue:theOutletObject forKey:key];
+            }
+        @catch (NSException *exception)
+            {
+            NSLog(@"ERROR: Could not find an outlet property called %@ on %@", key, self.owner);
+            }
+        }];
 
 	return(YES);
 	}
+
+#pragma mark -
+
+- (void)prepare
+    {
+	self.owner = NULL;
+	self.objectsByID = [NSMutableDictionary dictionary];
+    self.outletIDs = [NSMutableDictionary dictionary];
+    }
 
 #pragma mark -
 
@@ -342,8 +370,9 @@
 
 	__block NSError *theError = NULL;
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		if ([@[@"id", @"class", @"subviews", @"constraints", @"action", @"target"] containsObject:key])
+		if ([@[@"id", @"class", @"subviews", @"constraints", @"action", @"target", @"outlet"] containsObject:key])
 			{
+//            NSLog(@"DEBUG: Skipping %@", key);
 			return;
 			}
 
@@ -402,8 +431,21 @@
 
 	// #########################################################################
 
+    id theOutlet = theSpecification[@"outlet"];
+    if (theOutlet != NULL)
+        {
+        // TODO this is a bit of a hack. Outlets are either strings (name of the outlet) or true (the name of the outlet is the same as the object id).
+        if ([theOutlet isKindOfClass:[NSString class]] == NO)
+            {
+            theOutlet = theID;
+            }
+        self.outletIDs[theOutlet] = theID;
+        }
+
+	// #########################################################################
+
 	NSString *theActionName = theSpecification[@"action"];
-	if (theActionName != NULL)
+	if (theActionName.length > 0)
 		{
 		id theTarget = self.owner;
 		if (theTarget == NULL)
