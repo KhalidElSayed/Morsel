@@ -162,7 +162,7 @@
 
 #pragma mark -
 
-- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
+- (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
 	{
 	self.objectsByID = [NSMutableDictionary dictionary];
 	self.owner = ownerOrNil;
@@ -173,51 +173,34 @@
 		return(NO);
 		}
 
-	id theRootObject = [self objectWithSpecificationDictionary:self.specification[@"root"] root:YES error:outError];
-	if (theRootObject == NULL)
-		{
-		return(NULL);
-		}
+    NSMutableDictionary *theObjects = [NSMutableDictionary dictionary];
+    NSArray *theObjectSpecifications = self.specification[@"objects"];
+    for (NSDictionary *theSpecification in theObjectSpecifications)
+        {
+        NSString *theObjectID = theSpecification[@"id"];
+        id theObject = [self objectWithSpecificationDictionary:theSpecification error:outError];
+        if (theObject == NULL)
+            {
+            return(NULL);
+            }
 
-	if ([self populateObject:theRootObject withSpecificationDictionary:self.specification[@"root"] error:outError] == NO)
-		{
-		return(NULL);
-		}
+        if ([self populateObject:theObject withSpecificationDictionary:theSpecification error:outError] == NO)
+            {
+            return(NULL);
+            }
 
-	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
-	if (self.owner && theOwnerDictionary != NULL)
-		{
-		if (theOwnerDictionary[@"view"])
-			{
-			NSString *theViewID = theOwnerDictionary[@"view"];
-			id theView = self.objectsByID[theViewID];
-			AssertCast_(UIViewController, self.owner).view = theView;
-			}
+        theObjects[theObjectID] = theObject;
+        }
 
-		NSDictionary *theOutlets = theOwnerDictionary[@"outlets"];
-		[theOutlets enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-
-			id theOutletObject = self.objectsByID[obj];
-			@try
-				{
-				[self.owner setValue:theOutletObject forKey:key];
-				}
-			@catch (NSException *exception)
-				{
-				NSLog(@"ERROR: Could not find an outlet property called %@ on %@", key, self.owner);
-				}
-
-
-			}];
-		}
-
-	// At the moment we just care about the root object...
-	NSArray *theObjects = @[ theRootObject ];
+    if ([self configureOwner:outError] == NO)
+        {
+        return(NO);
+        }
 
 	return(theObjects);
 	}
 
-- (BOOL)instantiateWithRoot:(id)root owner:(id)owner  options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
+- (BOOL)instantiateWithRoot:(id)root owner:(id)owner options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
 	{
 	self.objectsByID = [NSMutableDictionary dictionary];
 	self.owner = owner;
@@ -228,11 +211,28 @@
 		return(NO);
 		}
 
-	if ([self populateObject:root withSpecificationDictionary:self.specification[@"root"] error:outError] == NO)
+    NSDictionary *theRootObjectSpecification = self.specification[@"objects"][@"root"];
+    if (theRootObjectSpecification == NULL)
+        {
+        NSLog(@"ERROR: Could not find an object specification with id root");
+        return(NO);
+        }
+
+	if ([self populateObject:root withSpecificationDictionary:theRootObjectSpecification error:outError] == NO)
 		{
 		return(NO);
 		}
 
+    if ([self configureOwner:outError] == NO)
+        {
+        return(NO);
+        }
+
+	return(YES);
+	}
+
+- (BOOL)configureOwner:(NSError **)outError
+    {
 	NSDictionary *theOwnerDictionary = self.specification[@"owner"];
 	if (self.owner && theOwnerDictionary != NULL)
 		{
@@ -263,7 +263,7 @@
 
 #pragma mark -
 
-- (id)objectWithSpecificationDictionary:(NSDictionary *)inSpecification root:(BOOL)inRoot error:(NSError **)outError
+- (id)objectWithSpecificationDictionary:(NSDictionary *)inSpecification error:(NSError **)outError
 	{
 	NSString *theID = inSpecification[@"id"] ?: @"root";
 	NSString *theClassName = inSpecification[@"class"];
@@ -372,7 +372,7 @@
 			{
 			theChildSpecification = self.specification[theChildSpecification];
 			}
-		id theChild = [self objectWithSpecificationDictionary:theChildSpecification root:NO error:outError];
+		id theChild = [self objectWithSpecificationDictionary:theChildSpecification error:outError];
 
 		if (theChild == NULL || [inObject isKindOfClass:[UIView class]] == NO || [theChild isKindOfClass:[UIView class]] == NO)
 			{
@@ -546,6 +546,7 @@
 
 - (NSDictionary *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName
 	{
+    NSParameterAssert(inObject != NULL);
 	for (NSDictionary *thePropertyType in self.propertyTypes)
 		{
 		NSPredicate *thePredicate = thePropertyType[@"predicate"];

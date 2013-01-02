@@ -1,8 +1,8 @@
 # -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
 
-root:
+objects:
+- id: root
   class: UIView                                     # You can use the class name or a defined synonym
-  id: root                                          # id is actually optional for root objects
   backgroundColor: 'rgb(100,200,150)'               # Morsel supports all CSS style colour definitions, see more examples later.
   size: [ 320, 416 ]                                # If we're using autolayout (which is on by default) this auto-generates constraints 
 

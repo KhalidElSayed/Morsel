@@ -2,7 +2,8 @@
 
 ################################################################################
 
-root:
+objects:
+- id: root
   class: UIView
   size: [ 320, 416 ]
   backgroundColor: black

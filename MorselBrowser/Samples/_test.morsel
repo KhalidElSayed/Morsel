@@ -8,9 +8,9 @@ owner:
   outlets:
     nameField: nameField
 
-root:
+objects:
+- id: root
   class: UIView
-  id: root
   backgroundColor: white
   size: [ 320, 416 ]
   subviews:

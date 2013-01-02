@@ -41,7 +41,7 @@
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError;
 - (id)initWithName:(NSString *)inName bundle:(NSBundle *)inBundle error:(NSError **)outError;
 
-- (NSArray *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
+- (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
 - (BOOL)instantiateWithRoot:(id)root owner:(id)owner  options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
 
 @end

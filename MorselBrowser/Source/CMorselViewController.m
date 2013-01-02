@@ -91,7 +91,7 @@
 		[self.view removeConstraints:[self.view recursiveConstraintsMatchingPredicate:[NSPredicate predicateWithFormat:@"firstItem == %@ OR secondItem == %@", self.morselRootView, self.morselRootView]]];
 		[self.morselRootView removeFromSuperview];
 
-		self.morselRootView = [_morsel instantiateWithOwner:NULL options:NULL error:NULL][0];
+		self.morselRootView = [_morsel instantiateWithOwner:NULL options:NULL error:NULL][@"root"];
 		if (self.morselRootView != NULL)
 			{
 			[self.view addSubview:self.morselRootView];

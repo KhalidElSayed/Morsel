@@ -55,6 +55,7 @@
 		45B581451694C1EE00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45B581481694C3EA00153631 /* ButtonPressed.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B581471694C3EA00153631 /* ButtonPressed.png */; };
 		45B5814A1694C3F000153631 /* ButtonPressed@2x.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B581491694C3F000153631 /* ButtonPressed@2x.png */; };
+		45B5814C1694C7CC00153631 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B5814B1694C7CC00153631 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,8 +170,9 @@
 		45B581181694BE4700153631 /* test.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = test.dat; sourceTree = "<group>"; };
 		45B581191694BE4700153631 /* Thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumb.png; sourceTree = "<group>"; };
 		45B581391694C10600153631 /* Samples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Samples; sourceTree = "<group>"; };
-		45B581471694C3EA00153631 /* ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = file; name = ButtonPressed.png; path = MorselBrowser/Samples/ButtonPressed.png; sourceTree = "<group>"; };
-		45B581491694C3F000153631 /* ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ButtonPressed@2x.png"; path = "MorselBrowser/Samples/ButtonPressed@2x.png"; sourceTree = "<group>"; };
+		45B581471694C3EA00153631 /* ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPressed.png; path = ../Samples/ButtonPressed.png; sourceTree = "<group>"; };
+		45B581491694C3F000153631 /* ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPressed@2x.png"; path = "../Samples/ButtonPressed@2x.png"; sourceTree = "<group>"; };
+		45B5814B1694C7CC00153631 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B5814C1694C7CC00153631 /* MapKit.framework in Frameworks */,
 				45B580DE1694BDB300153631 /* UIKit.framework in Frameworks */,
 				45B580DF1694BDB300153631 /* Foundation.framework in Frameworks */,
 				45B580E11694BDB300153631 /* CoreGraphics.framework in Frameworks */,
@@ -199,8 +202,6 @@
 		45B57F8E1694B7B800153631 = {
 			isa = PBXGroup;
 			children = (
-				45B581491694C3F000153631 /* ButtonPressed@2x.png */,
-				45B581471694C3EA00153631 /* ButtonPressed.png */,
 				45B57FAE1694B83A00153631 /* Source */,
 				45B580F71694BE4700153631 /* MorselBrowser */,
 				45B57FD51694B90E00153631 /* Externals */,
@@ -209,6 +210,7 @@
 				45B57F9A1694B7B800153631 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		45B57F9A1694B7B800153631 /* Products */ = {
 			isa = PBXGroup;
@@ -222,6 +224,7 @@
 		45B57F9B1694B7B800153631 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45B5814B1694C7CC00153631 /* MapKit.framework */,
 				45B57F9C1694B7B800153631 /* Foundation.framework */,
 				45B580B31694B99800153631 /* CoreFoundation.framework */,
 				45B580DD1694BDB300153631 /* UIKit.framework */,
@@ -349,6 +352,8 @@
 		45B580F81694BE4700153631 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				45B581491694C3F000153631 /* ButtonPressed@2x.png */,
+				45B581471694C3EA00153631 /* ButtonPressed.png */,
 				45B580F91694BE4700153631 /* Default-568h@2x.png */,
 				45B580FA1694BE4700153631 /* Default.png */,
 				45B580FB1694BE4700153631 /* Default@2x.png */,

@@ -2,9 +2,9 @@
 
 ################################################################################
 
-root:
+objects:
+- id: root
   class: UIView
-  id: root
   backgroundColor: white
   subviews:
   - class: UILabel
