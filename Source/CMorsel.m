@@ -314,7 +314,6 @@
 		self.objectsByID[theID] = theObject;
 		}
 
-
 	return(theObject);
 	}
 
