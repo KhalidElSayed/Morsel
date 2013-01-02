@@ -10,4 +10,6 @@
 
 @interface UIView (Debugging)
 
+- (void)dumpConstraints;
+
 @end

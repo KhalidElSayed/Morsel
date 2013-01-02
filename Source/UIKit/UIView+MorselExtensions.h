@@ -43,7 +43,11 @@
 
 - (NSArray *)recursiveConstraints;
 - (NSArray *)recursiveConstraintsMatchingPredicate:(NSPredicate *)inPredicate;
+
 - (NSLayoutConstraint *)constantWidthConstraint;
 - (NSLayoutConstraint *)constantHeightConstraint;
+
+- (NSArray *)recursiveSubviews;
+- (NSArray *)recursiveSubviewsMatchingPredicate:(NSPredicate *)inPredicate;
 
 @end

@@ -882,6 +882,7 @@
 				45B580F61694BDB300153631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45B581711694C95700153631 /* Build configuration list for PBXNativeTarget "MorselMinimal" */ = {
 			isa = XCConfigurationList;
@@ -890,6 +891,7 @@
 				45B581731694C95700153631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

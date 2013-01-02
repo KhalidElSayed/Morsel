@@ -135,4 +135,23 @@ static void *kMorselID;
 	return([theConstraints lastObject]);
 	}
 
+#pragma mark -
+
+- (NSArray *)recursiveSubviews
+    {
+	NSMutableArray *theViews = [NSMutableArray array];
+
+	[theViews addObjectsFromArray:self.subviews];
+	for (UIView *theView in self.subviews)
+		{
+		[theViews addObjectsFromArray:[theView recursiveSubviews]];
+		}
+	return(theViews);
+    }
+
+- (NSArray *)recursiveSubviewsMatchingPredicate:(NSPredicate *)inPredicate
+    {
+    return([[self recursiveSubviews] filteredArrayUsingPredicate:inPredicate]);
+    }
+
 @end

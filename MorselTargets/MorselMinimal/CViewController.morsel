@@ -5,30 +5,35 @@
 owner:
   class: CTestLoginViewController
   view: root
-  outlets:
-    nameField: nameField
+#  outlets:
+#    nameField: nameField
 
 objects:
 - id: root
   class: UIView
-  backgroundColor: white
+  backgroundColor: FFFFFF
   subviews:
   - class: UILabel
-    id: nameLabel
+    id: name_label
     text: 'Name:'
+    horizontalContentHuggingPriority: 1000
+    horizontalContentCompressionResistancePriority: 1000
 
   - class: UITextField
-    id: nameField
+    id: name_field
     placeholder: 'name'
     borderStyle: bezel
     returnKeyType: next
+#    outlet: nameField
 
   - class: UILabel
-    id: passwordLabel
+    id: password_label
     text: 'Password:'
+    horizontalContentHuggingPriority: 1000
+    horizontalContentCompressionResistancePriority: 1000
 
   - class: UITextField
-    id: passwordField
+    id: password_field
     placeholder: 'password'
     borderStyle: bezel
     secureTextEntry: true
@@ -40,12 +45,8 @@ objects:
     action: ok
 
   constraints:
-  - visual: 'H:|-[nameLabel]-[nameField]-|'
-  - visual: 'H:|-[passwordLabel]-[passwordField]-|'
-
-  - visual: 'V:|-[nameLabel]-[passwordLabel]-[ok_button]'
-
-  - align-baseline: [ nameLabel, nameField ]
-  - align-baseline: [ passwordLabel, passwordField ]
-  - align-left: [ nameField, passwordField ]
-  - align-right: [ passwordField, ok_button ]
+  - visual: { format: 'H:[name_label]-[name_field]-|', options: baseline }
+  - visual: { format: 'H:|-[password_label]-[password_field]-|', options: baseline }
+  - visual: { format: 'V:|-[name_label]-[password_label]', options: trailing }
+  - visual: { format: 'V:|-[name_field]-[password_field]', options: leading }
+  - visual: { format: 'V:[password_field]-[ok_button]', options: trailing }

@@ -12,10 +12,12 @@ defaults:
     translatesAutoresizingMaskIntoConstraints: false
   - class: UILabel
     backgroundColor: clear
+    verticalContentHuggingPriority: 250
+    horizontalContentHuggingPriority: 250
   - class: CCoreTextLabel
     backgroundColor: clear
-#    verticalContentHuggingPriority: 250
-#    horizontalContentHuggingPriority: 250
+    verticalContentHuggingPriority: 250
+    horizontalContentHuggingPriority: 250
 
 
 property-types:

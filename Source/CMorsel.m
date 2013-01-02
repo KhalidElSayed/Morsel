@@ -577,7 +577,7 @@
 	id theSpecification = inObject;
 	if ([theSpecification[@"type"] isEqualToString:@"visual"])
 		{
-		NSString *theFormat = theSpecification[@"format"];
+        NSString *theFormat = theSpecification[@"format"];
 		theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:0 metrics:self.specification[@"metrics"] views:self.objectsByID];
 		}
 	else if (theSpecification[@"visual"])
@@ -596,20 +596,20 @@
 			NSDictionary *theOptionsByName = @{
 				@"baseline": @(NSLayoutFormatAlignAllBaseline),
 				@"leading": @(NSLayoutFormatAlignAllLeading),
+				@"trailing": @(NSLayoutFormatAlignAllTrailing),
 				};
 			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] integerValue];
-
-
 			theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:theOptions metrics:self.specification[@"metrics"] views:self.objectsByID];
 			}
 		else if ([theSpecification isKindOfClass:[NSDictionary class]])
 			{
-			NSString *theFormat = theSpecification[@"visual"];
+			NSString *theFormat = theSpecification[@"format"];
 
 			NSString *theOptionsString = theSpecification[@"options"];
 			NSDictionary *theOptionsByName = @{
 				@"baseline": @(NSLayoutFormatAlignAllBaseline),
 				@"leading": @(NSLayoutFormatAlignAllLeading),
+				@"trailing": @(NSLayoutFormatAlignAllTrailing),
 				};
 			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] integerValue];
 			theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:theOptions metrics:self.specification[@"metrics"] views:self.objectsByID];

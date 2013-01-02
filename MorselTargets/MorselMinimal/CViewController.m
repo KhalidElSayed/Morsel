@@ -9,6 +9,7 @@
 #import "CViewController.h"
 
 #import "CMorsel.h"
+#import "UIView+Debugging.h"
 
 @interface CViewController ()
 @property (readwrite, nonatomic, weak) UILabel *nameField;
@@ -36,6 +37,8 @@
 - (IBAction)ok:(id)sender
     {
     NSLog(@"OK!: %@", self.nameField.text);
+
+    [self.view dumpConstraints];
     }
 
 @end

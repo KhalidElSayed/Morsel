@@ -33,7 +33,7 @@
 		{
 		if ([_accessCounts countForObject:theKey] == 0)
 			{
-			NSLog(@"Zero accesses for key '%@' in dictionary %p", theKey, self);
+			NSLog(@"WARNING: Zero accesses for key '%@' in dictionary %p", theKey, self);
 			}
 		}
 	}
