@@ -1,0 +1,51 @@
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+################################################################################
+
+owner:
+  class: CTestLoginViewController
+  view: root
+  outlets:
+    nameField: nameField
+
+objects:
+- id: root
+  class: UIView
+  backgroundColor: white
+  subviews:
+  - class: UILabel
+    id: nameLabel
+    text: 'Name:'
+
+  - class: UITextField
+    id: nameField
+    placeholder: 'name'
+    borderStyle: bezel
+    returnKeyType: next
+
+  - class: UILabel
+    id: passwordLabel
+    text: 'Password:'
+
+  - class: UITextField
+    id: passwordField
+    placeholder: 'password'
+    borderStyle: bezel
+    secureTextEntry: true
+    returnKeyType: go
+
+  - class: UIButton
+    id: ok_button
+    title: 'OK'
+    action: ok
+
+  constraints:
+  - visual: 'H:|-[nameLabel]-[nameField]-|'
+  - visual: 'H:|-[passwordLabel]-[passwordField]-|'
+
+  - visual: 'V:|-[nameLabel]-[passwordLabel]-[ok_button]'
+
+  - align-baseline: [ nameLabel, nameField ]
+  - align-baseline: [ passwordLabel, passwordField ]
+  - align-left: [ nameField, passwordField ]
+  - align-right: [ passwordField, ok_button ]

@@ -46,6 +46,4 @@
 - (NSLayoutConstraint *)constantWidthConstraint;
 - (NSLayoutConstraint *)constantHeightConstraint;
 
-- (void)dumpConstraints;
-
 @end

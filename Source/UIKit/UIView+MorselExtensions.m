@@ -31,7 +31,6 @@
 
 #import "UIView+MorselExtensions.h"
 
-#import "NSLayoutConstraint+MorselExtensions.h"
 #import "UIView+MorselExtensions.h"
 
 #import <objc/runtime.h>
@@ -134,18 +133,6 @@ static void *kMorselID;
 	NSPredicate *thePredicate = [NSPredicate predicateWithFormat:@"firstItem == %@ && firstAttribute == %@ && relation == %@ && secondItem == NULL && multiplier == 1.0", self, @(NSLayoutAttributeHeight), @(NSLayoutRelationEqual)];
 	NSArray *theConstraints = [self.superview recursiveConstraintsMatchingPredicate:thePredicate];
 	return([theConstraints lastObject]);
-	}
-
-
-- (void)dumpConstraints
-	{
-	NSMutableArray *theDescriptions = [NSMutableArray array];
-	for (NSLayoutConstraint *theConstraint in [self recursiveConstraints])
-		{
-		[theDescriptions addObject:[theConstraint debugDescription]];
-		}
-	[theDescriptions sortUsingSelector:@selector(compare:)];
-	NSLog(@"%@", [theDescriptions componentsJoinedByString:@"\n"]);
 	}
 
 @end

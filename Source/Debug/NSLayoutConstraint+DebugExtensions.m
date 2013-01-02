@@ -1,5 +1,5 @@
 //
-//	NSLayoutConstraint+MorselExtensions.m
+//	NSLayoutConstraint+DebugExtensions.m
 //	Morsel
 //
 //	Created by Jonathan Wight on 12/17/12.
@@ -29,11 +29,11 @@
 //	authors and should not be interpreted as representing official policies, either expressed
 //	or implied, of Jonathan Wight.
 
-#import "NSLayoutConstraint+MorselExtensions.h"
+#import "NSLayoutConstraint+DebugExtensions.h"
 
 #import "UIView+MorselExtensions.h"
 
-@implementation NSLayoutConstraint (MorselExtensions)
+@implementation NSLayoutConstraint (DebugExtensions)
 
 - (NSString *)debugDescription
 	{

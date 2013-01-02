@@ -16,7 +16,6 @@
 		45B57FCD1694B83A00153631 /* MorselSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBC1694B83A00153631 /* MorselSupport.m */; };
 		45B57FCE1694B83A00153631 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBF1694B83A00153631 /* CColorConverter.m */; };
 		45B57FCF1694B83A00153631 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
-		45B57FD01694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC51694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m */; };
 		45B57FD11694B83A00153631 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
 		45B580DE1694BDB300153631 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580DD1694BDB300153631 /* UIKit.framework */; };
 		45B580DF1694BDB300153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
@@ -50,12 +49,39 @@
 		45B581401694C1E300153631 /* MorselSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBC1694B83A00153631 /* MorselSupport.m */; };
 		45B581411694C1E300153631 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBF1694B83A00153631 /* CColorConverter.m */; };
 		45B581421694C1E300153631 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
-		45B581431694C1E300153631 /* NSLayoutConstraint+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC51694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m */; };
 		45B581441694C1E700153631 /* global.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B57FC11694B83A00153631 /* global.morsel */; };
 		45B581451694C1EE00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45B581481694C3EA00153631 /* ButtonPressed.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B581471694C3EA00153631 /* ButtonPressed.png */; };
 		45B5814A1694C3F000153631 /* ButtonPressed@2x.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45B581491694C3F000153631 /* ButtonPressed@2x.png */; };
 		45B5814C1694C7CC00153631 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B5814B1694C7CC00153631 /* MapKit.framework */; };
+		45B581531694C95600153631 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580DD1694BDB300153631 /* UIKit.framework */; };
+		45B581541694C95600153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
+		45B581551694C95600153631 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
+		45B5815B1694C95700153631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45B581591694C95700153631 /* InfoPlist.strings */; };
+		45B5815D1694C95700153631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5815C1694C95700153631 /* main.m */; };
+		45B581611694C95700153631 /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581601694C95700153631 /* CAppDelegate.m */; };
+		45B581631694C95700153631 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581621694C95700153631 /* Default.png */; };
+		45B581651694C95700153631 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581641694C95700153631 /* Default@2x.png */; };
+		45B581671694C95700153631 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581661694C95700153631 /* Default-568h@2x.png */; };
+		45B5816A1694C95700153631 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581691694C95700153631 /* CViewController.m */; };
+		45B581751694C9E700153631 /* CViewController.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B581741694C9E700153631 /* CViewController.morsel */; };
+		45B581761694CA0100153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
+		45B581771694CA0100153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		45B581781694CA0100153631 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
+		45B581791694CA0100153631 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
+		45B5817A1694CA0100153631 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
+		45B5817B1694CA0100153631 /* MorselSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBC1694B83A00153631 /* MorselSupport.m */; };
+		45B5817C1694CA0100153631 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBF1694B83A00153631 /* CColorConverter.m */; };
+		45B5817D1694CA0100153631 /* global.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B57FC11694B83A00153631 /* global.morsel */; };
+		45B5817E1694CA0100153631 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
+		45B581801694CA0100153631 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
+		45B581831694CA2E00153631 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580A21694B90E00153631 /* libCocoaYAML.a */; };
+		45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
+		45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
+		45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
+		45B5818E1694D4B400153631 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
+		45B5818F1694D4B400153631 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
+		45B581901694D4B400153631 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +100,13 @@
 			remoteInfo = "Unit Tests";
 		};
 		45B581361694BF7B00153631 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57FD81694B90E00153631 /* CocoaYAML_iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45F23B541676621E00A3A6FC;
+			remoteInfo = CocoaYAML;
+		};
+		45B581811694CA1600153631 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45B57FD81694B90E00153631 /* CocoaYAML_iOS.xcodeproj */;
 			proxyType = 1;
@@ -126,17 +159,12 @@
 		45B57FC11694B83A00153631 /* global.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = global.morsel; sourceTree = "<group>"; };
 		45B57FC21694B83A00153631 /* NSLayoutConstraint+Conveniences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Conveniences.h"; sourceTree = "<group>"; };
 		45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Conveniences.m"; sourceTree = "<group>"; };
-		45B57FC41694B83A00153631 /* NSLayoutConstraint+MorselExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MorselExtensions.h"; sourceTree = "<group>"; };
-		45B57FC51694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MorselExtensions.m"; sourceTree = "<group>"; };
 		45B57FC61694B83A00153631 /* UIView+MorselExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MorselExtensions.h"; sourceTree = "<group>"; };
 		45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MorselExtensions.m"; sourceTree = "<group>"; };
 		45B57FD21694B88000153631 /* Morsel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Morsel.h; sourceTree = "<group>"; };
 		45B57FD81694B90E00153631 /* CocoaYAML_iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CocoaYAML_iOS.xcodeproj; sourceTree = "<group>"; };
 		45B580651694B90E00153631 /* CYAMLDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYAMLDeserializer.h; sourceTree = "<group>"; };
 		45B580B31694B99800153631 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		45B580B71694B99800153631 /* MorselResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MorselResources-Info.plist"; sourceTree = "<group>"; };
-		45B580B91694B99900153631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		45B580BB1694B99900153631 /* MorselResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MorselResources-Prefix.pch"; sourceTree = "<group>"; };
 		45B580DB1694BDB300153631 /* MorselBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B580DD1694BDB300153631 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45B580E01694BDB300153631 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -173,6 +201,23 @@
 		45B581471694C3EA00153631 /* ButtonPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonPressed.png; path = ../Samples/ButtonPressed.png; sourceTree = "<group>"; };
 		45B581491694C3F000153631 /* ButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonPressed@2x.png"; path = "../Samples/ButtonPressed@2x.png"; sourceTree = "<group>"; };
 		45B5814B1694C7CC00153631 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		45B581511694C95600153631 /* MorselMinimal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselMinimal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B581581694C95700153631 /* MorselMinimal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MorselMinimal-Info.plist"; sourceTree = "<group>"; };
+		45B5815A1694C95700153631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45B5815C1694C95700153631 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		45B5815E1694C95700153631 /* MorselMinimal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MorselMinimal-Prefix.pch"; sourceTree = "<group>"; };
+		45B5815F1694C95700153631 /* CAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
+		45B581601694C95700153631 /* CAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CAppDelegate.m; sourceTree = "<group>"; };
+		45B581621694C95700153631 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		45B581641694C95700153631 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		45B581661694C95700153631 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		45B581681694C95700153631 /* CViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CViewController.h; sourceTree = "<group>"; };
+		45B581691694C95700153631 /* CViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CViewController.m; sourceTree = "<group>"; };
+		45B581741694C9E700153631 /* CViewController.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CViewController.morsel; sourceTree = "<group>"; };
+		45B581871694D46600153631 /* NSLayoutConstraint+DebugExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+DebugExtensions.h"; sourceTree = "<group>"; };
+		45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+DebugExtensions.m"; sourceTree = "<group>"; };
+		45B5818C1694D4B400153631 /* UIView+Debugging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Debugging.h"; sourceTree = "<group>"; };
+		45B5818D1694D4B400153631 /* UIView+Debugging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Debugging.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +241,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B5814E1694C95600153631 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B581831694CA2E00153631 /* libCocoaYAML.a in Frameworks */,
+				45B581531694C95600153631 /* UIKit.framework in Frameworks */,
+				45B581541694C95600153631 /* Foundation.framework in Frameworks */,
+				45B581551694C95600153631 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -204,8 +260,8 @@
 			children = (
 				45B57FAE1694B83A00153631 /* Source */,
 				45B580F71694BE4700153631 /* MorselBrowser */,
+				45B581561694C95600153631 /* MorselMinimal */,
 				45B57FD51694B90E00153631 /* Externals */,
-				45B580B51694B99800153631 /* MorselResources */,
 				45B57F9B1694B7B800153631 /* Frameworks */,
 				45B57F9A1694B7B800153631 /* Products */,
 			);
@@ -217,6 +273,7 @@
 			children = (
 				45B57F991694B7B800153631 /* libMorsel.a */,
 				45B580DB1694BDB300153631 /* MorselBrowser.app */,
+				45B581511694C95600153631 /* MorselMinimal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,6 +317,10 @@
 				45B57FB71694B83A00153631 /* CDebugDictionary.m */,
 				45B57FB81694B83A00153631 /* CDebugYAMLDeserializer.h */,
 				45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */,
+				45B581871694D46600153631 /* NSLayoutConstraint+DebugExtensions.h */,
+				45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */,
+				45B5818C1694D4B400153631 /* UIView+Debugging.h */,
+				45B5818D1694D4B400153631 /* UIView+Debugging.m */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -279,8 +340,6 @@
 				45B57FC11694B83A00153631 /* global.morsel */,
 				45B57FC21694B83A00153631 /* NSLayoutConstraint+Conveniences.h */,
 				45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */,
-				45B57FC41694B83A00153631 /* NSLayoutConstraint+MorselExtensions.h */,
-				45B57FC51694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m */,
 				45B57FC61694B83A00153631 /* UIView+MorselExtensions.h */,
 				45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */,
 			);
@@ -321,24 +380,6 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
-		45B580B51694B99800153631 /* MorselResources */ = {
-			isa = PBXGroup;
-			children = (
-				45B580B61694B99800153631 /* Supporting Files */,
-			);
-			path = MorselResources;
-			sourceTree = "<group>";
-		};
-		45B580B61694B99800153631 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				45B580B71694B99800153631 /* MorselResources-Info.plist */,
-				45B580B81694B99900153631 /* InfoPlist.strings */,
-				45B580BB1694B99900153631 /* MorselResources-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		45B580F71694BE4700153631 /* MorselBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,7 +387,8 @@
 				45B580F81694BE4700153631 /* Resources */,
 				45B581041694BE4700153631 /* Source */,
 			);
-			path = MorselBrowser;
+			name = MorselBrowser;
+			path = MorselTargets/MorselBrowser;
 			sourceTree = "<group>";
 		};
 		45B580F81694BE4700153631 /* Resources */ = {
@@ -394,6 +436,34 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		45B581561694C95600153631 /* MorselMinimal */ = {
+			isa = PBXGroup;
+			children = (
+				45B5815F1694C95700153631 /* CAppDelegate.h */,
+				45B581601694C95700153631 /* CAppDelegate.m */,
+				45B581681694C95700153631 /* CViewController.h */,
+				45B581691694C95700153631 /* CViewController.m */,
+				45B581741694C9E700153631 /* CViewController.morsel */,
+				45B581571694C95700153631 /* Supporting Files */,
+			);
+			name = MorselMinimal;
+			path = MorselTargets/MorselMinimal;
+			sourceTree = "<group>";
+		};
+		45B581571694C95700153631 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45B581581694C95700153631 /* MorselMinimal-Info.plist */,
+				45B581591694C95700153631 /* InfoPlist.strings */,
+				45B5815C1694C95700153631 /* main.m */,
+				45B5815E1694C95700153631 /* MorselMinimal-Prefix.pch */,
+				45B581621694C95700153631 /* Default.png */,
+				45B581641694C95700153631 /* Default@2x.png */,
+				45B581661694C95700153631 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -433,6 +503,24 @@
 			productReference = 45B580DB1694BDB300153631 /* MorselBrowser.app */;
 			productType = "com.apple.product-type.application";
 		};
+		45B581501694C95600153631 /* MorselMinimal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45B581711694C95700153631 /* Build configuration list for PBXNativeTarget "MorselMinimal" */;
+			buildPhases = (
+				45B5814D1694C95600153631 /* Sources */,
+				45B5814E1694C95600153631 /* Frameworks */,
+				45B5814F1694C95600153631 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45B581821694CA1600153631 /* PBXTargetDependency */,
+			);
+			name = MorselMinimal;
+			productName = MorselMinimal;
+			productReference = 45B581511694C95600153631 /* MorselMinimal.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -462,6 +550,7 @@
 			targets = (
 				45B57F981694B7B800153631 /* MorselLibrary */,
 				45B580DA1694BDB300153631 /* MorselBrowser */,
+				45B581501694C95600153631 /* MorselMinimal */,
 			);
 		};
 /* End PBXProject section */
@@ -503,6 +592,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B5814F1694C95600153631 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B5815B1694C95700153631 /* InfoPlist.strings in Resources */,
+				45B581631694C95700153631 /* Default.png in Resources */,
+				45B581651694C95700153631 /* Default@2x.png in Resources */,
+				45B581671694C95700153631 /* Default-568h@2x.png in Resources */,
+				45B581751694C9E700153631 /* CViewController.morsel in Resources */,
+				45B5817D1694CA0100153631 /* global.morsel in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -518,8 +620,9 @@
 				45B57FCD1694B83A00153631 /* MorselSupport.m in Sources */,
 				45B57FCE1694B83A00153631 /* CColorConverter.m in Sources */,
 				45B57FCF1694B83A00153631 /* NSLayoutConstraint+Conveniences.m in Sources */,
-				45B57FD01694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m in Sources */,
 				45B57FD11694B83A00153631 /* UIView+MorselExtensions.m in Sources */,
+				45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
+				45B5818E1694D4B400153631 /* UIView+Debugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,8 +647,30 @@
 				45B581401694C1E300153631 /* MorselSupport.m in Sources */,
 				45B581411694C1E300153631 /* CColorConverter.m in Sources */,
 				45B581421694C1E300153631 /* NSLayoutConstraint+Conveniences.m in Sources */,
-				45B581431694C1E300153631 /* NSLayoutConstraint+MorselExtensions.m in Sources */,
 				45B581451694C1EE00153631 /* CMorsel.m in Sources */,
+				45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
+				45B5818F1694D4B400153631 /* UIView+Debugging.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45B5814D1694C95600153631 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B5815D1694C95700153631 /* main.m in Sources */,
+				45B581611694C95700153631 /* CAppDelegate.m in Sources */,
+				45B5816A1694C95700153631 /* CViewController.m in Sources */,
+				45B581761694CA0100153631 /* CMorsel.m in Sources */,
+				45B581771694CA0100153631 /* CMorselContext.m in Sources */,
+				45B581781694CA0100153631 /* CTypeConverter.m in Sources */,
+				45B581791694CA0100153631 /* CDebugDictionary.m in Sources */,
+				45B5817A1694CA0100153631 /* CDebugYAMLDeserializer.m in Sources */,
+				45B5817B1694CA0100153631 /* MorselSupport.m in Sources */,
+				45B5817C1694CA0100153631 /* CColorConverter.m in Sources */,
+				45B5817E1694CA0100153631 /* NSLayoutConstraint+Conveniences.m in Sources */,
+				45B581801694CA0100153631 /* UIView+MorselExtensions.m in Sources */,
+				45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
+				45B581901694D4B400153631 /* UIView+Debugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,17 +682,14 @@
 			name = CocoaYAML;
 			targetProxy = 45B581361694BF7B00153631 /* PBXContainerItemProxy */;
 		};
+		45B581821694CA1600153631 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaYAML;
+			targetProxy = 45B581811694CA1600153631 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		45B580B81694B99900153631 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				45B580B91694B99900153631 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		45B580FC1694BE4700153631 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -590,6 +712,14 @@
 				45B581011694BE4700153631 /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		45B581591694C95700153631 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45B5815A1694C95700153631 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -675,8 +805,8 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MorselBrowser/Source/Prefix.pch;
-				INFOPLIST_FILE = MorselBrowser/Resources/Info.plist;
+				GCC_PREFIX_HEADER = MorselTargets/MorselBrowser/Source/Prefix.pch;
+				INFOPLIST_FILE = MorselTargets/MorselBrowser/Resources/Info.plist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -688,8 +818,35 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MorselBrowser/Source/Prefix.pch;
-				INFOPLIST_FILE = MorselBrowser/Resources/Info.plist;
+				GCC_PREFIX_HEADER = MorselTargets/MorselBrowser/Source/Prefix.pch;
+				INFOPLIST_FILE = MorselTargets/MorselBrowser/Resources/Info.plist;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		45B581721694C95700153631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MorselTargets/MorselMinimal/MorselMinimal-Prefix.pch";
+				INFOPLIST_FILE = "MorselTargets/MorselMinimal/MorselMinimal-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		45B581731694C95700153631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MorselTargets/MorselMinimal/MorselMinimal-Prefix.pch";
+				INFOPLIST_FILE = "MorselTargets/MorselMinimal/MorselMinimal-Info.plist";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -723,6 +880,14 @@
 			buildConfigurations = (
 				45B580F51694BDB300153631 /* Debug */,
 				45B580F61694BDB300153631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		45B581711694C95700153631 /* Build configuration list for PBXNativeTarget "MorselMinimal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45B581721694C95700153631 /* Debug */,
+				45B581731694C95700153631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
