@@ -370,9 +370,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		45B57F981694B7B800153631 /* Morsel */ = {
+		45B57F981694B7B800153631 /* MorselLibrary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45B57FA71694B7B800153631 /* Build configuration list for PBXNativeTarget "Morsel" */;
+			buildConfigurationList = 45B57FA71694B7B800153631 /* Build configuration list for PBXNativeTarget "MorselLibrary" */;
 			buildPhases = (
 				45B57F951694B7B800153631 /* Sources */,
 				45B57F961694B7B800153631 /* Frameworks */,
@@ -382,7 +382,7 @@
 			);
 			dependencies = (
 			);
-			name = Morsel;
+			name = MorselLibrary;
 			productName = Morsel_iOS;
 			productReference = 45B57F991694B7B800153631 /* libMorsel.a */;
 			productType = "com.apple.product-type.library.static";
@@ -433,7 +433,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				45B57F981694B7B800153631 /* Morsel */,
+				45B57F981694B7B800153631 /* MorselLibrary */,
 				45B580DA1694BDB300153631 /* MorselBrowser */,
 			);
 		};
@@ -515,7 +515,7 @@
 /* Begin PBXTargetDependency section */
 		45B581341694BF5D00153631 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 45B57F981694B7B800153631 /* Morsel */;
+			target = 45B57F981694B7B800153631 /* MorselLibrary */;
 			targetProxy = 45B581331694BF5D00153631 /* PBXContainerItemProxy */;
 		};
 		45B581371694BF7B00153631 /* PBXTargetDependency */ = {
@@ -613,12 +613,10 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DSTROOT = /tmp/Morsel_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MorselLibrary/Prefix.pch;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = Headers;
+				PRODUCT_NAME = Morsel;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
 			};
@@ -629,12 +627,10 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DSTROOT = /tmp/Morsel_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MorselLibrary/Prefix.pch;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = Headers;
+				PRODUCT_NAME = Morsel;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
 			};
@@ -679,7 +675,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45B57FA71694B7B800153631 /* Build configuration list for PBXNativeTarget "Morsel" */ = {
+		45B57FA71694B7B800153631 /* Build configuration list for PBXNativeTarget "MorselLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45B57FA81694B7B800153631 /* Debug */,

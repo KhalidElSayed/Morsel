@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "45B57F981694B7B800153631"
                BuildableName = "libMorsel.a"
-               BlueprintName = "Morsel"
+               BlueprintName = "MorselLibrary"
                ReferencedContainer = "container:Morsel.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
