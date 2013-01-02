@@ -45,7 +45,8 @@
     [super viewDidLoad];
 	//
 	NSMutableArray *theMorsels = [NSMutableArray array];
-	for (NSURL *theURL in [[NSFileManager defaultManager] enumeratorAtURL:[NSBundle mainBundle].resourceURL includingPropertiesForKeys:NULL options:0 errorHandler:NULL])
+	NSURL *theSampleURL = [[NSBundle mainBundle].resourceURL URLByAppendingPathComponent:@"Samples"];
+	for (NSURL *theURL in [[NSFileManager defaultManager] enumeratorAtURL:theSampleURL includingPropertiesForKeys:NULL options:0 errorHandler:NULL])
 		{
 		if ([[theURL lastPathComponent] rangeOfString:@"_bad"].location != NSNotFound)
 			{

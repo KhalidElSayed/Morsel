@@ -272,7 +272,7 @@
 	Class theClass = [self classWithString:theClassName error:outError];
 	if (theClass == NULL)
 		{
-		NSLog(@"Failed to load class of type %@ (%@)", theClassName, inSpecification);
+		NSLog(@"ERROR: Failed to load class of type %@ (%@)", theClassName, inSpecification);
 		return(NULL);
 		}
 
@@ -378,7 +378,7 @@
 
 		if (theChild == NULL || [inObject isKindOfClass:[UIView class]] == NO || [theChild isKindOfClass:[UIView class]] == NO)
 			{
-			NSLog(@"WARNING: HUH?");
+			NSLog(@"ERROR: Could not create view to insert into subviews.");
 			return(NO);
 			}
 

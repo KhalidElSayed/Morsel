@@ -491,7 +491,12 @@ static CMorselContext *gSharedInstance = NULL;
 
 - (UIImage *)imageNamed:(NSString *)inName
 	{
-	return([UIImage imageNamed:inName]);
+	UIImage *theImage = [UIImage imageNamed:inName];
+	if (theImage == NULL)
+		{
+		NSLog(@"WARNING: Could not find image named %@", inName);
+		}
+	return(theImage);
 	}
 
 @end
