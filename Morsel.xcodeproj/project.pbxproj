@@ -18,6 +18,30 @@
 		45B57FCF1694B83A00153631 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
 		45B57FD01694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC51694B83A00153631 /* NSLayoutConstraint+MorselExtensions.m */; };
 		45B57FD11694B83A00153631 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
+		45B580DE1694BDB300153631 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580DD1694BDB300153631 /* UIKit.framework */; };
+		45B580DF1694BDB300153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
+		45B580E11694BDB300153631 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
+		45B5811A1694BE4700153631 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B580F91694BE4700153631 /* Default-568h@2x.png */; };
+		45B5811B1694BE4700153631 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B580FA1694BE4700153631 /* Default.png */; };
+		45B5811C1694BE4700153631 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B580FB1694BE4700153631 /* Default@2x.png */; };
+		45B5811D1694BE4700153631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45B580FC1694BE4700153631 /* InfoPlist.strings */; };
+		45B5811E1694BE4700153631 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B580FE1694BE4700153631 /* MainStoryboard_iPad.storyboard */; };
+		45B5811F1694BE4700153631 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B581001694BE4700153631 /* MainStoryboard_iPhone.storyboard */; };
+		45B581211694BE4700153631 /* MorselBrowser.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 45B581031694BE4700153631 /* MorselBrowser.entitlements */; };
+		45B581221694BE4700153631 /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581061694BE4700153631 /* CAppDelegate.m */; };
+		45B581231694BE4700153631 /* CBonjourBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581081694BE4700153631 /* CBonjourBrowserViewController.m */; };
+		45B581241694BE4700153631 /* CLocalMorselsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5810A1694BE4700153631 /* CLocalMorselsViewController.m */; };
+		45B581251694BE4700153631 /* CMorselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5810C1694BE4700153631 /* CMorselViewController.m */; };
+		45B581261694BE4700153631 /* CRemoteMorselClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5810E1694BE4700153631 /* CRemoteMorselClient.m */; };
+		45B581271694BE4700153631 /* CRemoteMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581101694BE4700153631 /* CRemoteMorselContext.m */; };
+		45B581281694BE4700153631 /* CResizerThumb.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581121694BE4700153631 /* CResizerThumb.m */; };
+		45B581291694BE4700153631 /* CTestLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581141694BE4700153631 /* CTestLoginViewController.m */; };
+		45B5812A1694BE4700153631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581151694BE4700153631 /* main.m */; };
+		45B5812B1694BE4700153631 /* System.clr in Resources */ = {isa = PBXBuildFile; fileRef = 45B581171694BE4700153631 /* System.clr */; };
+		45B5812C1694BE4700153631 /* test.dat in Resources */ = {isa = PBXBuildFile; fileRef = 45B581181694BE4700153631 /* test.dat */; };
+		45B5812D1694BE4700153631 /* Thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581191694BE4700153631 /* Thumb.png */; };
+		45B581351694BF6F00153631 /* libMorsel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F991694B7B800153631 /* libMorsel.a */; };
+		45B581381694BFA500153631 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580A21694B90E00153631 /* libCocoaYAML.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +58,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 45C2ED261677020B005808D3;
 			remoteInfo = "Unit Tests";
+		};
+		45B581331694BF5D00153631 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57F901694B7B800153631 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B57F981694B7B800153631;
+			remoteInfo = Morsel;
+		};
+		45B581361694BF7B00153631 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57FD81694B90E00153631 /* CocoaYAML_iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45F23B541676621E00A3A6FC;
+			remoteInfo = CocoaYAML;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -81,7 +119,38 @@
 		45B580B71694B99800153631 /* MorselResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MorselResources-Info.plist"; sourceTree = "<group>"; };
 		45B580B91694B99900153631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45B580BB1694B99900153631 /* MorselResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MorselResources-Prefix.pch"; sourceTree = "<group>"; };
-		45B580CC1694BC4D00153631 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		45B580DB1694BDB300153631 /* MorselBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B580DD1694BDB300153631 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		45B580E01694BDB300153631 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		45B580F91694BE4700153631 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		45B580FA1694BE4700153631 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		45B580FB1694BE4700153631 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		45B580FD1694BE4700153631 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45B580FF1694BE4700153631 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		45B581011694BE4700153631 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		45B581021694BE4700153631 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B581031694BE4700153631 /* MorselBrowser.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MorselBrowser.entitlements; sourceTree = "<group>"; };
+		45B581051694BE4700153631 /* CAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
+		45B581061694BE4700153631 /* CAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAppDelegate.m; sourceTree = "<group>"; };
+		45B581071694BE4700153631 /* CBonjourBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBonjourBrowserViewController.h; sourceTree = "<group>"; };
+		45B581081694BE4700153631 /* CBonjourBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBonjourBrowserViewController.m; sourceTree = "<group>"; };
+		45B581091694BE4700153631 /* CLocalMorselsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLocalMorselsViewController.h; sourceTree = "<group>"; };
+		45B5810A1694BE4700153631 /* CLocalMorselsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLocalMorselsViewController.m; sourceTree = "<group>"; };
+		45B5810B1694BE4700153631 /* CMorselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselViewController.h; sourceTree = "<group>"; };
+		45B5810C1694BE4700153631 /* CMorselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselViewController.m; sourceTree = "<group>"; };
+		45B5810D1694BE4700153631 /* CRemoteMorselClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRemoteMorselClient.h; sourceTree = "<group>"; };
+		45B5810E1694BE4700153631 /* CRemoteMorselClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRemoteMorselClient.m; sourceTree = "<group>"; };
+		45B5810F1694BE4700153631 /* CRemoteMorselContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRemoteMorselContext.h; sourceTree = "<group>"; };
+		45B581101694BE4700153631 /* CRemoteMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRemoteMorselContext.m; sourceTree = "<group>"; };
+		45B581111694BE4700153631 /* CResizerThumb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CResizerThumb.h; sourceTree = "<group>"; };
+		45B581121694BE4700153631 /* CResizerThumb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CResizerThumb.m; sourceTree = "<group>"; };
+		45B581131694BE4700153631 /* CTestLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestLoginViewController.h; sourceTree = "<group>"; };
+		45B581141694BE4700153631 /* CTestLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestLoginViewController.m; sourceTree = "<group>"; };
+		45B581151694BE4700153631 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		45B581161694BE4700153631 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		45B581171694BE4700153631 /* System.clr */ = {isa = PBXFileReference; lastKnownFileType = file; path = System.clr; sourceTree = "<group>"; };
+		45B581181694BE4700153631 /* test.dat */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = test.dat; sourceTree = "<group>"; };
+		45B581191694BE4700153631 /* Thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumb.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +162,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B580D81694BDB300153631 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B580DE1694BDB300153631 /* UIKit.framework in Frameworks */,
+				45B580DF1694BDB300153631 /* Foundation.framework in Frameworks */,
+				45B580E11694BDB300153631 /* CoreGraphics.framework in Frameworks */,
+				45B581351694BF6F00153631 /* libMorsel.a in Frameworks */,
+				45B581381694BFA500153631 /* libCocoaYAML.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				45B57FAE1694B83A00153631 /* Source */,
-				45B580CB1694BC4D00153631 /* Morsel */,
+				45B580F71694BE4700153631 /* MorselBrowser */,
 				45B57FD51694B90E00153631 /* Externals */,
 				45B580B51694B99800153631 /* MorselResources */,
 				45B57F9B1694B7B800153631 /* Frameworks */,
@@ -112,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				45B57F991694B7B800153631 /* libMorsel.a */,
+				45B580DB1694BDB300153631 /* MorselBrowser.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,6 +203,8 @@
 			children = (
 				45B57F9C1694B7B800153631 /* Foundation.framework */,
 				45B580B31694B99800153631 /* CoreFoundation.framework */,
+				45B580DD1694BDB300153631 /* UIKit.framework */,
+				45B580E01694BDB300153631 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -231,12 +315,56 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		45B580CB1694BC4D00153631 /* Morsel */ = {
+		45B580F71694BE4700153631 /* MorselBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				45B580CC1694BC4D00153631 /* Prefix.pch */,
+				45B580F81694BE4700153631 /* Resources */,
+				45B581041694BE4700153631 /* Source */,
 			);
-			path = Morsel;
+			path = MorselBrowser;
+			sourceTree = "<group>";
+		};
+		45B580F81694BE4700153631 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45B580F91694BE4700153631 /* Default-568h@2x.png */,
+				45B580FA1694BE4700153631 /* Default.png */,
+				45B580FB1694BE4700153631 /* Default@2x.png */,
+				45B580FC1694BE4700153631 /* InfoPlist.strings */,
+				45B580FE1694BE4700153631 /* MainStoryboard_iPad.storyboard */,
+				45B581001694BE4700153631 /* MainStoryboard_iPhone.storyboard */,
+				45B581021694BE4700153631 /* Info.plist */,
+				45B581031694BE4700153631 /* MorselBrowser.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		45B581041694BE4700153631 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				45B581051694BE4700153631 /* CAppDelegate.h */,
+				45B581061694BE4700153631 /* CAppDelegate.m */,
+				45B581071694BE4700153631 /* CBonjourBrowserViewController.h */,
+				45B581081694BE4700153631 /* CBonjourBrowserViewController.m */,
+				45B581091694BE4700153631 /* CLocalMorselsViewController.h */,
+				45B5810A1694BE4700153631 /* CLocalMorselsViewController.m */,
+				45B5810B1694BE4700153631 /* CMorselViewController.h */,
+				45B5810C1694BE4700153631 /* CMorselViewController.m */,
+				45B5810D1694BE4700153631 /* CRemoteMorselClient.h */,
+				45B5810E1694BE4700153631 /* CRemoteMorselClient.m */,
+				45B5810F1694BE4700153631 /* CRemoteMorselContext.h */,
+				45B581101694BE4700153631 /* CRemoteMorselContext.m */,
+				45B581111694BE4700153631 /* CResizerThumb.h */,
+				45B581121694BE4700153631 /* CResizerThumb.m */,
+				45B581131694BE4700153631 /* CTestLoginViewController.h */,
+				45B581141694BE4700153631 /* CTestLoginViewController.m */,
+				45B581151694BE4700153631 /* main.m */,
+				45B581161694BE4700153631 /* Prefix.pch */,
+				45B581171694BE4700153631 /* System.clr */,
+				45B581181694BE4700153631 /* test.dat */,
+				45B581191694BE4700153631 /* Thumb.png */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +386,25 @@
 			productName = Morsel_iOS;
 			productReference = 45B57F991694B7B800153631 /* libMorsel.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		45B580DA1694BDB300153631 /* MorselBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45B580F41694BDB300153631 /* Build configuration list for PBXNativeTarget "MorselBrowser" */;
+			buildPhases = (
+				45B580D71694BDB300153631 /* Sources */,
+				45B580D81694BDB300153631 /* Frameworks */,
+				45B580D91694BDB300153631 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45B581371694BF7B00153631 /* PBXTargetDependency */,
+				45B581341694BF5D00153631 /* PBXTargetDependency */,
+			);
+			name = MorselBrowser;
+			productName = MorselBrowser;
+			productReference = 45B580DB1694BDB300153631 /* MorselBrowser.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -287,6 +434,7 @@
 			projectRoot = "";
 			targets = (
 				45B57F981694B7B800153631 /* Morsel */,
+				45B580DA1694BDB300153631 /* MorselBrowser */,
 			);
 		};
 /* End PBXProject section */
@@ -308,6 +456,26 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXResourcesBuildPhase section */
+		45B580D91694BDB300153631 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B5811A1694BE4700153631 /* Default-568h@2x.png in Resources */,
+				45B5811B1694BE4700153631 /* Default.png in Resources */,
+				45B5811C1694BE4700153631 /* Default@2x.png in Resources */,
+				45B5811D1694BE4700153631 /* InfoPlist.strings in Resources */,
+				45B5811E1694BE4700153631 /* MainStoryboard_iPad.storyboard in Resources */,
+				45B5811F1694BE4700153631 /* MainStoryboard_iPhone.storyboard in Resources */,
+				45B581211694BE4700153631 /* MorselBrowser.entitlements in Resources */,
+				45B5812B1694BE4700153631 /* System.clr in Resources */,
+				45B5812C1694BE4700153631 /* test.dat in Resources */,
+				45B5812D1694BE4700153631 /* Thumb.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		45B57F951694B7B800153631 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -326,7 +494,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45B580D71694BDB300153631 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45B581221694BE4700153631 /* CAppDelegate.m in Sources */,
+				45B581231694BE4700153631 /* CBonjourBrowserViewController.m in Sources */,
+				45B581241694BE4700153631 /* CLocalMorselsViewController.m in Sources */,
+				45B581251694BE4700153631 /* CMorselViewController.m in Sources */,
+				45B581261694BE4700153631 /* CRemoteMorselClient.m in Sources */,
+				45B581271694BE4700153631 /* CRemoteMorselContext.m in Sources */,
+				45B581281694BE4700153631 /* CResizerThumb.m in Sources */,
+				45B581291694BE4700153631 /* CTestLoginViewController.m in Sources */,
+				45B5812A1694BE4700153631 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45B581341694BF5D00153631 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B57F981694B7B800153631 /* Morsel */;
+			targetProxy = 45B581331694BF5D00153631 /* PBXContainerItemProxy */;
+		};
+		45B581371694BF7B00153631 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaYAML;
+			targetProxy = 45B581361694BF7B00153631 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		45B580B81694B99900153631 /* InfoPlist.strings */ = {
@@ -335,6 +532,30 @@
 				45B580B91694B99900153631 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		45B580FC1694BE4700153631 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45B580FD1694BE4700153631 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		45B580FE1694BE4700153631 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45B580FF1694BE4700153631 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		45B581001694BE4700153631 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45B581011694BE4700153631 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -394,7 +615,7 @@
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/Morsel_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Morsel/Prefix.pch;
+				GCC_PREFIX_HEADER = MorselLibrary/Prefix.pch;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
@@ -410,12 +631,39 @@
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/Morsel_iOS.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Morsel/Prefix.pch;
+				GCC_PREFIX_HEADER = MorselLibrary/Prefix.pch;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = Headers;
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
+			};
+			name = Release;
+		};
+		45B580F51694BDB300153631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MorselBrowser/Source/Prefix.pch;
+				INFOPLIST_FILE = MorselBrowser/Resources/Info.plist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		45B580F61694BDB300153631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = MorselBrowser/Source/Prefix.pch;
+				INFOPLIST_FILE = MorselBrowser/Resources/Info.plist;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -439,6 +687,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		45B580F41694BDB300153631 /* Build configuration list for PBXNativeTarget "MorselBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45B580F51694BDB300153631 /* Debug */,
+				45B580F61694BDB300153631 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
