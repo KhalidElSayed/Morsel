@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		455D67321694ED72004E0C52 /* COrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 455D67311694ED72004E0C52 /* COrderedDictionary.m */; };
+		455D67331694ED72004E0C52 /* COrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 455D67311694ED72004E0C52 /* COrderedDictionary.m */; };
+		455D67341694ED72004E0C52 /* COrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 455D67311694ED72004E0C52 /* COrderedDictionary.m */; };
 		45B57F9D1694B7B800153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
 		45B57FC81694B83A00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45B57FC91694B83A00153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
@@ -139,6 +142,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		455D67301694ED72004E0C52 /* COrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COrderedDictionary.h; sourceTree = "<group>"; };
+		455D67311694ED72004E0C52 /* COrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COrderedDictionary.m; sourceTree = "<group>"; };
 		45B57F991694B7B800153631 /* libMorsel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMorsel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B57F9C1694B7B800153631 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45B57FAF1694B83A00153631 /* CMorsel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorsel.h; sourceTree = "<group>"; };
@@ -330,6 +335,8 @@
 			children = (
 				45B57FBE1694B83A00153631 /* CColorConverter.h */,
 				45B57FBF1694B83A00153631 /* CColorConverter.m */,
+				455D67301694ED72004E0C52 /* COrderedDictionary.h */,
+				455D67311694ED72004E0C52 /* COrderedDictionary.m */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -623,6 +630,7 @@
 				45B57FD11694B83A00153631 /* UIView+MorselExtensions.m in Sources */,
 				45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
 				45B5818E1694D4B400153631 /* UIView+Debugging.m in Sources */,
+				455D67321694ED72004E0C52 /* COrderedDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +658,7 @@
 				45B581451694C1EE00153631 /* CMorsel.m in Sources */,
 				45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
 				45B5818F1694D4B400153631 /* UIView+Debugging.m in Sources */,
+				455D67331694ED72004E0C52 /* COrderedDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +680,7 @@
 				45B581801694CA0100153631 /* UIView+MorselExtensions.m in Sources */,
 				45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
 				45B581901694D4B400153631 /* UIView+Debugging.m in Sources */,
+				455D67341694ED72004E0C52 /* COrderedDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
