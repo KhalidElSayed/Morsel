@@ -216,7 +216,10 @@
     NSDictionary *theRootObjectSpecification = self.specification[@"objects"][@"root"];
     if (theRootObjectSpecification == NULL)
         {
-        NSLog(@"ERROR: Could not find an object specification with id root");
+        if (outError)
+            {
+            *outError = [self errorWithCode:-1 localizedDescription:@"Could not find an object specification with id 'root'." userInfo:NULL];
+            }
         return(NO);
         }
 
@@ -404,7 +407,10 @@
 
 		if (theChild == NULL || [inObject isKindOfClass:[UIView class]] == NO || [theChild isKindOfClass:[UIView class]] == NO)
 			{
-			NSLog(@"ERROR: Could not create view to insert into subviews.");
+            if (outError)
+                {
+                *outError = [self errorWithCode:-1 localizedDescription:@"Could not create view to insert into subviews." userInfo:NULL];
+                }
 			return(NO);
 			}
 
@@ -421,7 +427,7 @@
 	for (id theConstraintsSpecification in theSpecification[@"constraints"])
 		{
 		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:outError];
-		if (theConstraints.count == 0)
+		if (theConstraints == NULL)
 			{
 			return(NO);
 			}
@@ -521,7 +527,10 @@
 
 	if (theValue == NULL)
 		{
-		NSLog(@"TODO: We want an error param here!");
+        if (outError)
+            {
+            *outError = [self errorWithCode:-1 localizedDescription:[NSString stringWithFormat:@"Could not create a value from %@", inValue] userInfo:NULL];
+            }
 		return(NO);
 		}
 
@@ -556,8 +565,10 @@
 		}
 	@catch (NSException *exception)
 		{
-		NSLog(@"Cannot set %@ to %@ on %@", theKey, theValue, inObject);
-		NSLog(@"%@", exception);
+        if (outError)
+            {
+            *outError = [self errorWithCode:-1 localizedDescription:[NSString stringWithFormat:@"Exception caught trying to set %@ to %@ on %@", theKey, theValue, inObject] userInfo:NULL];
+            }
 		return(NO);
 		}
 	return(YES);
@@ -735,5 +746,14 @@
 		}
 	return(theConstraints);
 	}
+
+- (NSError *)errorWithCode:(NSInteger)inCode localizedDescription:(NSString *)inLocalizedDescription userInfo:(NSDictionary *)inUserInfo
+    {
+    NSMutableDictionary *theUserInfo = [inUserInfo mutableCopy] ?: [NSMutableDictionary dictionary];
+    theUserInfo[NSLocalizedDescriptionKey] = inLocalizedDescription;
+    NSError *theError = [NSError errorWithDomain:@"TODO_DOMAIN" code:inCode userInfo:theUserInfo];
+    NSLog(@"ERROR: %@", theError);
+    return(theError);
+    }
 
 @end
