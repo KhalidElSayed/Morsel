@@ -75,22 +75,22 @@
 		_data = inData;
         _typeConverter = [[CTypeConverter alloc] init];
 
+        __weak CMorsel *weak_self = self;
+
         [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
             return(self.objectsByID[inValue]);
             }];
-        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
 
-            id theObject = [self objectWithSpecificationDictionary:inValue error:outError];
+        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+            id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
             if (theObject == NULL)
                 {
                 return(NULL);
                 }
-
-            if ([self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
+            if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
                 {
                 return(NULL);
                 }
-
             return(theObject);
             }];
         }
