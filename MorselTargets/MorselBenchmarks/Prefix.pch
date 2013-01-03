@@ -12,5 +12,5 @@
 	#import <UIKit/UIKit.h>
 	#import <Foundation/Foundation.h>
 
-    #define USE_DEBUG_DICTIONARY 1
+    #define USE_DEBUG_DICTIONARY 0
 #endif

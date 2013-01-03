@@ -184,17 +184,22 @@
 
 #pragma mark -
 
+#pragma mark -
+
 - (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
 	{
     [self prepare];
 
 	self.owner = ownerOrNil;
 
-	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
-	if (self.specification == NULL)
-		{
-		return(NO);
-		}
+    if (self.specification == NULL)
+        {
+        self.specification = [self.context.deserializer deserializeData:self.data error:outError];
+        if (self.specification == NULL)
+            {
+            return(NO);
+            }
+        }
 
     NSMutableDictionary *theObjects = [NSMutableDictionary dictionary];
     NSArray *theObjectSpecifications = self.specification[@"objects"];

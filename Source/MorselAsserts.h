@@ -38,9 +38,6 @@
         #define USE_ASSERTIONS 1
 	#endif
 
-    #undef USE_ASSERTIONS
-    #define USE_ASSERTIONS 1
-
 	#if USE_ASSERTIONS == 1
 		#define Assert_(test, ...) NSAssert((test), [NSString stringWithFormat:__VA_ARGS__])
 
