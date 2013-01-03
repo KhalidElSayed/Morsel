@@ -31,19 +31,11 @@
 
 #import "CAppDelegate.h"
 
-#import "CTestLoginViewController.h"
-
 @implementation CAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	{
     return(YES);
-	}
-
-- (IBAction)test:(id)sender
-	{
-	CTestLoginViewController *theViewController = [[CTestLoginViewController alloc] init];
-	[self.window.rootViewController presentViewController:theViewController animated:YES completion:NULL];
 	}
 
 @end
