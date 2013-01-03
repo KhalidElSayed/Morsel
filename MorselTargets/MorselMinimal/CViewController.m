@@ -31,7 +31,9 @@
     {
     NSError *theError = NULL;
     CMorsel *theMorsel = [[CMorsel alloc] initWithName:NSStringFromClass([self class]) bundle:NULL error:&theError];
+    NSLog(@"%@", theError);
     [theMorsel instantiateWithOwner:self options:NULL error:&theError];
+    NSLog(@"%@", theError);
     }
 
 - (IBAction)ok:(id)sender

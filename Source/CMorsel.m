@@ -51,6 +51,7 @@
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
 @property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
+@property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 
 // Session properties...
 @property (readwrite, nonatomic, strong) id owner;
@@ -72,6 +73,26 @@
     if ((self = [super init]) != NULL)
         {
 		_data = inData;
+        _typeConverter = [[CTypeConverter alloc] init];
+
+        [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
+            return(self.objectsByID[inValue]);
+            }];
+        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+
+            id theObject = [self objectWithSpecificationDictionary:inValue error:outError];
+            if (theObject == NULL)
+                {
+                return(NULL);
+                }
+
+            if ([self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
+                {
+                return(NULL);
+                }
+
+            return(theObject);
+            }];
         }
     return self;
 	}
@@ -552,7 +573,7 @@
 	NSString *theType = theTypeDictionary[@"type"];
 	if (theType != NULL)
 		{
-		id theNewValue = [self.context.typeConverter objectOfType:theType withObject:theValue error:NULL];
+		id theNewValue = [self objectOfType:theType withObject:theValue error:NULL];
 		if (theNewValue != NULL)
 			{
 			theValue = theNewValue;
@@ -573,6 +594,16 @@
 		}
 	return(YES);
 	}
+
+- (id)objectOfType:(NSString *)inDestinationType withObject:(id)inSourceObject error:(NSError **)outError
+    {
+    id theObject = [self.typeConverter objectOfType:inDestinationType withObject:inSourceObject error:outError];
+    if (theObject == NULL)
+        {
+        theObject = [self.context.typeConverter objectOfType:inDestinationType withObject:inSourceObject error:outError];
+        }
+    return(theObject);
+    }
 
 - (Class)classWithString:(NSString *)inString error:(NSError **)outError
 	{
@@ -725,21 +756,6 @@
 			theConstraints = @[theConstraint];
 			}
 		}
-//	else if (theSpecification[@"position"])
-//		{
-//		id theValue = theSpecification[@"position"];
-//		NSValue *thePointValue = [self.context.typeConverter objectOfType:@"struct:CGPoint" withObject:theValue error:outError];
-//		if (thePointValue == NULL)
-//			{
-//			return(NULL);
-//			}
-//		CGPoint thePoint = [thePointValue CGPointValue];
-//		UIView *theView = self.objectsByID[theValue];
-//		theConstraints = @[
-//			[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:thePoint.x],
-//			[NSLayoutConstraint constraintWithItem:theView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:theView.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:thePoint.y],
-//			];
-//		}
 	else
 		{
 		NSLog(@"Do not understand constraint: %@", inObject);

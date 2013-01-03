@@ -23,6 +23,36 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		455D678016950DA7004E0C52 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
+		455D678116950DA7004E0C52 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		455D678216950DA7004E0C52 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
+		455D678316950DA7004E0C52 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
+		455D678416950DA7004E0C52 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
+		455D678516950DA7004E0C52 /* MorselSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBC1694B83A00153631 /* MorselSupport.m */; };
+		455D678616950DA7004E0C52 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBF1694B83A00153631 /* CColorConverter.m */; };
+		455D678716950DA7004E0C52 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
+		455D678816950DA7004E0C52 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
+		455D678916950DA7004E0C52 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
+		455D678A16950DA7004E0C52 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
+		455D678C16950DA7004E0C52 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580A21694B90E00153631 /* libCocoaYAML.a */; };
+		455D678D16950DA7004E0C52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580DD1694BDB300153631 /* UIKit.framework */; };
+		455D678E16950DA7004E0C52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
+		455D678F16950DA7004E0C52 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
+		455D679616950DA7004E0C52 /* global.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B57FC11694B83A00153631 /* global.morsel */; };
+		455D67AD16950DCA004E0C52 /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 455D67A116950DCA004E0C52 /* CAppDelegate.m */; };
+		455D67AF16950DCA004E0C52 /* UI.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 455D67A416950DCA004E0C52 /* UI.morsel */; };
+		455D67B016950DCA004E0C52 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 455D67A516950DCA004E0C52 /* Default-568h@2x.png */; };
+		455D67B116950DCA004E0C52 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 455D67A616950DCA004E0C52 /* Default.png */; };
+		455D67B216950DCA004E0C52 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 455D67A716950DCA004E0C52 /* Default@2x.png */; };
+		455D67B316950DCA004E0C52 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 455D67A816950DCA004E0C52 /* InfoPlist.strings */; };
+		455D67B416950DCA004E0C52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 455D67AA16950DCA004E0C52 /* main.m */; };
+		455D67B716950DF2004E0C52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5815C1694C95700153631 /* main.m */; };
+		455D67B816950DF7004E0C52 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581621694C95700153631 /* Default.png */; };
+		455D67B916950DF7004E0C52 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581641694C95700153631 /* Default@2x.png */; };
+		455D67BA16950DF7004E0C52 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581661694C95700153631 /* Default-568h@2x.png */; };
+		455D67BB16950E06004E0C52 /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581601694C95700153631 /* CAppDelegate.m */; };
+		455D67BC16950E06004E0C52 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581691694C95700153631 /* CViewController.m */; };
+		455D67BD16950E06004E0C52 /* CViewController.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B581741694C9E700153631 /* CViewController.morsel */; };
 		45B57F9D1694B7B800153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
 		45B57FC81694B83A00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45B57FC91694B83A00153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
@@ -74,13 +104,6 @@
 		45B581541694C95600153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
 		45B581551694C95600153631 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
 		45B5815B1694C95700153631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45B581591694C95700153631 /* InfoPlist.strings */; };
-		45B5815D1694C95700153631 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5815C1694C95700153631 /* main.m */; };
-		45B581611694C95700153631 /* CAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581601694C95700153631 /* CAppDelegate.m */; };
-		45B581631694C95700153631 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581621694C95700153631 /* Default.png */; };
-		45B581651694C95700153631 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581641694C95700153631 /* Default@2x.png */; };
-		45B581671694C95700153631 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581661694C95700153631 /* Default-568h@2x.png */; };
-		45B5816A1694C95700153631 /* CViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581691694C95700153631 /* CViewController.m */; };
-		45B581751694C9E700153631 /* CViewController.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B581741694C9E700153631 /* CViewController.morsel */; };
 		45B581761694CA0100153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45B581771694CA0100153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
 		45B581781694CA0100153631 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
@@ -121,6 +144,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45B581501694C95600153631;
 			remoteInfo = MorselMinimal;
+		};
+		455D677B16950DA7004E0C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57FD81694B90E00153631 /* CocoaYAML_iOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45F23B541676621E00A3A6FC;
+			remoteInfo = CocoaYAML;
 		};
 		45B580A11694B90E00153631 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -176,6 +206,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		455D679A16950DA7004E0C52 /* MorselTestbed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselTestbed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		455D67A016950DCA004E0C52 /* CAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
+		455D67A116950DCA004E0C52 /* CAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAppDelegate.m; sourceTree = "<group>"; };
+		455D67A416950DCA004E0C52 /* UI.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UI.morsel; sourceTree = "<group>"; };
+		455D67A516950DCA004E0C52 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		455D67A616950DCA004E0C52 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		455D67A716950DCA004E0C52 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		455D67A916950DCA004E0C52 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		455D67AA16950DCA004E0C52 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		455D67AB16950DCA004E0C52 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		455D67AC16950DCA004E0C52 /* MorselMinimal-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MorselMinimal-Prefix.pch"; sourceTree = "<group>"; };
 		45B57F991694B7B800153631 /* libMorsel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMorsel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B57F9C1694B7B800153631 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45B57FAF1694B83A00153631 /* CMorsel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorsel.h; sourceTree = "<group>"; };
@@ -258,6 +299,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		455D678B16950DA7004E0C52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455D678C16950DA7004E0C52 /* libCocoaYAML.a in Frameworks */,
+				455D678D16950DA7004E0C52 /* UIKit.framework in Frameworks */,
+				455D678E16950DA7004E0C52 /* Foundation.framework in Frameworks */,
+				455D678F16950DA7004E0C52 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45B57F961694B7B800153631 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -292,12 +344,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		455D679F16950DCA004E0C52 /* MorselTestbed */ = {
+			isa = PBXGroup;
+			children = (
+				455D67A016950DCA004E0C52 /* CAppDelegate.h */,
+				455D67A116950DCA004E0C52 /* CAppDelegate.m */,
+				455D67A416950DCA004E0C52 /* UI.morsel */,
+				455D67A516950DCA004E0C52 /* Default-568h@2x.png */,
+				455D67A616950DCA004E0C52 /* Default.png */,
+				455D67A716950DCA004E0C52 /* Default@2x.png */,
+				455D67A816950DCA004E0C52 /* InfoPlist.strings */,
+				455D67AA16950DCA004E0C52 /* main.m */,
+				455D67AB16950DCA004E0C52 /* Info.plist */,
+				455D67AC16950DCA004E0C52 /* MorselMinimal-Prefix.pch */,
+			);
+			name = MorselTestbed;
+			path = MorselTargets/MorselTestbed;
+			sourceTree = "<group>";
+		};
 		45B57F8E1694B7B800153631 = {
 			isa = PBXGroup;
 			children = (
 				45B57FAE1694B83A00153631 /* Source */,
 				45B580F71694BE4700153631 /* MorselBrowser */,
 				45B581561694C95600153631 /* MorselMinimal */,
+				455D679F16950DCA004E0C52 /* MorselTestbed */,
 				45B57FD51694B90E00153631 /* Externals */,
 				45B57F9B1694B7B800153631 /* Frameworks */,
 				45B57F9A1694B7B800153631 /* Products */,
@@ -311,6 +382,7 @@
 				45B57F991694B7B800153631 /* libMorsel.a */,
 				45B580DB1694BDB300153631 /* MorselBrowser.app */,
 				45B581511694C95600153631 /* MorselMinimal.app */,
+				455D679A16950DA7004E0C52 /* MorselTestbed.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -504,6 +576,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		455D677916950DA7004E0C52 /* MorselTestbed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 455D679716950DA7004E0C52 /* Build configuration list for PBXNativeTarget "MorselTestbed" */;
+			buildPhases = (
+				455D677C16950DA7004E0C52 /* Sources */,
+				455D678B16950DA7004E0C52 /* Frameworks */,
+				455D679016950DA7004E0C52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				455D677A16950DA7004E0C52 /* PBXTargetDependency */,
+			);
+			name = MorselTestbed;
+			productName = MorselMinimal;
+			productReference = 455D679A16950DA7004E0C52 /* MorselTestbed.app */;
+			productType = "com.apple.product-type.application";
+		};
 		45B57F981694B7B800153631 /* MorselLibrary */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 45B57FA71694B7B800153631 /* Build configuration list for PBXNativeTarget "MorselLibrary" */;
@@ -589,6 +679,7 @@
 				45B57F981694B7B800153631 /* MorselLibrary */,
 				45B580DA1694BDB300153631 /* MorselBrowser */,
 				45B581501694C95600153631 /* MorselMinimal */,
+				455D677916950DA7004E0C52 /* MorselTestbed */,
 			);
 		};
 /* End PBXProject section */
@@ -611,6 +702,19 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		455D679016950DA7004E0C52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455D679616950DA7004E0C52 /* global.morsel in Resources */,
+				455D67AF16950DCA004E0C52 /* UI.morsel in Resources */,
+				455D67B016950DCA004E0C52 /* Default-568h@2x.png in Resources */,
+				455D67B116950DCA004E0C52 /* Default.png in Resources */,
+				455D67B216950DCA004E0C52 /* Default@2x.png in Resources */,
+				455D67B316950DCA004E0C52 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45B580D91694BDB300153631 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -635,17 +739,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B5815B1694C95700153631 /* InfoPlist.strings in Resources */,
-				45B581631694C95700153631 /* Default.png in Resources */,
-				45B581651694C95700153631 /* Default@2x.png in Resources */,
-				45B581671694C95700153631 /* Default-568h@2x.png in Resources */,
-				45B581751694C9E700153631 /* CViewController.morsel in Resources */,
 				45B5817D1694CA0100153631 /* global.morsel in Resources */,
+				455D67B816950DF7004E0C52 /* Default.png in Resources */,
+				455D67B916950DF7004E0C52 /* Default@2x.png in Resources */,
+				455D67BA16950DF7004E0C52 /* Default-568h@2x.png in Resources */,
+				455D67BD16950E06004E0C52 /* CViewController.morsel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		455D677C16950DA7004E0C52 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455D678016950DA7004E0C52 /* CMorsel.m in Sources */,
+				455D678116950DA7004E0C52 /* CMorselContext.m in Sources */,
+				455D678216950DA7004E0C52 /* CTypeConverter.m in Sources */,
+				455D678316950DA7004E0C52 /* CDebugDictionary.m in Sources */,
+				455D678416950DA7004E0C52 /* CDebugYAMLDeserializer.m in Sources */,
+				455D678516950DA7004E0C52 /* MorselSupport.m in Sources */,
+				455D678616950DA7004E0C52 /* CColorConverter.m in Sources */,
+				455D678716950DA7004E0C52 /* NSLayoutConstraint+Conveniences.m in Sources */,
+				455D678816950DA7004E0C52 /* UIView+MorselExtensions.m in Sources */,
+				455D678916950DA7004E0C52 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
+				455D678A16950DA7004E0C52 /* UIView+Debugging.m in Sources */,
+				455D67AD16950DCA004E0C52 /* CAppDelegate.m in Sources */,
+				455D67B416950DCA004E0C52 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45B57F951694B7B800153631 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -695,9 +819,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45B5815D1694C95700153631 /* main.m in Sources */,
-				45B581611694C95700153631 /* CAppDelegate.m in Sources */,
-				45B5816A1694C95700153631 /* CViewController.m in Sources */,
 				45B581761694CA0100153631 /* CMorsel.m in Sources */,
 				45B581771694CA0100153631 /* CMorselContext.m in Sources */,
 				45B581781694CA0100153631 /* CTypeConverter.m in Sources */,
@@ -709,6 +830,9 @@
 				45B581801694CA0100153631 /* UIView+MorselExtensions.m in Sources */,
 				45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
 				45B581901694D4B400153631 /* UIView+Debugging.m in Sources */,
+				455D67B716950DF2004E0C52 /* main.m in Sources */,
+				455D67BB16950E06004E0C52 /* CAppDelegate.m in Sources */,
+				455D67BC16950E06004E0C52 /* CViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +854,11 @@
 			target = 45B581501694C95600153631 /* MorselMinimal */;
 			targetProxy = 455D67481694F3A6004E0C52 /* PBXContainerItemProxy */;
 		};
+		455D677A16950DA7004E0C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaYAML;
+			targetProxy = 455D677B16950DA7004E0C52 /* PBXContainerItemProxy */;
+		};
 		45B581371694BF7B00153631 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaYAML;
@@ -743,6 +872,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		455D67A816950DCA004E0C52 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				455D67A916950DCA004E0C52 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		45B580FC1694BE4700153631 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -789,6 +926,33 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		455D679816950DA7004E0C52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MorselTargets/MorselTestbed/MorselMinimal-Prefix.pch";
+				INFOPLIST_FILE = MorselTargets/MorselTestbed/Info.plist;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		455D679916950DA7004E0C52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MorselTargets/MorselTestbed/MorselMinimal-Prefix.pch";
+				INFOPLIST_FILE = MorselTargets/MorselTestbed/Info.plist;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -929,6 +1093,15 @@
 			buildConfigurations = (
 				455D67421694F39B004E0C52 /* Debug */,
 				455D67431694F39B004E0C52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		455D679716950DA7004E0C52 /* Build configuration list for PBXNativeTarget "MorselTestbed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				455D679816950DA7004E0C52 /* Debug */,
+				455D679916950DA7004E0C52 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

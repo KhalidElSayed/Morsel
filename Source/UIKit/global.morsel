@@ -23,6 +23,12 @@ defaults:
 property-types:
 # TODO - replace property types with a dictionary of classes containing a dictionary of properties
 
+#### UIViewController
+
+  - class: UIViewController
+    property: view
+    type: 'class:UIView'
+
 #### UIView
 
   - class: UIView
