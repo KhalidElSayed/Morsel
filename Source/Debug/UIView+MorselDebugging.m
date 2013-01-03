@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 toxicsoftware. All rights reserved.
 //
 
-#import "UIView+Debugging.h"
+#import "UIView+MorselDebugging.h"
 
 #import "NSLayoutConstraint+DebugExtensions.h"
 #import "UIView+MorselExtensions.h"
