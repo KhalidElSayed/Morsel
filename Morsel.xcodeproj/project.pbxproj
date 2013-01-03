@@ -25,6 +25,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		451AE35F16961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
+		451AE36016961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
+		451AE36116961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
+		451AE36216961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
+		451AE36316961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
 		455D678016950DA7004E0C52 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		455D678116950DA7004E0C52 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
 		455D678216950DA7004E0C52 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
@@ -35,7 +40,6 @@
 		455D678716950DA7004E0C52 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
 		455D678816950DA7004E0C52 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
 		455D678916950DA7004E0C52 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
-		455D678A16950DA7004E0C52 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
 		455D678D16950DA7004E0C52 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580DD1694BDB300153631 /* UIKit.framework */; };
 		455D678E16950DA7004E0C52 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
 		455D678F16950DA7004E0C52 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
@@ -121,16 +125,12 @@
 		45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
 		45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
 		45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
-		45B5818E1694D4B400153631 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
-		45B5818F1694D4B400153631 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
-		45B581901694D4B400153631 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
 		45E4F4C7169552B8001D0342 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45E4F4C8169552B8001D0342 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
 		45E4F4C9169552B8001D0342 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		45E4F4CA169552B8001D0342 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		45E4F4CB169552B8001D0342 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
 		45E4F4CC169552B8001D0342 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
-		45E4F4CD169552B8001D0342 /* UIView+Debugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B5818D1694D4B400153631 /* UIView+Debugging.m */; };
 		45E4F4CE169552B8001D0342 /* MorselSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBC1694B83A00153631 /* MorselSupport.m */; };
 		45E4F4CF169552B8001D0342 /* CColorConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FBF1694B83A00153631 /* CColorConverter.m */; };
 		45E4F4D0169552B8001D0342 /* global.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B57FC11694B83A00153631 /* global.morsel */; };
@@ -260,6 +260,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		451AE35D16961A51004514E1 /* UIView+MorselDebugging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MorselDebugging.h"; sourceTree = "<group>"; };
+		451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MorselDebugging.m"; sourceTree = "<group>"; };
 		455D679A16950DA7004E0C52 /* MorselTestbed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselTestbed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		455D67A016950DCA004E0C52 /* CAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
 		455D67A116950DCA004E0C52 /* CAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAppDelegate.m; sourceTree = "<group>"; };
@@ -347,8 +349,6 @@
 		45B581741694C9E700153631 /* CViewController.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CViewController.morsel; sourceTree = "<group>"; };
 		45B581871694D46600153631 /* NSLayoutConstraint+DebugExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+DebugExtensions.h"; sourceTree = "<group>"; };
 		45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+DebugExtensions.m"; sourceTree = "<group>"; };
-		45B5818C1694D4B400153631 /* UIView+Debugging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Debugging.h"; sourceTree = "<group>"; };
-		45B5818D1694D4B400153631 /* UIView+Debugging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Debugging.m"; sourceTree = "<group>"; };
 		45F88E4F169551F400002C16 /* MorselBenchmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselBenchmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F88E51169551F400002C16 /* MorselMinimal copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MorselMinimal copy-Info.plist"; path = "/Users/schwa/Development/Source/Git/schwa/Morsel/MorselMinimal copy-Info.plist"; sourceTree = "<absolute>"; };
 		45F88E531695521E00002C16 /* CAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
@@ -546,8 +546,8 @@
 				45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */,
 				45B581871694D46600153631 /* NSLayoutConstraint+DebugExtensions.h */,
 				45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */,
-				45B5818C1694D4B400153631 /* UIView+Debugging.h */,
-				45B5818D1694D4B400153631 /* UIView+Debugging.m */,
+				451AE35D16961A51004514E1 /* UIView+MorselDebugging.h */,
+				451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -907,9 +907,9 @@
 				455D678716950DA7004E0C52 /* NSLayoutConstraint+Conveniences.m in Sources */,
 				455D678816950DA7004E0C52 /* UIView+MorselExtensions.m in Sources */,
 				455D678916950DA7004E0C52 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
-				455D678A16950DA7004E0C52 /* UIView+Debugging.m in Sources */,
 				455D67AD16950DCA004E0C52 /* CAppDelegate.m in Sources */,
 				455D67B416950DCA004E0C52 /* main.m in Sources */,
+				451AE36216961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,7 +927,7 @@
 				45B57FCF1694B83A00153631 /* NSLayoutConstraint+Conveniences.m in Sources */,
 				45B57FD11694B83A00153631 /* UIView+MorselExtensions.m in Sources */,
 				45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
-				45B5818E1694D4B400153631 /* UIView+Debugging.m in Sources */,
+				451AE35F16961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -953,7 +953,7 @@
 				45B581421694C1E300153631 /* NSLayoutConstraint+Conveniences.m in Sources */,
 				45B581451694C1EE00153631 /* CMorsel.m in Sources */,
 				45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
-				45B5818F1694D4B400153631 /* UIView+Debugging.m in Sources */,
+				451AE36016961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,10 +971,10 @@
 				45B5817E1694CA0100153631 /* NSLayoutConstraint+Conveniences.m in Sources */,
 				45B581801694CA0100153631 /* UIView+MorselExtensions.m in Sources */,
 				45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
-				45B581901694D4B400153631 /* UIView+Debugging.m in Sources */,
 				455D67B716950DF2004E0C52 /* main.m in Sources */,
 				455D67BB16950E06004E0C52 /* CAppDelegate.m in Sources */,
 				455D67BC16950E06004E0C52 /* CViewController.m in Sources */,
+				451AE36116961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,11 +991,11 @@
 				45E4F4CA169552B8001D0342 /* CDebugDictionary.m in Sources */,
 				45E4F4CB169552B8001D0342 /* CDebugYAMLDeserializer.m in Sources */,
 				45E4F4CC169552B8001D0342 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
-				45E4F4CD169552B8001D0342 /* UIView+Debugging.m in Sources */,
 				45E4F4CE169552B8001D0342 /* MorselSupport.m in Sources */,
 				45E4F4CF169552B8001D0342 /* CColorConverter.m in Sources */,
 				45E4F4D1169552B8001D0342 /* NSLayoutConstraint+Conveniences.m in Sources */,
 				45E4F4D2169552B8001D0342 /* UIView+MorselExtensions.m in Sources */,
+				451AE36316961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

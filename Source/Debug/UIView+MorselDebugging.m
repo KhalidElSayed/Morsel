@@ -1,5 +1,5 @@
 //
-//  UIView+Debugging.m
+//  UIView+MorselDebugging.m
 //  Morsel
 //
 //  Created by Jonathan Wight on 1/2/13.
@@ -11,7 +11,7 @@
 #import "NSLayoutConstraint+DebugExtensions.h"
 #import "UIView+MorselExtensions.h"
 
-@implementation UIView (Debugging)
+@implementation UIView (MorselDebugging)
 
 - (void)dumpConstraints
 	{
