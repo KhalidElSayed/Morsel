@@ -1,0 +1,49 @@
+# -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
+
+################################################################################
+
+owner:
+  view: root
+
+objects:
+- id: root
+  class: UIView
+  backgroundColor: FFFFFF
+  subviews:
+  - class: UILabel
+    id: name_label
+    text: 'Name:'
+    horizontalContentHuggingPriority: 1000
+    horizontalContentCompressionResistancePriority: 1000
+
+  - class: UITextField
+    id: name_field
+    placeholder: 'name'
+    borderStyle: bezel
+    returnKeyType: next
+    outlet: nameField
+
+  - class: UILabel
+    id: password_label
+    text: 'Password:'
+    horizontalContentHuggingPriority: 1000
+    horizontalContentCompressionResistancePriority: 1000
+
+  - class: UITextField
+    id: password_field
+    placeholder: 'password'
+    borderStyle: bezel
+    secureTextEntry: true
+    returnKeyType: go
+
+  - class: UIButton
+    id: ok_button
+    title: 'OK'
+    action: ok
+
+  constraints:
+  - visual: { format: 'H:[name_label]-[name_field]-|', options: baseline }
+  - visual: { format: 'H:|-[password_label]-[password_field]-|', options: baseline }
+  - visual: { format: 'V:|-[name_label]-[password_label]', options: trailing }
+  - visual: { format: 'V:|-[name_field]-[password_field]', options: leading }
+  - visual: { format: 'V:[password_field]-[ok_button]', options: trailing }
