@@ -758,7 +758,8 @@
 		}
 	else
 		{
-		NSLog(@"Do not understand constraint: %@", inObject);
+		NSLog(@"ERROR: Do not understand constraint: %@", inObject);
+        return(NULL);
 		}
 	return(theConstraints);
 	}
