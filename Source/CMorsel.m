@@ -239,7 +239,8 @@
 		return(NO);
 		}
 
-    NSDictionary *theRootObjectSpecification = self.specification[@"objects"][@"root"];
+	// TODO: This is a little bit of a hack - but is faster than instantiating all objects...
+    NSDictionary *theRootObjectSpecification = [self.specification[@"objects"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"id == 'root'"]][0];
     if (theRootObjectSpecification == NULL)
         {
         if (outError)
