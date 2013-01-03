@@ -6,6 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		455D67401694F39B004E0C52 /* Aggregate */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 455D67411694F39B004E0C52 /* Build configuration list for PBXAggregateTarget "Aggregate" */;
+			buildPhases = (
+			);
+			dependencies = (
+				455D67451694F3A6004E0C52 /* PBXTargetDependency */,
+				455D67471694F3A6004E0C52 /* PBXTargetDependency */,
+				455D67491694F3A6004E0C52 /* PBXTargetDependency */,
+			);
+			name = Aggregate;
+			productName = Aggregate;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		45B57F9D1694B7B800153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
 		45B57FC81694B83A00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
@@ -85,6 +101,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		455D67441694F3A6004E0C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57F901694B7B800153631 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B57F981694B7B800153631;
+			remoteInfo = MorselLibrary;
+		};
+		455D67461694F3A6004E0C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57F901694B7B800153631 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B580DA1694BDB300153631;
+			remoteInfo = MorselBrowser;
+		};
+		455D67481694F3A6004E0C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B57F901694B7B800153631 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45B581501694C95600153631;
+			remoteInfo = MorselMinimal;
+		};
 		45B580A11694B90E00153631 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45B57FD81694B90E00153631 /* CocoaYAML_iOS.xcodeproj */;
@@ -548,6 +585,7 @@
 			);
 			projectRoot = "";
 			targets = (
+				455D67401694F39B004E0C52 /* Aggregate */,
 				45B57F981694B7B800153631 /* MorselLibrary */,
 				45B580DA1694BDB300153631 /* MorselBrowser */,
 				45B581501694C95600153631 /* MorselMinimal */,
@@ -677,6 +715,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		455D67451694F3A6004E0C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B57F981694B7B800153631 /* MorselLibrary */;
+			targetProxy = 455D67441694F3A6004E0C52 /* PBXContainerItemProxy */;
+		};
+		455D67471694F3A6004E0C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B580DA1694BDB300153631 /* MorselBrowser */;
+			targetProxy = 455D67461694F3A6004E0C52 /* PBXContainerItemProxy */;
+		};
+		455D67491694F3A6004E0C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45B581501694C95600153631 /* MorselMinimal */;
+			targetProxy = 455D67481694F3A6004E0C52 /* PBXContainerItemProxy */;
+		};
 		45B581371694BF7B00153631 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaYAML;
@@ -725,6 +778,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		455D67421694F39B004E0C52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		455D67431694F39B004E0C52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		45B57FA51694B7B800153631 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -857,6 +924,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		455D67411694F39B004E0C52 /* Build configuration list for PBXAggregateTarget "Aggregate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				455D67421694F39B004E0C52 /* Debug */,
+				455D67431694F39B004E0C52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		45B57F931694B7B800153631 /* Build configuration list for PBXProject "Morsel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
