@@ -139,6 +139,14 @@ property-types:
     property: borderColor
     type: 'special:CGColor'
 
+  - class: CALayer
+    property: shadowColor
+    type: 'special:CGColor'
+
+  - class: CALayer
+    property: shadowOffset
+    type: 'struct:CGSize'
+
 enums:
   UIViewContentMode:
     UIViewContentModeScaleToFill: 0
