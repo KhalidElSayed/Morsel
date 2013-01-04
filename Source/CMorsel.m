@@ -663,6 +663,25 @@
 
 - (NSArray *)constraintsFromObject:(id)inObject error:(NSError **)outError
 	{
+	NSDictionary *theOptionsByName = @{
+		@"left": @(NSLayoutFormatAlignAllLeft),
+		@"right": @(NSLayoutFormatAlignAllRight),
+		@"top": @(NSLayoutFormatAlignAllTop),
+		@"bottom": @(NSLayoutFormatAlignAllBottom),
+		@"leading": @(NSLayoutFormatAlignAllLeading),
+		@"trailing": @(NSLayoutFormatAlignAllTrailing),
+		@"center-x": @(NSLayoutFormatAlignAllCenterX),
+		@"center-y": @(NSLayoutFormatAlignAllCenterY),
+		@"baseline": @(NSLayoutFormatAlignAllBaseline),
+		};
+
+    /* choose only one of these three
+     */
+//    NSLayoutFormatDirectionLeadingToTrailing = 0 << 16, // default
+//    NSLayoutFormatDirectionLeftToRight = 1 << 16,
+//    NSLayoutFormatDirectionRightToLeft = 2 << 16,  
+
+
 	NSArray *theConstraints = NULL;
 	id theSpecification = inObject;
 	if ([theSpecification[@"type"] isEqualToString:@"visual"])
@@ -683,11 +702,6 @@
 			NSString *theFormat = theSpecification[0];
 
 			NSString *theOptionsString = theSpecification[1];
-			NSDictionary *theOptionsByName = @{
-				@"baseline": @(NSLayoutFormatAlignAllBaseline),
-				@"leading": @(NSLayoutFormatAlignAllLeading),
-				@"trailing": @(NSLayoutFormatAlignAllTrailing),
-				};
 			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] integerValue];
 			theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:theOptions metrics:self.specification[@"metrics"] views:self.objectsByID];
 			}
@@ -696,11 +710,6 @@
 			NSString *theFormat = theSpecification[@"format"];
 
 			NSString *theOptionsString = theSpecification[@"options"];
-			NSDictionary *theOptionsByName = @{
-				@"baseline": @(NSLayoutFormatAlignAllBaseline),
-				@"leading": @(NSLayoutFormatAlignAllLeading),
-				@"trailing": @(NSLayoutFormatAlignAllTrailing),
-				};
 			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] integerValue];
 			theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:theOptions metrics:self.specification[@"metrics"] views:self.objectsByID];
 			}
