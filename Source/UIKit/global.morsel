@@ -92,7 +92,13 @@ property-types:
     property: textAlignment
     type: 'enum:NSTextAlignment'
 
+  - class: CCoreTextLabel
+    property: shadowOffset
+    type: 'struct:CGSize'
 
+  - class: CCoreTextLabel
+    property: shadowColor
+    type: 'class:UIColor'
 
 #### UIImageView
 
