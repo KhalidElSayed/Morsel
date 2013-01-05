@@ -14,25 +14,22 @@
 
 - (void)test1
 	{
-//	CTypeConverter *theConverter = [[CTypeConverter alloc] init];
-//	[theConverter addConverterForSourceClass:[NSString class] destinationClass:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-//		return([NSURL URLWithString:inValue]);
-//		}];
-//
-//	NSError *theError = NULL;
-//
-//	id theSourceObject = NULL;
-//	Class theDestinatinationClass = NULL;
-//	id theExpectedResult = NULL;
-//	id theResult = NULL;
-//	//
-//	theSourceObject = @"http://twitter.com/";
-//	theDestinatinationClass = [NSURL class];
-
     CColorConverter *theColorConverter = [[CColorConverter alloc] init];
     NSError *theError = NULL;
-    NSLog(@"%@", [theColorConverter colorDictionaryWithString:@"rgba(1, 1, 1, 50%)" error:&theError]);
+    NSString *theColorString = @"rgba(255, 255, 255, 50%)";
+    NSDictionary *theResult = [theColorConverter colorDictionaryWithString:theColorString error:&theError];
+    NSDictionary *theExpectedResult = @{ @"type": @"RGB", @"red": @(1.0), @"green": @(1.0), @"blue": @(1.0), @"alpha": @(0.5) };
+    STAssertEqualObjects(theResult, theExpectedResult, NULL);
+    }
 
+- (void)test2
+	{
+    CColorConverter *theColorConverter = [[CColorConverter alloc] init];
+    NSError *theError = NULL;
+    NSString *theColorString = @"rgb(255, 255, 255)";
+    NSDictionary *theResult = [theColorConverter colorDictionaryWithString:theColorString error:&theError];
+    NSDictionary *theExpectedResult = @{ @"type": @"RGB", @"red": @(1.0), @"green": @(1.0), @"blue": @(1.0), @"alpha": @(1.0) };
+    STAssertEqualObjects(theResult, theExpectedResult, NULL);
     }
 
 @end
