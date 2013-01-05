@@ -9,7 +9,6 @@
 #import "CViewController.h"
 
 #import "CMorsel.h"
-#import "UIView+Debugging.h"
 
 @interface CViewController ()
 @property (readwrite, nonatomic, weak) UILabel *nameField;
