@@ -37,7 +37,6 @@
 
 @property (readwrite, nonatomic, strong) CMorselContext *context;
 
-- (id)initWithData:(NSData *)inData error:(NSError **)outError;
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError;
 - (id)initWithName:(NSString *)inName bundle:(NSBundle *)inBundle error:(NSError **)outError;
 

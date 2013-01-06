@@ -38,7 +38,6 @@
 #import "MorselAsserts.h"
 
 #import "CTypeConverter.h"
-#import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
 #import "UIView+MorselExtensions.h"
@@ -46,7 +45,7 @@
 
 @interface CMorsel ()
 // Morsel properties...
-@property (readwrite, nonatomic, strong) NSData *data;
+@property (readwrite, nonatomic, strong) NSURL *URL;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
@@ -68,46 +67,12 @@
 @synthesize classSynonyms = _classSynonyms;
 @synthesize propertyTypes = _propertyTypes;
 
-- (id)initWithData:(NSData *)inData error:(NSError **)outError;
-	{
-    if ((self = [super init]) != NULL)
-        {
-		_data = inData;
-        _typeConverter = [[CTypeConverter alloc] init];
-
-        __weak CMorsel *weak_self = self;
-
-        [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
-            return(self.objectsByID[inValue]);
-            }];
-
-        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-            id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
-            if (theObject == NULL)
-                {
-                return(NULL);
-                }
-            if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
-                {
-                return(NULL);
-                }
-            return(theObject);
-            }];
-        }
-    return self;
-	}
 
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
     {
-	NSData *theData = [NSData dataWithContentsOfURL:inURL options:0 error:outError];
-	if (theData == NULL)
-		{
-		self = NULL;
-		return(NULL);
-		}
-
-    if ((self = [self initWithData:theData error:outError]) != NULL)
+    if ((self = [self init]) != NULL)
         {
+        _URL = inURL;
         }
     return self;
     }
@@ -116,10 +81,38 @@
 	{
 	inBundle = inBundle ?: [NSBundle mainBundle];
 	NSURL *theURL = [inBundle URLForResource:inName withExtension:@"morsel"];
+    if ([theURL checkResourceIsReachableAndReturnError:NULL] == NO || YES)
+        {
+        theURL = [inBundle URLForResource:inName withExtension:@"plist"];
+        }
 	return([self initWithURL:theURL error:outError]);
 	}
 
 #pragma mark -
+
+- (void)setup
+    {
+    _typeConverter = [[CTypeConverter alloc] init];
+
+    __weak CMorsel *weak_self = self;
+
+    [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
+        return(self.objectsByID[inValue]);
+        }];
+
+    [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+        id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
+        if (theObject == NULL)
+            {
+            return(NULL);
+            }
+        if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
+            {
+            return(NULL);
+            }
+        return(theObject);
+        }];
+    }
 
 - (CMorselContext *)context
 	{
@@ -194,10 +187,21 @@
 
     if (self.specification == NULL)
         {
-        self.specification = [self.context.deserializer deserializeData:self.data error:outError];
-        if (self.specification == NULL)
+        if ([[self.URL pathExtension] isEqualToString:@"morsel"])
             {
-            return(NO);
+            self.specification = [self.context deserializeURL:self.URL error:outError];
+            if (self.specification == NULL)
+                {
+                return(NO);
+                }
+            }
+        if ([[self.URL pathExtension] isEqualToString:@"plist"])
+            {
+            self.specification = [NSDictionary dictionaryWithContentsOfURL:self.URL];
+            if (self.specification == NULL)
+                {
+                return(NO);
+                }
             }
         }
 
@@ -233,7 +237,7 @@
     [self prepare];
 	self.owner = owner;
 
-	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
+	self.specification = [self.context deserializeURL:self.URL error:outError];
 	if (self.specification == NULL)
 		{
 		return(NO);

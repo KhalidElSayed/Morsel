@@ -144,6 +144,7 @@
 		45D2F04B1698E1DA003C6458 /* global.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B57FC11694B83A00153631 /* global.morsel */; };
 		45D2F04C1698E1DA003C6458 /* NSLayoutConstraint+Conveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC31694B83A00153631 /* NSLayoutConstraint+Conveniences.m */; };
 		45D2F04D1698E1DA003C6458 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
+		45DC70BA1698ED3600519489 /* CViewController.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45DC70B91698ED3600519489 /* CViewController.plist */; };
 		45E4F4C7169552B8001D0342 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
 		45E4F4C8169552B8001D0342 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
 		45E4F4C9169552B8001D0342 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
@@ -384,6 +385,7 @@
 		45D2F0391698E1A8003C6458 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45D2F03A1698E1A8003C6458 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45D2F03B1698E1A8003C6458 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		45DC70B91698ED3600519489 /* CViewController.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = CViewController.plist; sourceTree = "<group>"; };
 		45F88E4F169551F400002C16 /* MorselBenchmarks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorselBenchmarks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F88E531695521E00002C16 /* CAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAppDelegate.h; sourceTree = "<group>"; };
 		45F88E541695521E00002C16 /* CAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAppDelegate.m; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				45F88E541695521E00002C16 /* CAppDelegate.m */,
 				45F88E551695521E00002C16 /* CViewController.h */,
 				45F88E561695521E00002C16 /* CViewController.m */,
+				45DC70B91698ED3600519489 /* CViewController.plist */,
 				45F88E571695521E00002C16 /* CViewController.morsel */,
 				45F88E581695521E00002C16 /* Default-568h@2x.png */,
 				45F88E591695521E00002C16 /* Default.png */,
@@ -978,6 +981,7 @@
 				45F88E651695521E00002C16 /* Default@2x.png in Resources */,
 				45F88E661695521E00002C16 /* InfoPlist.strings in Resources */,
 				45E4F4D0169552B8001D0342 /* global.morsel in Resources */,
+				45DC70BA1698ED3600519489 /* CViewController.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

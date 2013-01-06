@@ -107,7 +107,7 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
-	self.globalSpecification = [self.deserializer deserializeURL:theURL error:outError];
+	self.globalSpecification = [self deserializeURL:theURL error:outError];
 	if (self.globalSpecification == NULL)
 		{
 		return(NO);
@@ -233,7 +233,6 @@ static CMorselContext *gSharedInstance = NULL;
 		return(YES);
 		}];
 
-
 	// UIView.size
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIView *theView = AssertCast_(UIView, object);
@@ -327,7 +326,6 @@ static CMorselContext *gSharedInstance = NULL;
 		return(YES);
 		}];
 
-
 	// UIButton.title
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		[(UIButton *)object setTitle:specification forState:UIControlStateNormal];
@@ -350,7 +348,6 @@ static CMorselContext *gSharedInstance = NULL;
 		return(YES);
 		}];
 
-
 	// UIButton.titleColor
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
 		UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:specification error:outError];
@@ -358,7 +355,6 @@ static CMorselContext *gSharedInstance = NULL;
 		[theButton setTitleColor:theColor forState:UIControlStateNormal];
 		return(YES);
 		}];
-
 
 	// UIImageView.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
@@ -404,6 +400,20 @@ static CMorselContext *gSharedInstance = NULL;
 
 	return(YES);
 	}
+
+- (id)deserializeURL:(NSURL *)inURL error:(NSError **)outError;
+    {
+    id theObject = NULL;
+    if ([[inURL pathExtension] isEqualToString:@"morsel"])
+        {
+        theObject = [self.deserializer deserializeURL:inURL error:outError];
+        }
+    else if ([[inURL pathExtension] isEqualToString:@"plist"])
+        {
+        theObject = [NSDictionary dictionaryWithContentsOfURL:inURL];
+        }
+    return(theObject);
+    }
 
 - (BOOL)loadEnumerations:(NSError **)outError
 	{
@@ -478,7 +488,6 @@ static CMorselContext *gSharedInstance = NULL;
 		}
 	return(_propertyTypes);
 	}
-
 
 #pragma mark -
 
