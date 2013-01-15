@@ -48,6 +48,8 @@ typedef BOOL (^MorselPropertyHandler)(id object, NSString *property, id specific
 
 + (CMorselContext *)defaultContext;
 
+- (id)deserializeObjectWithURL:(NSURL *)inURL error:(NSError **)outError;
+
 - (UIImage *)imageNamed:(NSString *)inName;
 
 - (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(MorselPropertyHandler)inBlock;

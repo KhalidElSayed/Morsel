@@ -38,7 +38,6 @@
 #import "MorselAsserts.h"
 
 #import "CTypeConverter.h"
-#import "CYAMLDeserializer.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
 #import "UIView+MorselExtensions.h"
@@ -46,7 +45,7 @@
 
 @interface CMorsel ()
 // Morsel properties...
-@property (readwrite, nonatomic, strong) NSData *data;
+@property (readwrite, nonatomic, strong) NSURL *URL;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
@@ -68,11 +67,11 @@
 @synthesize classSynonyms = _classSynonyms;
 @synthesize propertyTypes = _propertyTypes;
 
-- (id)initWithData:(NSData *)inData error:(NSError **)outError;
-	{
+- (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
+    {
     if ((self = [super init]) != NULL)
         {
-		_data = inData;
+		_URL = inURL;
         _typeConverter = [[CTypeConverter alloc] init];
 
         __weak CMorsel *weak_self = self;
@@ -93,23 +92,8 @@
                 }
             return(theObject);
             }];
-        }
-    return self;
-	}
-
-- (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
-    {
-	NSData *theData = [NSData dataWithContentsOfURL:inURL options:0 error:outError];
-	if (theData == NULL)
-		{
-		self = NULL;
-		return(NULL);
 		}
-
-    if ((self = [self initWithData:theData error:outError]) != NULL)
-        {
-        }
-    return self;
+	return(self);
     }
 
 - (id)initWithName:(NSString *)inName bundle:(NSBundle *)inBundle error:(NSError **)outError;
@@ -194,7 +178,7 @@
 
     if (self.specification == NULL)
         {
-        self.specification = [self.context.deserializer deserializeData:self.data error:outError];
+        self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
         if (self.specification == NULL)
             {
             return(NO);
@@ -233,7 +217,7 @@
     [self prepare];
 	self.owner = owner;
 
-	self.specification = [self.context.deserializer deserializeData:self.data error:outError];
+	self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
 	if (self.specification == NULL)
 		{
 		return(NO);
