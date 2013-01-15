@@ -178,7 +178,7 @@
 
     if (self.specification == NULL)
         {
-        self.specification = [self.context deserializeURL:self.URL error:outError];
+        self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
         if (self.specification == NULL)
             {
             return(NO);
@@ -217,7 +217,7 @@
     [self prepare];
 	self.owner = owner;
 
-	self.specification = [self.context deserializeURL:self.URL error:outError];
+	self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
 	if (self.specification == NULL)
 		{
 		return(NO);

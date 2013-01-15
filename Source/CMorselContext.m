@@ -50,7 +50,7 @@
 @property (readwrite, nonatomic, strong) NSDictionary *globalSpecification;
 @property (readwrite, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readwrite, nonatomic, strong) NSMutableArray *propertyHandlers;
-@property (readwrite, nonatomic, strong) NSCache *deserializedURLsCache;
+@property (readwrite, nonatomic, strong) NSCache *deserializedObjectsCache;
 @end
 
 #pragma mark -
@@ -80,7 +80,7 @@ static CMorselContext *gSharedInstance = NULL;
         {
 		_typeConverter = [[CTypeConverter alloc] init];
 		_propertyHandlers = [NSMutableArray array];
-		_deserializedURLsCache = [[NSCache alloc] init];
+		_deserializedObjectsCache = [[NSCache alloc] init];
 
 		#if USE_DEBUG_DICTIONARY == 1
 		_deserializer = [[CDebugYAMLDeserializer alloc] init];
@@ -108,7 +108,7 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
-	self.globalSpecification = [self deserializeURL:theURL error:outError];
+	self.globalSpecification = [self deserializeObjectWithURL:theURL error:outError];
 	if (self.globalSpecification == NULL)
 		{
 		return(NO);
@@ -501,14 +501,14 @@ static CMorselContext *gSharedInstance = NULL;
 
 #pragma mark -
 
-- (id)deserializeURL:(NSURL *)inURL error:(NSError **)outError
+- (id)deserializeObjectWithURL:(NSURL *)inURL error:(NSError **)outError
 	{
-	id theDeserializedObject = [self.deserializedURLsCache objectForKey:inURL];
+	id theDeserializedObject = [self.deserializedObjectsCache objectForKey:inURL];
 	if (theDeserializedObject == NULL)
 		{
 //		NSLog(@"CACHE MISS: %@", inURL);
 		theDeserializedObject = [self.deserializer deserializeURL:inURL error:outError];
-		[self.deserializedURLsCache setObject:theDeserializedObject forKey:inURL];
+		[self.deserializedObjectsCache setObject:theDeserializedObject forKey:inURL];
 		}
 	else
 		{
