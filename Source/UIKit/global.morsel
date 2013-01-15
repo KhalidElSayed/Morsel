@@ -74,6 +74,14 @@ property-types:
     property: textAlignment
     type: 'enum:NSTextAlignment'
 
+  - class: UILabel
+    property: shadowOffset
+    type: 'struct:CGSize'
+
+  - class: UILabel
+    property: shadowColor
+    type: 'class:UIColor'
+
 #### CCoreTextLabel
 
   - class: CCoreTextLabel
