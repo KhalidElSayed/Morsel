@@ -755,6 +755,15 @@
 			theConstraints = @[theConstraint];
 			}
 		}
+	else if (theSpecification[@"relationship"])
+		{
+		id theValue = theSpecification[@"relationship"];
+		if (IS_STRING(theValue))
+			{
+			NSLayoutConstraint *theConstraint = [NSLayoutConstraint constraintWithRelationshipInString:theValue views:self.objectsByID];
+			theConstraints = @[theConstraint];
+			}
+		}
 	else
 		{
 		NSLog(@"ERROR: Do not understand constraint: %@", inObject);

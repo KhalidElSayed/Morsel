@@ -68,4 +68,75 @@
 	return([theConstraints copy]);
 	}
 
++ (NSLayoutConstraint *)constraintWithRelationshipInString:(NSString *)inFormula views:(NSDictionary *)inViews;
+	{
+//	view_a.height = view_b.width
+//	view_a.height = view_b.width * 100 + 10
+
+	NSDictionary *theAttributes = @{
+		@"left": @(NSLayoutAttributeLeft),
+		@"right": @(NSLayoutAttributeRight),
+		@"top": @(NSLayoutAttributeTop),
+		@"bottom": @(NSLayoutAttributeBottom),
+		@"leading": @(NSLayoutAttributeLeading),
+		@"trailing": @(NSLayoutAttributeTrailing),
+		@"width": @(NSLayoutAttributeWidth),
+		@"height": @(NSLayoutAttributeHeight),
+		@"center-x": @(NSLayoutAttributeCenterX),
+		@"center-y": @(NSLayoutAttributeCenterY),
+		@"baseline": @(NSLayoutAttributeBaseline),
+		};
+	NSDictionary *theRelations = @{
+		@"<=": @(NSLayoutRelationLessThanOrEqual),
+		@"=": @(NSLayoutRelationEqual),
+		@"=?": @(NSLayoutRelationGreaterThanOrEqual),
+		};
+
+	NSString *theAttributesPattern = [[theAttributes allKeys] componentsJoinedByString:@"|"];
+	NSString *thePattern = [NSString stringWithFormat:@"^([a-z]\\w*)\\.(%@)(=|>=|<=)([a-z]\\w*)\\.(%@)(?:\\*(-?\\d+(\\.\\d+))?)?(?:\\+(-?(\\d+\\.\\d+))?)?$", theAttributesPattern, theAttributesPattern];
+
+	NSError *error = NULL;
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:thePattern options:NSRegularExpressionCaseInsensitive error:&error];
+
+	NSString *theFormula = [inFormula stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+	NSTextCheckingResult *theMatch = [regex firstMatchInString:theFormula options:0 range:(NSRange){ .length = theFormula.length }];
+	NSAssert(theMatch != NULL, @"Relationship does not match expression.");
+
+	NSString *theFirstObjectName = [theFormula substringWithRange:[theMatch rangeAtIndex:1]];
+	id theFirstObject = inViews[theFirstObjectName];
+	NSAssert(theFirstObject != NULL, @"Could not find object named %@", theFirstObjectName);
+
+	NSString *theFirstAttributeName = [theFormula substringWithRange:[theMatch rangeAtIndex:2]];
+	NSLayoutAttribute theFirstAttribute = [theAttributes[theFirstAttributeName] intValue];
+
+	NSString *theRelationName = [theFormula substringWithRange:[theMatch rangeAtIndex:3]];
+	NSLayoutRelation theRelation = [theRelations[theRelationName] intValue];
+
+	NSString *theSecondObjectName = [theFormula substringWithRange:[theMatch rangeAtIndex:4]];
+	id theSecondObject = inViews[theSecondObjectName];
+	NSAssert(theSecondObject != NULL, @"Could not find object named %@", theSecondObjectName);
+
+	NSString *theSecondAttributeName = [theFormula substringWithRange:[theMatch rangeAtIndex:5]];
+	NSLayoutAttribute theSecondAttribute = [theAttributes[theSecondAttributeName] intValue];
+
+	CGFloat theMultiplier = 1.0;
+	if ([theMatch rangeAtIndex:6].location != NSNotFound)
+		{
+		NSString *theMultiplierString = [theFormula substringWithRange:[theMatch rangeAtIndex:6]];
+		theMultiplier = [theMultiplierString floatValue];
+		}
+
+	CGFloat theConstant = 0.0;
+	if ([theMatch rangeAtIndex:7].location != NSNotFound)
+		{
+		NSString *theConstantString = [theFormula substringWithRange:[theMatch rangeAtIndex:7]];
+		theConstant = [theConstantString floatValue];
+		}
+
+	NSLayoutConstraint *theConstraint = [NSLayoutConstraint constraintWithItem:theFirstObject attribute:theFirstAttribute relatedBy:theRelation toItem:theSecondObject attribute:theSecondAttribute multiplier:theMultiplier constant:theConstant];
+
+	return(theConstraint);
+	}
+
 @end
