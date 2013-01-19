@@ -307,7 +307,7 @@
 
 - (id)objectWithSpecificationDictionary:(NSDictionary *)inSpecification error:(NSError **)outError
 	{
-	NSString *theID = inSpecification[@"id"] ?: @"root";
+	NSString *theID = inSpecification[@"id"];
 	NSString *theClassName = inSpecification[@"class"];
 	Class theClass = [self classWithString:theClassName error:outError];
 	if (theClass == NULL)
