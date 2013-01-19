@@ -93,7 +93,8 @@
 		};
 
 	NSString *theAttributesPattern = [[theAttributes allKeys] componentsJoinedByString:@"|"];
-	NSString *thePattern = [NSString stringWithFormat:@"^([a-z]\\w*)\\.(%@)(=|>=|<=)([a-z]\\w*)\\.(%@)(?:\\*(-?\\d+(\\.\\d+))?)?(?:\\+(-?(\\d+\\.\\d+))?)?$", theAttributesPattern, theAttributesPattern];
+    NSString *theNumberPattern = @"-?\\d+(?:\\.\\d+)?";
+	NSString *thePattern = [NSString stringWithFormat:@"^([a-z]\\w*)\\.(%@)(=|>=|<=)([a-z]\\w*)\\.(%@)(?:\\*(%@))?(?:(\\+|-)(%@))?", theAttributesPattern, theAttributesPattern, theNumberPattern, theNumberPattern];
 
 	NSError *error = NULL;
 	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:thePattern options:NSRegularExpressionCaseInsensitive error:&error];
@@ -130,8 +131,14 @@
 	CGFloat theConstant = 0.0;
 	if ([theMatch rangeAtIndex:7].location != NSNotFound)
 		{
-		NSString *theConstantString = [theFormula substringWithRange:[theMatch rangeAtIndex:7]];
+		NSString *theSign = [theFormula substringWithRange:[theMatch rangeAtIndex:7]];
+
+		NSString *theConstantString = [theFormula substringWithRange:[theMatch rangeAtIndex:8]];
 		theConstant = [theConstantString floatValue];
+        if ([theSign characterAtIndex:0] == '-')
+            {
+            theConstant *= -1.0;
+            }
 		}
 
 	NSLayoutConstraint *theConstraint = [NSLayoutConstraint constraintWithItem:theFirstObject attribute:theFirstAttribute relatedBy:theRelation toItem:theSecondObject attribute:theSecondAttribute multiplier:theMultiplier constant:theConstant];
