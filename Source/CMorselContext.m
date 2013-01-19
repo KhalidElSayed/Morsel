@@ -37,6 +37,7 @@
 #import "CTypeConverter.h"
 #import "CYAMLDeserializer.h"
 #import "CColorConverter.h"
+#import "CImageGroup.h"
 
 #if !defined(USE_DEBUG_DICTIONARY)
 #define USE_DEBUG_DICTIONARY 0
@@ -138,12 +139,12 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// NSString -> UIImage
 	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([weak_self imageNamed:inValue]);
+		return([UIImage imageNamed:inValue]);
 		}];
 
 	// NSDictionary -> UIImage
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		UIImage *theImage = [weak_self imageNamed:inValue[@"name"]];
+		UIImage *theImage = [UIImage imageNamed:inValue[@"name"]];
 		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
 		if (theCapInsetsDictionary)
 			{
@@ -157,6 +158,28 @@ static CMorselContext *gSharedInstance = NULL;
 
 		return(theImage);
 		}];
+
+	// NSString -> CImageGroup
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[CImageGroup class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+		return([CImageGroup imageGroupNamed:inValue]);
+		}];
+
+	// NSDictionary -> CImageGroup
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[CImageGroup class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+		UIEdgeInsets theCapInsets;
+		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
+		if (theCapInsetsDictionary)
+			{
+			theCapInsets.left = [theCapInsetsDictionary[@"left"] floatValue];
+			theCapInsets.right = [theCapInsetsDictionary[@"right"] floatValue];
+			theCapInsets.top = [theCapInsetsDictionary[@"top"] floatValue];
+			theCapInsets.bottom = [theCapInsetsDictionary[@"bottom"] floatValue];
+			}
+
+		CImageGroup *theImageGroup = [CImageGroup imageGroupNamed:inValue[@"name"] capInsets:theCapInsets];
+		return(theImageGroup);
+		}];
+
 
 	// NSDictionary -> CGPoint
 	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError) {
@@ -337,9 +360,11 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// UIButton.backgroundImage
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
+		CImageGroup *theImageGroup = [self.typeConverter objectOfClass:[CImageGroup class] withObject:specification error:outError];
 		UIButton *theButton = AssertCast_(UIButton, object);
-		[theButton setBackgroundImage:theImage forState:UIControlStateNormal];
+		[theImageGroup enumerateImages:^(UIImage *image, UIControlState state) {
+			[theButton setBackgroundImage:image forState:state];
+			}];
 		return(YES);
 		}];
 
@@ -515,16 +540,6 @@ static CMorselContext *gSharedInstance = NULL;
 //		NSLog(@"CACHE HIT: %@", inURL);
 		}
 	return(theDeserializedObject);
-	}
-
-- (UIImage *)imageNamed:(NSString *)inName
-	{
-	UIImage *theImage = [UIImage imageNamed:inName];
-	if (theImage == NULL)
-		{
-		NSLog(@"WARNING: Could not find image named %@", inName);
-		}
-	return(theImage);
 	}
 
 @end
