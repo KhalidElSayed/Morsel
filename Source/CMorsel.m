@@ -71,22 +71,12 @@
     {
 	NSParameterAssert(inURL != NULL);
 
-    if ((self = [super init]) != NULL)
+    if ((self = [self init]) != NULL)
         {
 		_URL = inURL;
-        _typeConverter = [[CTypeConverter alloc] init];
-
-        __weak CMorsel *weak_self = self;
-
-        [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
-            return(self.objectsByID[inValue]);
-            }];
-
-        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-            id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
-            if (theObject == NULL)
-                {
-                return(NULL);
+        _URL = inURL;
+        }
+    return self;
                 }
             if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
                 {
@@ -102,10 +92,38 @@
 	{
 	inBundle = inBundle ?: [NSBundle mainBundle];
 	NSURL *theURL = [inBundle URLForResource:inName withExtension:@"morsel"];
+    if ([theURL checkResourceIsReachableAndReturnError:NULL] == NO || YES)
+        {
+        theURL = [inBundle URLForResource:inName withExtension:@"plist"];
+        }
 	return([self initWithURL:theURL error:outError]);
 	}
 
 #pragma mark -
+
+- (void)setup
+    {
+    _typeConverter = [[CTypeConverter alloc] init];
+
+    __weak CMorsel *weak_self = self;
+
+    [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
+        return(self.objectsByID[inValue]);
+        }];
+
+    [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+        id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
+        if (theObject == NULL)
+            {
+            return(NULL);
+            }
+        if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
+            {
+            return(NULL);
+            }
+        return(theObject);
+        }];
+    }
 
 - (CMorselContext *)context
 	{
@@ -126,7 +144,6 @@
 			{
 			[theDefaults addObjectsFromArray:self.specification[@"defaults"]];
 			}
-
 		_defaults = [theDefaults copy];
 		}
 	return(_defaults);
@@ -170,8 +187,6 @@
 
 #pragma mark -
 
-#pragma mark -
-
 - (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
 	{
     [self prepare];
@@ -181,12 +196,21 @@
 
     if (self.specification == NULL)
         {
-		NSParameterAssert(self.URL != NULL);
-
-        self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
-        if (self.specification == NULL)
+        if ([[self.URL pathExtension] isEqualToString:@"morsel"])
             {
-            return(NO);
+            self.specification = [self.context deserializeURL:self.URL error:outError];
+            if (self.specification == NULL)
+                {
+                return(NO);
+                }
+            }
+        if ([[self.URL pathExtension] isEqualToString:@"plist"])
+            {
+            self.specification = [NSDictionary dictionaryWithContentsOfURL:self.URL];
+            if (self.specification == NULL)
+                {
+                return(NO);
+                }
             }
         }
 
@@ -664,12 +688,9 @@
 		@"baseline": @(NSLayoutFormatAlignAllBaseline),
 		};
 
-    /* choose only one of these three
-     */
 //    NSLayoutFormatDirectionLeadingToTrailing = 0 << 16, // default
 //    NSLayoutFormatDirectionLeftToRight = 1 << 16,
 //    NSLayoutFormatDirectionRightToLeft = 2 << 16,  
-
 
 	NSArray *theConstraints = NULL;
 	id theSpecification = inObject;
