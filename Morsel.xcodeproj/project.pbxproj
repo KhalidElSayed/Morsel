@@ -121,6 +121,8 @@
 		45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
 		45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
 		45B5818B1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */; };
+		45B932B616AB485500939A8A /* ConstraintsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B932B516AB485500939A8A /* ConstraintsTests.m */; };
+		45B932B716AB492200939A8A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
 		45D2F0101698E065003C6458 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D2F00A1698E034003C6458 /* libCocoaYAML.a */; };
 		45D2F0161698E080003C6458 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D2F00A1698E034003C6458 /* libCocoaYAML.a */; };
 		45D2F0171698E089003C6458 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D2F00A1698E034003C6458 /* libCocoaYAML.a */; };
@@ -383,6 +385,8 @@
 		45B581741694C9E700153631 /* CViewController.morsel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CViewController.morsel; sourceTree = "<group>"; };
 		45B581871694D46600153631 /* NSLayoutConstraint+DebugExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+DebugExtensions.h"; sourceTree = "<group>"; };
 		45B581881694D46600153631 /* NSLayoutConstraint+DebugExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+DebugExtensions.m"; sourceTree = "<group>"; };
+		45B932B416AB485500939A8A /* ConstraintsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintsTests.h; sourceTree = "<group>"; };
+		45B932B516AB485500939A8A /* ConstraintsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstraintsTests.m; sourceTree = "<group>"; };
 		45D2F0011698E034003C6458 /* CocoaYAML_iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CocoaYAML_iOS.xcodeproj; sourceTree = "<group>"; };
 		45D2F0231698E197003C6458 /* Unit Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45D2F0241698E197003C6458 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -457,6 +461,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B932B716AB492200939A8A /* CoreGraphics.framework in Frameworks */,
 				45D2F0411698E1CB003C6458 /* libCocoaYAML.a in Frameworks */,
 				45D2F0251698E197003C6458 /* SenTestingKit.framework in Frameworks */,
 				45D2F0261698E198003C6458 /* UIKit.framework in Frameworks */,
@@ -729,6 +734,8 @@
 				451870581698E4310082EE49 /* CColorConverterUnitTests.m */,
 				45D2F0361698E1A8003C6458 /* CTypeConverterUnitTests.h */,
 				45D2F0371698E1A8003C6458 /* CTypeConverterUnitTests.m */,
+				45B932B416AB485500939A8A /* ConstraintsTests.h */,
+				45B932B516AB485500939A8A /* ConstraintsTests.m */,
 				45D2F0381698E1A8003C6458 /* InfoPlist.strings */,
 				45D2F03A1698E1A8003C6458 /* Info.plist */,
 				45D2F03B1698E1A8003C6458 /* Prefix.pch */,
@@ -1121,6 +1128,7 @@
 				45D2F04D1698E1DA003C6458 /* UIView+MorselExtensions.m in Sources */,
 				451870591698E4310082EE49 /* CColorConverterUnitTests.m in Sources */,
 				45F3F59216AB441E00DA4C0B /* CImageGroup.m in Sources */,
+				45B932B616AB485500939A8A /* ConstraintsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
