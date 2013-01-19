@@ -67,7 +67,6 @@
 @synthesize classSynonyms = _classSynonyms;
 @synthesize propertyTypes = _propertyTypes;
 
-
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
     {
     if ((self = [self init]) != NULL)
@@ -133,7 +132,6 @@
 			{
 			[theDefaults addObjectsFromArray:self.specification[@"defaults"]];
 			}
-
 		_defaults = [theDefaults copy];
 		}
 	return(_defaults);
@@ -174,8 +172,6 @@
 		}
 	return(_propertyTypes);
 	}
-
-#pragma mark -
 
 #pragma mark -
 
@@ -679,12 +675,9 @@
 		@"baseline": @(NSLayoutFormatAlignAllBaseline),
 		};
 
-    /* choose only one of these three
-     */
 //    NSLayoutFormatDirectionLeadingToTrailing = 0 << 16, // default
 //    NSLayoutFormatDirectionLeftToRight = 1 << 16,
 //    NSLayoutFormatDirectionRightToLeft = 2 << 16,  
-
 
 	NSArray *theConstraints = NULL;
 	id theSpecification = inObject;

@@ -87,6 +87,7 @@ static CMorselContext *gSharedInstance = NULL;
 		_deserializer = [[CYAMLDeserializer alloc] init];
 		#endif
 
+        // TODO This is YAML only and wont work for plists and other formats...
 		[_deserializer registerHandlerForTag:@"!UIColor" block:^id (id value, NSError *__autoreleasing *error) {
 			UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:value error:error];
 			return(theColor);
