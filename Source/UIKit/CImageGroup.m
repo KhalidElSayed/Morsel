@@ -98,6 +98,18 @@ static NSString *nameSuffixForState(UIControlState inControlState);
 	return(theName);
 	}
 
+- (UIImage *)image
+	{
+	NSString *theImageName = self.name;
+	UIImage *theImage = [UIImage imageNamed:theImageName];
+	if (theImage == NULL)
+		{
+		theImageName = [self imageNameWithSuffix:@"Normal"];
+		theImage = [UIImage imageNamed:theImageName];
+		}
+	return(theImage);
+	}
+
 - (UIImage *)imageForState:(UIControlState)inControlState
 	{
 	NSString *theName = [self imageNameForState:inControlState];
