@@ -45,7 +45,7 @@
 
 @interface CMorsel ()
 // Morsel properties...
-@property (readwrite, nonatomic, strong) NSURL *URL;
+@property (readonly, nonatomic, strong) NSURL *URL;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
@@ -69,6 +69,8 @@
 
 - (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
     {
+	NSParameterAssert(inURL != NULL);
+
     if ((self = [super init]) != NULL)
         {
 		_URL = inURL;
@@ -174,10 +176,13 @@
 	{
     [self prepare];
 
+
 	self.owner = ownerOrNil;
 
     if (self.specification == NULL)
         {
+		NSParameterAssert(self.URL != NULL);
+
         self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
         if (self.specification == NULL)
             {

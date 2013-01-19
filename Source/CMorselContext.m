@@ -528,11 +528,17 @@ static CMorselContext *gSharedInstance = NULL;
 
 - (id)deserializeObjectWithURL:(NSURL *)inURL error:(NSError **)outError
 	{
+	NSParameterAssert(inURL != NULL);
+
 	id theDeserializedObject = [self.deserializedObjectsCache objectForKey:inURL];
 	if (theDeserializedObject == NULL)
 		{
 //		NSLog(@"CACHE MISS: %@", inURL);
 		theDeserializedObject = [self.deserializer deserializeURL:inURL error:outError];
+		if (theDeserializedObject == NULL)
+			{
+			return(NULL);
+			}
 		[self.deserializedObjectsCache setObject:theDeserializedObject forKey:inURL];
 		}
 	else
