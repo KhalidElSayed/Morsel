@@ -117,7 +117,7 @@ static NSString *nameSuffixForState(UIControlState inControlState);
 	UIImage *theImage = [UIImage imageNamed:theName];
 	if (theImage == NULL)
 		{
-		TMLogWarning_(@"No image named %@ found for control state %d", self.name, inControlState);
+		NSLog(@"No image named %@ found for control state %d", self.name, inControlState);
 		theImage = [UIImage imageNamed:self.name];
 		}
 
@@ -156,7 +156,7 @@ static NSString *nameSuffixForState(UIControlState inControlState);
 		}
 	if (theCount == 0)
 		{
-		TMLogWarn_(@"No images found for \"%@\", possible typo in image name?", self.name);
+		NSLog(@"No images found for \"%@\", possible typo in image name?", self.name);
 		}
 	}
 

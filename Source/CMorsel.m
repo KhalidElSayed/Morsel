@@ -71,12 +71,22 @@
     {
 	NSParameterAssert(inURL != NULL);
 
-    if ((self = [self init]) != NULL)
+    if ((self = [super init]) != NULL)
         {
 		_URL = inURL;
-        _URL = inURL;
-        }
-    return self;
+        _typeConverter = [[CTypeConverter alloc] init];
+
+        __weak CMorsel *weak_self = self;
+
+        [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
+            return(self.objectsByID[inValue]);
+            }];
+
+        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+            id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
+            if (theObject == NULL)
+                {
+                return(NULL);
                 }
             if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
                 {
@@ -95,6 +105,11 @@
     if ([theURL checkResourceIsReachableAndReturnError:NULL] == NO || YES)
         {
         theURL = [inBundle URLForResource:inName withExtension:@"plist"];
+        }
+    if (theURL == NULL)
+        {
+        self = NULL;
+        return(self);
         }
 	return([self initWithURL:theURL error:outError]);
 	}
@@ -198,7 +213,7 @@
         {
         if ([[self.URL pathExtension] isEqualToString:@"morsel"])
             {
-            self.specification = [self.context deserializeURL:self.URL error:outError];
+            self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
             if (self.specification == NULL)
                 {
                 return(NO);

@@ -111,7 +111,7 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
-	self.globalSpecification = [self deserializeURL:theURL error:outError];
+	self.globalSpecification = [self deserializeObjectWithURL:theURL error:outError];
 	if (self.globalSpecification == NULL)
 		{
 		return(NO);
@@ -429,20 +429,6 @@ static CMorselContext *gSharedInstance = NULL;
 	return(YES);
 	}
 
-- (id)deserializeURL:(NSURL *)inURL error:(NSError **)outError;
-    {
-    id theObject = NULL;
-    if ([[inURL pathExtension] isEqualToString:@"morsel"])
-        {
-        theObject = [self.deserializer deserializeURL:inURL error:outError];
-        }
-    else if ([[inURL pathExtension] isEqualToString:@"plist"])
-        {
-        theObject = [NSDictionary dictionaryWithContentsOfURL:inURL];
-        }
-    return(theObject);
-    }
-
 - (BOOL)loadEnumerations:(NSError **)outError
 	{
 	NSDictionary *theEnumerations = self.globalSpecification[@"enums"];
@@ -545,7 +531,14 @@ static CMorselContext *gSharedInstance = NULL;
 	if (theDeserializedObject == NULL)
 		{
 //		NSLog(@"CACHE MISS: %@", inURL);
-		theDeserializedObject = [self.deserializer deserializeURL:inURL error:outError];
+        if ([[inURL pathExtension] isEqualToString:@"morsel"])
+            {
+            theDeserializedObject = [self.deserializer deserializeURL:inURL error:outError];
+            }
+        else if ([[inURL pathExtension] isEqualToString:@"plist"])
+            {
+            theDeserializedObject = [NSDictionary dictionaryWithContentsOfURL:inURL];
+            }
 		if (theDeserializedObject == NULL)
 			{
 			return(NULL);
