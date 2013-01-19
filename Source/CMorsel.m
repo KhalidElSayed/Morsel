@@ -102,7 +102,7 @@
 	{
 	inBundle = inBundle ?: [NSBundle mainBundle];
 	NSURL *theURL = [inBundle URLForResource:inName withExtension:@"morsel"];
-    if ([theURL checkResourceIsReachableAndReturnError:NULL] == NO || YES)
+    if ([theURL checkResourceIsReachableAndReturnError:NULL] == NO)
         {
         theURL = [inBundle URLForResource:inName withExtension:@"plist"];
         }
