@@ -437,7 +437,8 @@
 
 	__block NSError *theError = NULL;
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		if ([@[@"id", @"class", @"subviews", @"constraints", @"action", @"target", @"outlet"] containsObject:key])
+		// TODO skip list is a bit of a hack.
+		if ([@[@"id", @"class", @"subviews", @"constraints", @"action", @"target", @"outlet", @"gestureRecognizers"] containsObject:key])
 			{
 //            NSLog(@"DEBUG: Skipping %@", key);
 			return;
@@ -461,6 +462,7 @@
 
 	// #########################################################################
 
+	// TODO tidy up and put into own method
 	for (__strong id theChildSpecification in theSpecification[@"subviews"])
 		{
 		if ([theChildSpecification isKindOfClass:[NSString class]])
@@ -488,6 +490,7 @@
 
 	// #########################################################################
 
+	// TODO tidy up and put into own method
 	for (id theConstraintsSpecification in theSpecification[@"constraints"])
 		{
 		NSArray *theConstraints = [self constraintsFromObject:theConstraintsSpecification error:outError];
@@ -501,6 +504,7 @@
 
 	// #########################################################################
 
+	// TODO tidy up and put into own method
     id theOutlet = theSpecification[@"outlet"];
     if (theOutlet != NULL)
         {
@@ -514,6 +518,7 @@
 
 	// #########################################################################
 
+	// TODO tidy up and put into own method
 	NSString *theActionName = theSpecification[@"action"];
 	if (theActionName.length > 0)
 		{
@@ -528,24 +533,7 @@
 
 			if ([theActionName isKindOfClass:[NSString class]])
 				{
-				SEL theAction = NSSelectorFromString(theActionName);
-				if ([theTarget respondsToSelector:theAction] == NO)
-					{
-					if ([theActionName characterAtIndex:theActionName.length - 1] == ':')
-						{
-						theActionName = [theActionName substringToIndex:theActionName.length - 1];
-						}
-					else
-						{
-						theActionName = [theActionName stringByAppendingString:@":"];
-						}
-					theAction = NSSelectorFromString(theActionName);
-					if ([theTarget respondsToSelector:theAction] == NO)
-						{
-						NSLog(@"WARNING: %@ does not support selector: %@", theTarget, theActionName);
-						}
-					}
-
+				SEL theAction = [self selector:theActionName target:theTarget error:outError];
 				if (theTarget != NULL && theAction != NULL)
 					{
 					[(UIControl *)inObject addTarget:theTarget action:theAction forControlEvents:theControlEvents];
@@ -553,6 +541,33 @@
 				}
 			}
 		}
+
+	// #########################################################################
+
+	// TODO tidy up and put into own method
+	for (id theRecognizerSpecification in theSpecification[@"gestureRecognizers"])
+		{
+		if ([theRecognizerSpecification allKeys].count != 1)
+			{
+			if (outError)
+				{
+				*outError = [self errorWithCode:-1 localizedDescription:@"Gesture recognizers specificied incorrectly" userInfo:NULL];
+				}
+			return(NO);
+			}
+		NSString *theKey = [[theRecognizerSpecification allKeys] lastObject];
+		NSString *theValue = theRecognizerSpecification[theKey];
+		NSDictionary *theClassesForNames = @{
+			@"tap": NSStringFromClass([UITapGestureRecognizer class]),
+			};
+		NSString *theClassName = theClassesForNames[theKey] ?: theKey;
+		Class theClass = NSClassFromString(theClassName);
+		id theTarget = self.owner;
+		SEL theSelector = [self selector:theValue target:theTarget error:outError];
+		UIGestureRecognizer *theRecognizer = [[theClass alloc] initWithTarget:theTarget action:theSelector];
+		[(UIView *)inObject addGestureRecognizer:theRecognizer];
+		}
+
 	return(YES);
 	}
 
@@ -820,6 +835,32 @@
         return(NULL);
 		}
 	return(theConstraints);
+	}
+
+- (SEL)selector:(NSString *)inActionName target:(id)inTarget error:(NSError **)outError
+	{
+	SEL theSelector = NULL;
+	if ([inActionName isKindOfClass:[NSString class]])
+		{
+		theSelector = NSSelectorFromString(inActionName);
+		if ([inTarget respondsToSelector:theSelector] == NO)
+			{
+			if ([inActionName characterAtIndex:inActionName.length - 1] == ':')
+				{
+				inActionName = [inActionName substringToIndex:inActionName.length - 1];
+				}
+			else
+				{
+				inActionName = [inActionName stringByAppendingString:@":"];
+				}
+			theSelector = NSSelectorFromString(inActionName);
+			if ([inTarget respondsToSelector:theSelector] == NO)
+				{
+				NSLog(@"WARNING: %@ does not support selector: %@", inTarget, inActionName);
+				}
+			}
+		}
+	return(theSelector);
 	}
 
 - (NSError *)errorWithCode:(NSInteger)inCode localizedDescription:(NSString *)inLocalizedDescription userInfo:(NSDictionary *)inUserInfo
