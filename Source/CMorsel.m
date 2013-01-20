@@ -366,12 +366,19 @@
 	if ([theClass isSubclassOfClass:[UIButton class]])
 		{
 		// TODO - this is a total hack
-		UIButtonType theButtonType = UIButtonTypeRoundedRect;
-		if (inSpecification[@"backgroundImage"] != NULL)
+		if (theClass != [UIButton class])
 			{
-			theButtonType = UIButtonTypeCustom;
+			theObject = [[theClass alloc] initWithFrame:(CGRectZero)];
 			}
-		theObject = [theClass buttonWithType:theButtonType];
+		else
+			{
+			UIButtonType theButtonType = UIButtonTypeRoundedRect;
+			if (inSpecification[@"backgroundImage"] != NULL)
+				{
+				theButtonType = UIButtonTypeCustom;
+				}
+			theObject = [theClass buttonWithType:theButtonType];
+			}
 		}
 	else
 		{
