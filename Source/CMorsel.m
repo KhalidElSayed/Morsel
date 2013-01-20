@@ -278,6 +278,8 @@
         return(NO);
         }
 
+	self.objectsByID[@"root"] = root;
+
 	if ([self populateObject:root withSpecificationDictionary:theRootObjectSpecification error:outError] == NO)
 		{
 		return(NO);
