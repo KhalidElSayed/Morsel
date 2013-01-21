@@ -125,6 +125,18 @@ property-types:
     type: 'UIFont'
     keyPath: titleLabel.font
 
+  - class: UIButton
+    property: contentEdgeInsets
+    type: 'struct:UIEdgeInsets'
+
+  - class: UIButton
+    property: titleEdgeInsets
+    type: 'struct:UIEdgeInsets'
+
+  - class: UIButton
+    property: imageEdgeInsets
+    type: 'struct:UIEdgeInsets'
+
 #### UITextField
 
   - class: UITextField

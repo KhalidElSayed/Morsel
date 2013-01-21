@@ -231,6 +231,18 @@ static CMorselContext *gSharedInstance = NULL;
 		return((__bridge id)theColor.CGColor);
 		}];
 
+	// NSDictionary -> UIEdgeInsets
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:UIEdgeInsets" block:^id(id inValue, NSError *__autoreleasing *outError) {
+		UIEdgeInsets theEdgeInsets = {
+			.left = [inValue[@"left"] floatValue],
+			.right = [inValue[@"right"] floatValue],
+			.top = [inValue[@"top"] floatValue],
+			.bottom = [inValue[@"bottom"] floatValue],
+			};
+		return([NSValue valueWithUIEdgeInsets:theEdgeInsets]);
+		}];
+
+
 	// #########################################################################
 
 	// UIView.size
