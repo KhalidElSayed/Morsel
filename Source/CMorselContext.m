@@ -372,7 +372,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// UIButton.backgroundImage
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		CImageGroup *theImageGroup = [self.typeConverter objectOfClass:[CImageGroup class] withObject:specification error:outError];
+		CImageGroup *theImageGroup = [weak_self.typeConverter objectOfClass:[CImageGroup class] withObject:specification error:outError];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theImageGroup enumerateImages:^(UIImage *image, UIControlState state) {
 			[theButton setBackgroundImage:image forState:state];
@@ -382,7 +382,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// UIButton.image
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
+		UIImage *theImage = [weak_self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theButton setImage:theImage forState:UIControlStateNormal];
 		return(YES);
@@ -390,7 +390,7 @@ static CMorselContext *gSharedInstance = NULL;
 
 	// UIButton.titleColor
 	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		UIColor *theColor = [self.typeConverter objectOfClass:[UIColor class] withObject:specification error:outError];
+		UIColor *theColor = [weak_self.typeConverter objectOfClass:[UIColor class] withObject:specification error:outError];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theButton setTitleColor:theColor forState:UIControlStateNormal];
 		return(YES);
@@ -405,7 +405,7 @@ static CMorselContext *gSharedInstance = NULL;
 			{
 			if (specification[@"url"])
 				{
-				NSURL *theURL = [self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:outError];
+				NSURL *theURL = [weak_self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:outError];
 				if (theURL == NULL)
 					{
 					return(NO);
@@ -424,7 +424,7 @@ static CMorselContext *gSharedInstance = NULL;
 				}
 			}
 
-		UIImage *theImage = [self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
+		UIImage *theImage = [weak_self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
 		if (theImage == NULL)
 			{
 			return(NO);

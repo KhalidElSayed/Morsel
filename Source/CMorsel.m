@@ -79,7 +79,7 @@
         __weak CMorsel *weak_self = self;
 
         [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
-            return(self.objectsByID[inValue]);
+            return(weak_self.objectsByID[inValue]);
             }];
 
         [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
@@ -123,7 +123,7 @@
     __weak CMorsel *weak_self = self;
 
     [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
-        return(self.objectsByID[inValue]);
+        return(weak_self.objectsByID[inValue]);
         }];
 
     [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
