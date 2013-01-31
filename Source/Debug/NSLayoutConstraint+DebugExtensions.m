@@ -104,7 +104,7 @@
 
 
     [theComponents addObject:[NSString stringWithFormat:@"%@.%@",
-		self.firstItem ? ([self.firstItem morselID] ?: self.firstItem) : [NSNull null],
+		self.firstItem ? ([self.firstItem morselID] ?: [NSString stringWithFormat:@"%@(%p)", NSStringFromClass([self.firstItem class]), self.firstItem]) : [NSNull null],
 		theAttributes[@(self.firstAttribute)]
 		]];
 
@@ -113,7 +113,7 @@
 	if (self.secondItem != NULL)
 		{
 		[theComponents addObject:[NSString stringWithFormat:@"%@.%@",
-			self.secondItem ? ([self.secondItem morselID] ?: self.secondItem) : [NSNull null],
+			self.secondItem ? ([self.secondItem morselID] ?: [NSString stringWithFormat:@"%@(%p)", NSStringFromClass([self.secondItem class]), self.secondItem]) : [NSNull null],
 			theAttributes[@(self.secondAttribute)]
 			]];
 		}
