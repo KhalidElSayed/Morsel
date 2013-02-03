@@ -73,10 +73,11 @@
 		self.morselClient.URL = self.URL;
 		self.morselClient.service = self.service;
 
-		__weak typeof(self) weakSelf = self;
+		__weak typeof(self) weak_self = self;
 
 		self.morselClient.morselHandler = ^(CMorsel *morsel, NSError *error) {
-			weakSelf.morsel = morsel;
+            __strong typeof(weak_self) strong_self = weak_self;
+			strong_self.morsel = morsel;
 			};
 		[self.morselClient start];
 		}

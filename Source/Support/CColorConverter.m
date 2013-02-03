@@ -113,19 +113,27 @@ static CColorConverter *gSharedInstance = NULL;
 		if ([theResult rangeAtIndex:1].location != NSNotFound)
 			{
 			NSString *theHex = [inString substringWithRange:[theResult rangeAtIndex:1]];
-			UInt32 D = hexdec([theHex UTF8String], 0);
-			CGFloat R = (CGFloat)((D & 0x0F00) >> 8) / 15.0;
-			CGFloat G = (CGFloat)((D & 0x00F0) >> 4) / 15.0;
-			CGFloat B = (CGFloat)((D & 0x000F) >> 0) / 15.0;
+			int D = hexdec([theHex UTF8String], 0);
+            if (D < 0)
+                {
+                return(NULL);
+                }
+			CGFloat R = (CGFloat)((D & 0x0F00) >> 8) / 15.0f;
+			CGFloat G = (CGFloat)((D & 0x00F0) >> 4) / 15.0f;
+			CGFloat B = (CGFloat)((D & 0x000F) >> 0) / 15.0f;
 			theColor = @{ @"type": @"RGB", @"red":@(R), @"green":@(G), @"blue":@(B), @"alpha":@(1.0) };
 			}
 		else
 			{
 			NSString *theHex = [inString substringWithRange:[theResult rangeAtIndex:2]];
-			UInt32 D = (UInt32)hexdec([theHex UTF8String], 0);
-			CGFloat R = (CGFloat)((D & 0x00FF0000) >> 16) / 255.0;
-			CGFloat G = (CGFloat)((D & 0x0000FF00) >> 8) / 255.0;
-			CGFloat B = (CGFloat)((D & 0x000000FF) >> 0) / 255.0;
+			int D = hexdec([theHex UTF8String], 0);
+            if (D < 0)
+                {
+                return(NULL);
+                }
+			CGFloat R = (CGFloat)((D & 0x00FF0000) >> 16) / 255.0f;
+			CGFloat G = (CGFloat)((D & 0x0000FF00) >> 8) / 255.0f;
+			CGFloat B = (CGFloat)((D & 0x000000FF) >> 0) / 255.0f;
 			theColor = @{ @"type": @"RGB", @"red":@(R), @"green":@(G), @"blue":@(B), @"alpha":@(1.0) };
 			}
 		return(theColor);
@@ -268,10 +276,10 @@ static CGFloat StringToFloat(NSString *inString, CGFloat base)
 	{
 	if ([inString characterAtIndex:inString.length - 1] == '%')
 		{
-		return([[inString substringToIndex:inString.length - 1] doubleValue] / 100.0);
+		return([[inString substringToIndex:inString.length - 1] floatValue] / 100.0f);
 		}
 	else
 		{
-		return([inString  doubleValue] / base);
+		return([inString floatValue] / base);
 		}
 	}

@@ -36,7 +36,6 @@
 
 #import "MorselSupport.h"
 #import "MorselAsserts.h"
-
 #import "CTypeConverter.h"
 #import "NSLayoutConstraint+Conveniences.h"
 #import "CMorselContext.h"
@@ -775,7 +774,7 @@
 			NSString *theFormat = theSpecification[0];
 
 			NSString *theOptionsString = theSpecification[1];
-			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] integerValue];
+			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] unsignedIntegerValue];
 			theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:theOptions metrics:self.specification[@"metrics"] views:self.objectsByID];
 			}
 		else if ([theSpecification isKindOfClass:[NSDictionary class]])
@@ -783,7 +782,7 @@
 			NSString *theFormat = theSpecification[@"format"];
 
 			NSString *theOptionsString = theSpecification[@"options"];
-			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] integerValue];
+			NSLayoutFormatOptions theOptions = [theOptionsByName[theOptionsString] unsignedIntegerValue];
 			theConstraints = [NSLayoutConstraint constraintsWithVisualFormat:theFormat options:theOptions metrics:self.specification[@"metrics"] views:self.objectsByID];
 			}
 		}

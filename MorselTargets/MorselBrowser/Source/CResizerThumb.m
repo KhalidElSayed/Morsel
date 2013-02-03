@@ -47,7 +47,7 @@
     {
     if ((self = [super initWithCoder:inCoder]) != NULL)
         {
-		UIImageView *theImageView = [[UIImageView alloc] initWithFrame:(CGRect){ .size = 16, 16 }];
+		UIImageView *theImageView = [[UIImageView alloc] initWithFrame:(CGRect){ .size = { 16, 16 } }];
 		theImageView.image = [UIImage imageNamed:@"Thumb.png"];
 		[self addSubview:theImageView];
         }
@@ -58,7 +58,7 @@
     {
     if ((self = [super initWithFrame:frame]) != NULL)
         {
-		UIImageView *theImageView = [[UIImageView alloc] initWithFrame:(CGRect){ .size = 16, 16 }];
+		UIImageView *theImageView = [[UIImageView alloc] initWithFrame:(CGRect){ .size = { 16, 16 } }];
 		theImageView.image = [UIImage imageNamed:@"Thumb.png"];
 		[self addSubview:theImageView];
         }

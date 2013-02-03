@@ -66,7 +66,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 	{
-    return(self.morsels.count);
+    return((NSInteger)self.morsels.count);
 	}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,7 +82,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 	{
 	NSIndexPath *theIndexPath = [self.tableView indexPathForCell:sender];
-	NSURL *theURL = [self.morsels objectAtIndex:theIndexPath.row];
+	NSURL *theURL = self.morsels[(NSUInteger)theIndexPath.row];
 
 
 	CMorselViewController *theViewController = NULL;

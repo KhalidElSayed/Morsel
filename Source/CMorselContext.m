@@ -110,8 +110,8 @@ static CMorselContext *gSharedInstance = NULL;
 	{
 	// #########################################################################
 
-	NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
-	self.globalSpecification = [self deserializeObjectWithURL:theURL error:outError];
+	NSURL *theGlobalSpecificationURL = [[NSBundle mainBundle] URLForResource:@"global" withExtension:@"morsel"];
+	self.globalSpecification = [self deserializeObjectWithURL:theGlobalSpecificationURL error:outError];
 	if (self.globalSpecification == NULL)
 		{
 		return(NO);
@@ -124,28 +124,28 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	// NSString -> NSURL
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[NSURL class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		return([NSURL URLWithString:inValue]);
 		}];
 
 	// NSString -> UIColor
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-		return([UIColor colorWithString:inValue error:outError]);
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIColor class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
+		return([UIColor colorWithString:inValue error:outError_]);
 		}];
 
 	// NSDictionary -> UIFont
-	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIFont class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIFont class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		UIFont *theFont = [UIFont fontWithName:inValue[@"name"] size:[inValue[@"size"] floatValue]];
 		return(theFont);
 		}];
 
 	// NSString -> UIImage
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		return([UIImage imageNamed:inValue]);
 		}];
 
 	// NSDictionary -> UIImage
-	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIImage class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		UIImage *theImage = [UIImage imageNamed:inValue[@"name"]];
 		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
 		if (theCapInsetsDictionary)
@@ -162,12 +162,12 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// NSString -> CImageGroup
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[CImageGroup class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationClass:[CImageGroup class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		return([CImageGroup imageGroupNamed:inValue]);
 		}];
 
 	// NSDictionary -> CImageGroup
-	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[CImageGroup class] block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[CImageGroup class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		UIEdgeInsets theCapInsets;
 		NSDictionary *theCapInsetsDictionary = inValue[@"capInsets"];
 		if (theCapInsetsDictionary)
@@ -184,55 +184,55 @@ static CMorselContext *gSharedInstance = NULL;
 
 
 	// NSDictionary -> CGPoint
-	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		CGPoint thePoint = {
-			.x = [inValue[@"x"] doubleValue],
-			.y = [inValue[@"y"] doubleValue],
+			.x = [inValue[@"x"] floatValue],
+			.y = [inValue[@"y"] floatValue],
 			};
 		return([NSValue valueWithCGPoint:thePoint]);
 		}];
 
 	// NSArray -> CGPoint
-	[self.typeConverter addConverterForSourceClass:[NSArray class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSArray class] destinationType:@"struct:CGPoint" block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		CGPoint thePoint = {
-			.x = [inValue[0] doubleValue],
-			.y = [inValue[1] doubleValue],
+			.x = [inValue[0] floatValue],
+			.y = [inValue[1] floatValue],
 			};
 		return([NSValue valueWithCGPoint:thePoint]);
 		}];
 
 	// NSDictionary -> CGSize
-	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		CGSize theSize = {
-			.width = [inValue[@"width"] doubleValue],
-			.height = [inValue[@"height"] doubleValue],
+			.width = [inValue[@"width"] floatValue],
+			.height = [inValue[@"height"] floatValue],
 			};
 		return([NSValue valueWithCGSize:theSize]);
 		}];
 
 	// NSArray -> CGSize
-	[self.typeConverter addConverterForSourceClass:[NSArray class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSArray class] destinationType:@"struct:CGSize" block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		CGSize theSize = {
-			.width = [inValue[0] doubleValue],
-			.height = [inValue[1] doubleValue],
+			.width = [inValue[0] floatValue],
+			.height = [inValue[1] floatValue],
 			};
 		return([NSValue valueWithCGSize:theSize]);
 		}];
 
 	// UIColor -> CGColor
-	[self.typeConverter addConverterForSourceClass:[UIColor class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[UIColor class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		UIColor *theColor = AssertCast_(UIColor, inValue);
 		return((__bridge id)theColor.CGColor);
 		}];
 
 	// NSString -> CGColor
-	[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError) {
-		UIColor *theColor = [weak_self.typeConverter objectOfClass:[UIColor class] withObject:inValue error:outError];
+	[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:CGColor" block:^id(id inValue, NSError *__autoreleasing *outError_) {
+		UIColor *theColor = [weak_self.typeConverter objectOfClass:[UIColor class] withObject:inValue error:outError_];
 		return((__bridge id)theColor.CGColor);
 		}];
 
 	// NSDictionary -> UIEdgeInsets
-	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:UIEdgeInsets" block:^id(id inValue, NSError *__autoreleasing *outError) {
+	[self.typeConverter addConverterForSourceClass:[NSDictionary class] destinationType:@"struct:UIEdgeInsets" block:^id(id inValue, NSError *__autoreleasing *outError_) {
 		UIEdgeInsets theEdgeInsets = {
 			.left = [inValue[@"left"] floatValue],
 			.right = [inValue[@"right"] floatValue],
@@ -246,10 +246,10 @@ static CMorselContext *gSharedInstance = NULL;
 	// #########################################################################
 
 	// UIView.size
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"position"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"position"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 		UIView *theView = AssertCast_(UIView, object);
 
-		NSValue *thePointValue = [weak_self.typeConverter objectOfType:@"struct:CGPoint" withObject:specification error:outError];
+		NSValue *thePointValue = [weak_self.typeConverter objectOfType:@"struct:CGPoint" withObject:specification error:outError_];
 		if (thePointValue == NULL)
 			{
 			return(NO);
@@ -272,10 +272,10 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// UIView.size
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"size"] block: ^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 		UIView *theView = AssertCast_(UIView, object);
 
-		NSValue *theSizeValue = [weak_self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:outError];
+		NSValue *theSizeValue = [weak_self.typeConverter objectOfType:@"struct:CGSize" withObject:specification error:outError_];
 		if (theSizeValue == NULL)
 			{
 			return(NO);
@@ -298,7 +298,7 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// UIView.width
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"width"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"width"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 		UIView *theView = AssertCast_(UIView, object);
 
 		CGFloat theScalar = [specification floatValue];
@@ -317,7 +317,7 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// UIView.height
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"height"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"height"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 		UIView *theView = AssertCast_(UIView, object);
 
 		CGFloat theScalar = [specification floatValue];
@@ -336,7 +336,7 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// UIView.edge-constraints
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"edge-constraints"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIView class] property:@"edge-constraints"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 		UIView *theView = AssertCast_(UIView, object);
 		UIView *theSuperview = theView.superview;
 		NSDictionary *theDictionary = AssertCast_(NSDictionary, specification);
@@ -365,14 +365,14 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// UIButton.title
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"title"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 		[(UIButton *)object setTitle:specification forState:UIControlStateNormal];
 		return(YES);
 		}];
 
 	// UIButton.backgroundImage
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		CImageGroup *theImageGroup = [weak_self.typeConverter objectOfClass:[CImageGroup class] withObject:specification error:outError];
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"backgroundImage"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
+		CImageGroup *theImageGroup = [weak_self.typeConverter objectOfClass:[CImageGroup class] withObject:specification error:outError_];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theImageGroup enumerateImages:^(UIImage *image, UIControlState state) {
 			[theButton setBackgroundImage:image forState:state];
@@ -381,23 +381,23 @@ static CMorselContext *gSharedInstance = NULL;
 		}];
 
 	// UIButton.image
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		UIImage *theImage = [weak_self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
+		UIImage *theImage = [weak_self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError_];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theButton setImage:theImage forState:UIControlStateNormal];
 		return(YES);
 		}];
 
 	// UIButton.titleColor
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
-		UIColor *theColor = [weak_self.typeConverter objectOfClass:[UIColor class] withObject:specification error:outError];
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIButton class] property:@"titleColor"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
+		UIColor *theColor = [weak_self.typeConverter objectOfClass:[UIColor class] withObject:specification error:outError_];
 		UIButton *theButton = AssertCast_(UIButton, object);
 		[theButton setTitleColor:theColor forState:UIControlStateNormal];
 		return(YES);
 		}];
 
 	// UIImageView.image
-	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError) {
+	[self addPropertyHandlerForPredicate:[self predicateForClass:[UIImageView class] property:@"image"] block:^BOOL (id object, NSString *property, id specification, NSError **outError_) {
 
 		UIImageView *theImageView = AssertCast_(UIImageView, object);
 
@@ -405,7 +405,7 @@ static CMorselContext *gSharedInstance = NULL;
 			{
 			if (specification[@"url"])
 				{
-				NSURL *theURL = [weak_self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:outError];
+				NSURL *theURL = [weak_self.typeConverter objectOfClass:[NSURL class] withObject:specification[@"url"] error:outError_];
 				if (theURL == NULL)
 					{
 					return(NO);
@@ -424,7 +424,7 @@ static CMorselContext *gSharedInstance = NULL;
 				}
 			}
 
-		UIImage *theImage = [weak_self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError];
+		UIImage *theImage = [weak_self.typeConverter objectOfClass:[UIImage class] withObject:specification error:outError_];
 		if (theImage == NULL)
 			{
 			return(NO);
@@ -450,7 +450,7 @@ static CMorselContext *gSharedInstance = NULL;
 		NSDictionary *theEnumerationKeyValues = obj;
 		NSString *theEnumerationType = [NSString stringWithFormat:@"enum:%@", theEnumerationName];
 
-		[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError) {
+		[self.typeConverter addConverterForSourceClass:[NSString class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError_) {
 			id theValue = theEnumerationKeyValues[inValue];
 			if (theValue == NULL)
 				{
@@ -459,7 +459,7 @@ static CMorselContext *gSharedInstance = NULL;
 			return(theValue);
 			}];
 
-		[self.typeConverter addConverterForSourceClass:[NSNumber class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError) {
+		[self.typeConverter addConverterForSourceClass:[NSNumber class] destinationType:theEnumerationType block:^id(id inValue, NSError *__autoreleasing *outError_) {
 			return(inValue);
 			}];
 		}];

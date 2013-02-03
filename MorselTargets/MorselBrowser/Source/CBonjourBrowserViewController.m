@@ -65,26 +65,26 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 	{
-    return([self.domains count]);
+    return((NSInteger)[self.domains count]);
 	}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 	{
-	NSString *theDomain = self.domains[section];
+	NSString *theDomain = self.domains[(NSUInteger)section];
+    NSArray *theServices = self.servicesByDomain[theDomain];
 
-
-    return([self.servicesByDomain[theDomain] count]);
+    return((NSInteger)[theServices count]);
 	}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 	{
-	return(self.domains[section]);
+	return(self.domains[(NSUInteger)section]);
 	}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 	{
-	NSString *theDomain = self.domains[indexPath.section];
-	NSNetService *theService = self.servicesByDomain[theDomain][indexPath.row];
+	NSString *theDomain = self.domains[(NSUInteger)indexPath.section];
+	NSNetService *theService = self.servicesByDomain[theDomain][(NSUInteger)indexPath.row];
 
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -108,8 +108,8 @@
 	else if ([sender isKindOfClass:[UITableViewCell class]])
 		{
 		NSIndexPath *theIndexPath = [self.tableView indexPathForCell:sender];
-		NSString *theDomain = self.domains[theIndexPath.section];
-		NSNetService *theService = self.servicesByDomain[theDomain][theIndexPath.row];
+		NSString *theDomain = self.domains[(NSUInteger)theIndexPath.section];
+		NSNetService *theService = self.servicesByDomain[theDomain][(NSUInteger)theIndexPath.row];
 		if ([segue.destinationViewController isKindOfClass:[UINavigationController class]])
 			{
 			CMorselViewController *theViewController = (CMorselViewController *)((UINavigationController *)(segue.destinationViewController)).topViewController;
@@ -140,7 +140,8 @@
 	if ([self.servicesByDomain[aNetService.domain] containsObject:aNetService] == YES)
 		{
 		[self.servicesByDomain[aNetService.domain] removeObject:aNetService];
-		if ([self.servicesByDomain[aNetService.domain] count] == 0)
+        NSArray *theServices = self.servicesByDomain[aNetService.domain];
+		if ([theServices count] == 0)
 			{
 			[self.servicesByDomain removeObjectForKey:aNetService.domain];
 			[self.domains removeObject:aNetService.domain];
