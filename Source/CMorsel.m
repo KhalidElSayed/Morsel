@@ -45,7 +45,7 @@
 
 @interface CMorsel ()
 // Morsel properties...
-@property (readonly, nonatomic, strong) NSURL *URL;
+@property (readonly, nonatomic, strong) id source;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
 @property (readwrite, nonatomic, strong) NSArray *propertyTypes;
 @property (readonly, nonatomic, strong) NSArray *defaults;
@@ -67,13 +67,10 @@
 @synthesize classSynonyms = _classSynonyms;
 @synthesize propertyTypes = _propertyTypes;
 
-- (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
+- (id)init
     {
-	NSParameterAssert(inURL != NULL);
-
     if ((self = [super init]) != NULL)
         {
-		_URL = inURL;
         _typeConverter = [[CTypeConverter alloc] init];
 
         __weak CMorsel *weak_self = self;
@@ -94,6 +91,17 @@
                 }
             return(theObject);
             }];
+        }
+    return self;
+    }
+
+- (id)initWithURL:(NSURL *)inURL error:(NSError **)outError
+    {
+	NSParameterAssert(inURL != NULL);
+
+    if ((self = [self init]) != NULL)
+        {
+		_source = inURL;
 		}
 	return(self);
     }
@@ -113,6 +121,15 @@
         }
 	return([self initWithURL:theURL error:outError]);
 	}
+
+- (id)initWithData:(NSData *)inData error:(NSError **)outError;
+    {
+    if ((self = [self init]) != NULL)
+        {
+        _source = inData;
+        }
+    return self;
+    }
 
 #pragma mark -
 
@@ -200,33 +217,41 @@
 	return(_propertyTypes);
 	}
 
+- (BOOL)load:(NSError **)outError
+    {
+    if (self.specification != NULL)
+        {
+        return(YES);
+        }
+
+    if ([self.source isKindOfClass:[NSURL class]])
+        {
+        self.specification = [self.context deserializeObjectWithURL:self.source error:outError];
+        }
+    else if ([self.source isKindOfClass:[NSData class]])
+        {
+        self.specification = [self.context deserializeObjectWithData:self.source error:outError];
+        }
+
+    if (self.specification == NULL)
+        {
+        return(NO);
+        }
+
+    return(YES);
+    }
+
 #pragma mark -
 
 - (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError
 	{
     [self prepare];
 
-
 	self.owner = ownerOrNil;
 
-    if (self.specification == NULL)
+    if ([self load:outError] == NO)
         {
-        if ([[self.URL pathExtension] isEqualToString:@"morsel"])
-            {
-            self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
-            if (self.specification == NULL)
-                {
-                return(NO);
-                }
-            }
-        if ([[self.URL pathExtension] isEqualToString:@"plist"])
-            {
-            self.specification = [NSDictionary dictionaryWithContentsOfURL:self.URL];
-            if (self.specification == NULL)
-                {
-                return(NO);
-                }
-            }
+        return(NULL);
         }
 
     NSMutableDictionary *theObjects = [NSMutableDictionary dictionary];
@@ -261,8 +286,7 @@
     [self prepare];
 	self.owner = owner;
 
-	self.specification = [self.context deserializeObjectWithURL:self.URL error:outError];
-	if (self.specification == NULL)
+	if ([self load:outError] == NO)
 		{
 		return(NO);
 		}

@@ -535,6 +535,13 @@ static CMorselContext *gSharedInstance = NULL;
 
 #pragma mark -
 
+- (id)deserializeObjectWithData:(NSData *)inData error:(NSError **)outError
+    {
+    // TODO -- what about plists huh? huh? huh?
+    id theDeserializedObject = [self.deserializer deserializeData:inData error:outError];
+    return(theDeserializedObject);
+    }
+
 - (id)deserializeObjectWithURL:(NSURL *)inURL error:(NSError **)outError
 	{
 	NSParameterAssert(inURL != NULL);
