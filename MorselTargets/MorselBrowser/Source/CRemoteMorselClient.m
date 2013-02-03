@@ -73,7 +73,7 @@
 				CRemoteMorselContext *theContext = [[CRemoteMorselContext alloc] init];
 				theContext.URL = self.URL;
 				CMorsel *theMorsel = [[CMorsel alloc] initWithData:data error:NULL];
-				theMorsel.context = theContext;
+				theMorsel.session = theContext;
 				if (self.morselHandler)
 					{
 					self.morselHandler(theMorsel, NULL);

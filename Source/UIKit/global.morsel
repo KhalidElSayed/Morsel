@@ -1,11 +1,5 @@
 # -*- tab-width: 2; x-auto-expand-tabs: true; indent-tabs-mode: nil; coding: utf-8; mode: yaml; -*-
 
-class-synonyms:
-  view: UIView
-  label: UILabel
-  button: UIButton
-  shape: CAShapeLayer
-
 defaults:
 # TODO - this should probably go into property-types
   - class: UIView
@@ -19,6 +13,7 @@ defaults:
     verticalContentHuggingPriority: 250
     horizontalContentHuggingPriority: 250
 
+################################################################################
 
 property-types:
 # TODO - replace property types with a dictionary of classes containing a dictionary of properties
@@ -166,6 +161,8 @@ property-types:
   - class: CALayer
     property: shadowOffset
     type: 'struct:CGSize'
+
+################################################################################
 
 enums:
   UIViewContentMode:

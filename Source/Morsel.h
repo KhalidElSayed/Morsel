@@ -7,7 +7,7 @@
 //
 
 #import <Morsel/CMorsel.h>
-#import <Morsel/CMorselContext.h>
+#import <Morsel/CMorselSession.h>
 
 #import <Morsel/CTypeConverter.h>
 #import <Morsel/CColorConverter.h>

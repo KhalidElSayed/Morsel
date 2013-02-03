@@ -1,8 +1,8 @@
 //
-//	CMorsel.h
+//	CMorselSession.h
 //	Morsel
 //
-//	Created by Jonathan Wight on 12/5/12.
+//	Created by Jonathan Wight on 12/12/12.
 //	Copyright 2012 Jonathan Wight. All rights reserved.
 //
 //	Redistribution and use in source and binary forms, with or without modification, are
@@ -31,20 +31,19 @@
 
 #import <Foundation/Foundation.h>
 
-@class CMorselSession;
+@class CTypeConverter;
+@class CYAMLDeserializer;
 @class CMorselContext;
 
-@interface CMorsel : NSObject
+/// CMorselSessions are global objects used to configure and extend morsel processing.
+@interface CMorselSession : NSObject
 
-@property (readwrite, nonatomic, strong) CMorselSession *session;
-@property (readonly, nonatomic, strong) CMorselContext *context;
+@property (readonly, nonatomic, strong) CYAMLDeserializer *deserializer;
+@property (readwrite, nonatomic, strong) CMorselContext *context;
 
-- (id)init;
-- (id)initWithURL:(NSURL *)inURL error:(NSError **)outError;
-- (id)initWithName:(NSString *)inName bundle:(NSBundle *)inBundle error:(NSError **)outError;
-- (id)initWithData:(NSData *)inData error:(NSError **)outError;
++ (CMorselSession *)defaultSession;
 
-- (NSDictionary *)instantiateWithOwner:(id)ownerOrNil options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
-- (BOOL)instantiateWithRoot:(id)root owner:(id)owner  options:(NSDictionary *)optionsOrNil error:(NSError **)outError;
+- (id)deserializeObjectWithData:(NSData *)inData error:(NSError **)outError;
+- (id)deserializeObjectWithURL:(NSURL *)inURL error:(NSError **)outError;
 
 @end

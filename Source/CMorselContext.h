@@ -2,8 +2,8 @@
 //	CMorselContext.h
 //	Morsel
 //
-//	Created by Jonathan Wight on 12/12/12.
-//	Copyright 2012 Jonathan Wight. All rights reserved.
+//	Created by Jonathan Wight on 2/2/13.
+//	Copyright 2013 Jonathan Wight. All rights reserved.
 //
 //	Redistribution and use in source and binary forms, with or without modification, are
 //	permitted provided that the following conditions are met:
@@ -29,28 +29,30 @@
 //	authors and should not be interpreted as representing official policies, either expressed
 //	or implied, of Jonathan Wight.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "CMorselSession.h"
 
 @class CTypeConverter;
-@class CYAMLDeserializer;
 
 typedef BOOL (^MorselPropertyHandler)(id object, NSString *property, id specification, NSError **outError);
 
-/// CMorselContexts are global objects used to configure and extend morsel processing.
 @interface CMorselContext : NSObject
 
-@property (readonly, nonatomic, strong) CYAMLDeserializer *deserializer;
+@property (readwrite, nonatomic, strong) CMorselContext *nextContext;
 @property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readonly, nonatomic, strong) NSMutableArray *propertyHandlers;
-@property (readonly, nonatomic, strong) NSArray *defaults;
-@property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
 @property (readonly, nonatomic, strong) NSArray *propertyTypes;
 
-+ (CMorselContext *)defaultContext;
+- (id)initWithSpecification:(NSDictionary *)inSpecification error:(NSError **)outError;
 
-- (id)deserializeObjectWithData:(NSData *)inData error:(NSError **)outError;
-- (id)deserializeObjectWithURL:(NSURL *)inURL error:(NSError **)outError;
+- (BOOL)load:(NSError **)outError;
 
 - (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(MorselPropertyHandler)inBlock;
+
+- (NSPredicate *)predicateForClass:(Class)inClass property:(NSString *)inProperty;
+- (id)objectOfType:(NSString *)inDestinationType withObject:(id)inSourceObject error:(NSError **)outError;
+- (NSDictionary *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName;
+- (MorselPropertyHandler)handlerForObject:(id)inObject keyPath:(NSString *)inKeyPath;
 
 @end

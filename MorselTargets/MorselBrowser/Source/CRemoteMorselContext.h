@@ -29,8 +29,8 @@
 //	authors and should not be interpreted as representing official policies, either expressed
 //	or implied, of Jonathan Wight.
 
-#import "CMorselContext.h"
+#import "CMorselSession.h"
 
-@interface CRemoteMorselContext : CMorselContext
+@interface CRemoteMorselContext : CMorselSession
 @property (readwrite, nonatomic, strong) NSURL *URL;
 @end

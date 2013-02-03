@@ -25,6 +25,18 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		450503BD16BDF62D003274B6 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503BC16BDF629003274B6 /* CMorselContext.m */; };
+		450503BE16BDF62E003274B6 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503BC16BDF629003274B6 /* CMorselContext.m */; };
+		450503BF16BDF62F003274B6 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503BC16BDF629003274B6 /* CMorselContext.m */; };
+		450503C016BDF62F003274B6 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503BC16BDF629003274B6 /* CMorselContext.m */; };
+		450503C116BDF630003274B6 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503BC16BDF629003274B6 /* CMorselContext.m */; };
+		450503C216BDF631003274B6 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503BC16BDF629003274B6 /* CMorselContext.m */; };
+		450503C516BDFFFB003274B6 /* CMorselGlobalContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */; };
+		450503C616BDFFFB003274B6 /* CMorselGlobalContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */; };
+		450503C716BDFFFC003274B6 /* CMorselGlobalContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */; };
+		450503C816BDFFFC003274B6 /* CMorselGlobalContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */; };
+		450503C916BDFFFD003274B6 /* CMorselGlobalContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */; };
+		450503CA16BDFFFD003274B6 /* CMorselGlobalContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */; };
 		451870591698E4310082EE49 /* CColorConverterUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 451870581698E4310082EE49 /* CColorConverterUnitTests.m */; };
 		451AE35F16961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
 		451AE36016961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
@@ -32,7 +44,7 @@
 		451AE36216961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
 		451AE36316961A51004514E1 /* UIView+MorselDebugging.m in Sources */ = {isa = PBXBuildFile; fileRef = 451AE35E16961A51004514E1 /* UIView+MorselDebugging.m */; };
 		455D678016950DA7004E0C52 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
-		455D678116950DA7004E0C52 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		455D678116950DA7004E0C52 /* CMorselSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselSession.m */; };
 		455D678216950DA7004E0C52 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		455D678316950DA7004E0C52 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		455D678416950DA7004E0C52 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
@@ -61,7 +73,7 @@
 		455D67BD16950E06004E0C52 /* CViewController.morsel in Resources */ = {isa = PBXBuildFile; fileRef = 45B581741694C9E700153631 /* CViewController.morsel */; };
 		45B57F9D1694B7B800153631 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B57F9C1694B7B800153631 /* Foundation.framework */; };
 		45B57FC81694B83A00153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
-		45B57FC91694B83A00153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		45B57FC91694B83A00153631 /* CMorselSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselSession.m */; };
 		45B57FCA1694B83A00153631 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		45B57FCB1694B83A00153631 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		45B57FCC1694B83A00153631 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
@@ -92,7 +104,7 @@
 		45B5812D1694BE4700153631 /* Thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 45B581191694BE4700153631 /* Thumb.png */; };
 		45B5813A1694C10600153631 /* Samples in Resources */ = {isa = PBXBuildFile; fileRef = 45B581391694C10600153631 /* Samples */; };
 		45B5813B1694C18600153631 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
-		45B5813C1694C1D800153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		45B5813C1694C1D800153631 /* CMorselSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselSession.m */; };
 		45B5813D1694C1DB00153631 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		45B5813E1694C1E300153631 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		45B5813F1694C1E300153631 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
@@ -109,7 +121,7 @@
 		45B581551694C95600153631 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B580E01694BDB300153631 /* CoreGraphics.framework */; };
 		45B5815B1694C95700153631 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45B581591694C95700153631 /* InfoPlist.strings */; };
 		45B581761694CA0100153631 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
-		45B581771694CA0100153631 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		45B581771694CA0100153631 /* CMorselSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselSession.m */; };
 		45B581781694CA0100153631 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		45B581791694CA0100153631 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		45B5817A1694CA0100153631 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
@@ -135,7 +147,7 @@
 		45D2F03D1698E1A8003C6458 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45D2F0381698E1A8003C6458 /* InfoPlist.strings */; };
 		45D2F0411698E1CB003C6458 /* libCocoaYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D2F00A1698E034003C6458 /* libCocoaYAML.a */; };
 		45D2F0421698E1DA003C6458 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
-		45D2F0431698E1DA003C6458 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		45D2F0431698E1DA003C6458 /* CMorselSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselSession.m */; };
 		45D2F0441698E1DA003C6458 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		45D2F0451698E1DA003C6458 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		45D2F0461698E1DA003C6458 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
@@ -148,7 +160,7 @@
 		45D2F04D1698E1DA003C6458 /* UIView+MorselExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FC71694B83A00153631 /* UIView+MorselExtensions.m */; };
 		45DC70BA1698ED3600519489 /* CViewController.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45DC70B91698ED3600519489 /* CViewController.plist */; };
 		45E4F4C7169552B8001D0342 /* CMorsel.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB01694B83A00153631 /* CMorsel.m */; };
-		45E4F4C8169552B8001D0342 /* CMorselContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselContext.m */; };
+		45E4F4C8169552B8001D0342 /* CMorselSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB21694B83A00153631 /* CMorselSession.m */; };
 		45E4F4C9169552B8001D0342 /* CTypeConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB41694B83A00153631 /* CTypeConverter.m */; };
 		45E4F4CA169552B8001D0342 /* CDebugDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB71694B83A00153631 /* CDebugDictionary.m */; };
 		45E4F4CB169552B8001D0342 /* CDebugYAMLDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B57FB91694B83A00153631 /* CDebugYAMLDeserializer.m */; };
@@ -295,6 +307,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		450503BB16BDF629003274B6 /* CMorselContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselContext.h; sourceTree = "<group>"; };
+		450503BC16BDF629003274B6 /* CMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselContext.m; sourceTree = "<group>"; };
+		450503C316BDFFF8003274B6 /* CMorselGlobalContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselGlobalContext.h; sourceTree = "<group>"; };
+		450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselGlobalContext.m; sourceTree = "<group>"; };
 		451870571698E4310082EE49 /* CColorConverterUnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CColorConverterUnitTests.h; sourceTree = "<group>"; };
 		451870581698E4310082EE49 /* CColorConverterUnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CColorConverterUnitTests.m; sourceTree = "<group>"; };
 		451AE35D16961A51004514E1 /* UIView+MorselDebugging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MorselDebugging.h"; sourceTree = "<group>"; };
@@ -316,8 +332,8 @@
 		45B57F9C1694B7B800153631 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45B57FAF1694B83A00153631 /* CMorsel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorsel.h; sourceTree = "<group>"; };
 		45B57FB01694B83A00153631 /* CMorsel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorsel.m; sourceTree = "<group>"; };
-		45B57FB11694B83A00153631 /* CMorselContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselContext.h; sourceTree = "<group>"; };
-		45B57FB21694B83A00153631 /* CMorselContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselContext.m; sourceTree = "<group>"; };
+		45B57FB11694B83A00153631 /* CMorselSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMorselSession.h; sourceTree = "<group>"; };
+		45B57FB21694B83A00153631 /* CMorselSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMorselSession.m; sourceTree = "<group>"; };
 		45B57FB31694B83A00153631 /* CTypeConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTypeConverter.h; sourceTree = "<group>"; };
 		45B57FB41694B83A00153631 /* CTypeConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTypeConverter.m; sourceTree = "<group>"; };
 		45B57FB61694B83A00153631 /* CDebugDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDebugDictionary.h; sourceTree = "<group>"; };
@@ -576,8 +592,12 @@
 				45B57FD21694B88000153631 /* Morsel.h */,
 				45B57FAF1694B83A00153631 /* CMorsel.h */,
 				45B57FB01694B83A00153631 /* CMorsel.m */,
-				45B57FB11694B83A00153631 /* CMorselContext.h */,
-				45B57FB21694B83A00153631 /* CMorselContext.m */,
+				45B57FB11694B83A00153631 /* CMorselSession.h */,
+				45B57FB21694B83A00153631 /* CMorselSession.m */,
+				450503BB16BDF629003274B6 /* CMorselContext.h */,
+				450503BC16BDF629003274B6 /* CMorselContext.m */,
+				450503C316BDFFF8003274B6 /* CMorselGlobalContext.h */,
+				450503C416BDFFF8003274B6 /* CMorselGlobalContext.m */,
 				45B57FB31694B83A00153631 /* CTypeConverter.h */,
 				45B57FB41694B83A00153631 /* CTypeConverter.m */,
 				45B57FB51694B83A00153631 /* Debug */,
@@ -1026,7 +1046,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				455D678016950DA7004E0C52 /* CMorsel.m in Sources */,
-				455D678116950DA7004E0C52 /* CMorselContext.m in Sources */,
+				455D678116950DA7004E0C52 /* CMorselSession.m in Sources */,
 				455D678216950DA7004E0C52 /* CTypeConverter.m in Sources */,
 				455D678316950DA7004E0C52 /* CDebugDictionary.m in Sources */,
 				455D678416950DA7004E0C52 /* CDebugYAMLDeserializer.m in Sources */,
@@ -1039,6 +1059,8 @@
 				455D67B416950DCA004E0C52 /* main.m in Sources */,
 				451AE36216961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 				45F3F59016AB441E00DA4C0B /* CImageGroup.m in Sources */,
+				450503C016BDF62F003274B6 /* CMorselContext.m in Sources */,
+				450503C816BDFFFC003274B6 /* CMorselGlobalContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1047,7 +1069,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B57FC81694B83A00153631 /* CMorsel.m in Sources */,
-				45B57FC91694B83A00153631 /* CMorselContext.m in Sources */,
+				45B57FC91694B83A00153631 /* CMorselSession.m in Sources */,
 				45B57FCA1694B83A00153631 /* CTypeConverter.m in Sources */,
 				45B57FCB1694B83A00153631 /* CDebugDictionary.m in Sources */,
 				45B57FCC1694B83A00153631 /* CDebugYAMLDeserializer.m in Sources */,
@@ -1058,6 +1080,8 @@
 				45B581891694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
 				451AE35F16961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 				45F3F58D16AB441E00DA4C0B /* CImageGroup.m in Sources */,
+				450503BD16BDF62D003274B6 /* CMorselContext.m in Sources */,
+				450503C516BDFFFB003274B6 /* CMorselGlobalContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1074,7 +1098,7 @@
 				45B581281694BE4700153631 /* CResizerThumb.m in Sources */,
 				45B5812A1694BE4700153631 /* main.m in Sources */,
 				45B5813B1694C18600153631 /* UIView+MorselExtensions.m in Sources */,
-				45B5813C1694C1D800153631 /* CMorselContext.m in Sources */,
+				45B5813C1694C1D800153631 /* CMorselSession.m in Sources */,
 				45B5813D1694C1DB00153631 /* CTypeConverter.m in Sources */,
 				45B5813E1694C1E300153631 /* CDebugDictionary.m in Sources */,
 				45B5813F1694C1E300153631 /* CDebugYAMLDeserializer.m in Sources */,
@@ -1085,6 +1109,8 @@
 				45B5818A1694D46600153631 /* NSLayoutConstraint+DebugExtensions.m in Sources */,
 				451AE36016961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 				45F3F58E16AB441E00DA4C0B /* CImageGroup.m in Sources */,
+				450503BE16BDF62E003274B6 /* CMorselContext.m in Sources */,
+				450503C616BDFFFB003274B6 /* CMorselGlobalContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1093,7 +1119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B581761694CA0100153631 /* CMorsel.m in Sources */,
-				45B581771694CA0100153631 /* CMorselContext.m in Sources */,
+				45B581771694CA0100153631 /* CMorselSession.m in Sources */,
 				45B581781694CA0100153631 /* CTypeConverter.m in Sources */,
 				45B581791694CA0100153631 /* CDebugDictionary.m in Sources */,
 				45B5817A1694CA0100153631 /* CDebugYAMLDeserializer.m in Sources */,
@@ -1107,6 +1133,8 @@
 				455D67BC16950E06004E0C52 /* CViewController.m in Sources */,
 				451AE36116961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 				45F3F58F16AB441E00DA4C0B /* CImageGroup.m in Sources */,
+				450503BF16BDF62F003274B6 /* CMorselContext.m in Sources */,
+				450503C716BDFFFC003274B6 /* CMorselGlobalContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,7 +1144,7 @@
 			files = (
 				45D2F03C1698E1A8003C6458 /* CTypeConverterUnitTests.m in Sources */,
 				45D2F0421698E1DA003C6458 /* CMorsel.m in Sources */,
-				45D2F0431698E1DA003C6458 /* CMorselContext.m in Sources */,
+				45D2F0431698E1DA003C6458 /* CMorselSession.m in Sources */,
 				45D2F0441698E1DA003C6458 /* CTypeConverter.m in Sources */,
 				45D2F0451698E1DA003C6458 /* CDebugDictionary.m in Sources */,
 				45D2F0461698E1DA003C6458 /* CDebugYAMLDeserializer.m in Sources */,
@@ -1129,6 +1157,8 @@
 				451870591698E4310082EE49 /* CColorConverterUnitTests.m in Sources */,
 				45F3F59216AB441E00DA4C0B /* CImageGroup.m in Sources */,
 				45B932B616AB485500939A8A /* ConstraintsTests.m in Sources */,
+				450503C216BDF631003274B6 /* CMorselContext.m in Sources */,
+				450503CA16BDFFFD003274B6 /* CMorselGlobalContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,7 +1170,7 @@
 				45F88E611695521E00002C16 /* CViewController.m in Sources */,
 				45F88E671695521E00002C16 /* main.m in Sources */,
 				45E4F4C7169552B8001D0342 /* CMorsel.m in Sources */,
-				45E4F4C8169552B8001D0342 /* CMorselContext.m in Sources */,
+				45E4F4C8169552B8001D0342 /* CMorselSession.m in Sources */,
 				45E4F4C9169552B8001D0342 /* CTypeConverter.m in Sources */,
 				45E4F4CA169552B8001D0342 /* CDebugDictionary.m in Sources */,
 				45E4F4CB169552B8001D0342 /* CDebugYAMLDeserializer.m in Sources */,
@@ -1151,6 +1181,8 @@
 				45E4F4D2169552B8001D0342 /* UIView+MorselExtensions.m in Sources */,
 				451AE36316961A51004514E1 /* UIView+MorselDebugging.m in Sources */,
 				45F3F59116AB441E00DA4C0B /* CImageGroup.m in Sources */,
+				450503C116BDF630003274B6 /* CMorselContext.m in Sources */,
+				450503C916BDFFFD003274B6 /* CMorselGlobalContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

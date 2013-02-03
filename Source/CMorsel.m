@@ -38,18 +38,16 @@
 #import "MorselAsserts.h"
 #import "CTypeConverter.h"
 #import "NSLayoutConstraint+Conveniences.h"
-#import "CMorselContext.h"
+#import "CMorselSession.h"
 #import "UIView+MorselExtensions.h"
 #import "NSLayoutConstraint+DebugExtensions.h"
+#import "CMorselContext.h"
 
 @interface CMorsel ()
 // Morsel properties...
 @property (readonly, nonatomic, strong) id source;
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
-@property (readwrite, nonatomic, strong) NSArray *propertyTypes;
-@property (readonly, nonatomic, strong) NSArray *defaults;
-@property (readonly, nonatomic, strong) NSDictionary *classSynonyms;
-@property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
+@property (readwrite, nonatomic, strong) CMorselContext *context;
 
 // Session properties...
 @property (readwrite, nonatomic, strong) id owner;
@@ -61,35 +59,12 @@
 
 @implementation CMorsel
 
-@synthesize context = _context;
-@synthesize defaults = _defaults;
-@synthesize classSynonyms = _classSynonyms;
-@synthesize propertyTypes = _propertyTypes;
+@synthesize session = _session;
 
 - (id)init
     {
     if ((self = [super init]) != NULL)
         {
-        _typeConverter = [[CTypeConverter alloc] init];
-
-        __weak CMorsel *weak_self = self;
-
-        [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
-            return(weak_self.objectsByID[inValue]);
-            }];
-
-        [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-            id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
-            if (theObject == NULL)
-                {
-                return(NULL);
-                }
-            if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
-                {
-                return(NULL);
-                }
-            return(theObject);
-            }];
         }
     return self;
     }
@@ -132,89 +107,15 @@
 
 #pragma mark -
 
-- (void)setup
-    {
-    _typeConverter = [[CTypeConverter alloc] init];
-
-    __weak CMorsel *weak_self = self;
-
-    [_typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError) {
-        return(weak_self.objectsByID[inValue]);
-        }];
-
-    [_typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError) {
-        id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError];
-        if (theObject == NULL)
-            {
-            return(NULL);
-            }
-        if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError] == NO)
-            {
-            return(NULL);
-            }
-        return(theObject);
-        }];
-    }
-
-- (CMorselContext *)context
+- (CMorselSession *)session
 	{
-	if (_context == NULL)
+	if (_session == NULL)
 		{
-		_context = [CMorselContext defaultContext];
+		_session = [CMorselSession defaultSession];
 		}
-	return(_context);
+	return(_session);
 	}
 
-- (NSArray *)defaults
-	{
-	if (_defaults == NULL)
-		{
-		NSMutableArray *theDefaults = [NSMutableArray array];
-		[theDefaults addObjectsFromArray:self.context.defaults];
-		if (self.specification[@"defaults"])
-			{
-			[theDefaults addObjectsFromArray:self.specification[@"defaults"]];
-			}
-		_defaults = [theDefaults copy];
-		}
-	return(_defaults);
-	}
-
-- (NSDictionary *)classSynonyms
-	{
-	if (_classSynonyms == NULL)
-		{
-		NSMutableDictionary *theClassSynonyms = [NSMutableDictionary dictionary];
-		[theClassSynonyms addEntriesFromDictionary:self.context.classSynonyms];
-		if (self.specification[@"class-synonyms"])
-			{
-			[theClassSynonyms addEntriesFromDictionary:self.specification[@"class-synonyms"]];
-			}
-		_classSynonyms = [theClassSynonyms copy];
-		}
-	return(_classSynonyms);
-	}
-
-- (NSArray *)propertyTypes
-	{
-	if (_propertyTypes == NULL)
-		{
-		NSMutableArray *thePropertyTypes = [self.context.propertyTypes mutableCopy];
-
-		for (NSDictionary *thePropertyType in self.specification[@"property-types"])
-			{
-			Class theClass = NSClassFromString(thePropertyType[@"class"]);
-
-			NSPredicate *thePredicate = [self predicateForClass:theClass property:thePropertyType[@"property"]];
-			[thePropertyTypes addObject:@{
-				@"predicate": thePredicate,
-				@"type": thePropertyType,
-				}];
-			}
-		_propertyTypes = [thePropertyTypes copy];
-		}
-	return(_propertyTypes);
-	}
 
 - (BOOL)load:(NSError **)outError
     {
@@ -225,17 +126,42 @@
 
     if ([self.source isKindOfClass:[NSURL class]])
         {
-        self.specification = [self.context deserializeObjectWithURL:self.source error:outError];
+        self.specification = [self.session deserializeObjectWithURL:self.source error:outError];
         }
     else if ([self.source isKindOfClass:[NSData class]])
         {
-        self.specification = [self.context deserializeObjectWithData:self.source error:outError];
+        self.specification = [self.session deserializeObjectWithData:self.source error:outError];
         }
 
     if (self.specification == NULL)
         {
         return(NO);
         }
+
+    // TODO error checking...
+    self.context = [[CMorselContext alloc] initWithSpecification:self.specification error:outError];
+    [self.context load:outError];
+    self.context.nextContext = self.session.context;
+
+    __weak CMorsel *weak_self = self;
+
+    [self.context.typeConverter addConverterForSourceClass:[NSString class] destinationType:@"special:lookup" block:^id(id inValue, NSError *__autoreleasing *outError_) {
+        return(weak_self.objectsByID[inValue]);
+        }];
+
+    [self.context.typeConverter addConverterForSourceClass:[NSDictionary class] destinationClass:[UIView class] block:^id(id inValue, NSError *__autoreleasing *outError_) {
+        id theObject = [weak_self objectWithSpecificationDictionary:inValue error:outError_];
+        if (theObject == NULL)
+            {
+            return(NULL);
+            }
+        if ([weak_self populateObject:theObject withSpecificationDictionary:inValue error:outError_] == NO)
+            {
+            return(NULL);
+            }
+        return(theObject);
+        }];
+
 
     return(YES);
     }
@@ -435,23 +361,8 @@
 - (BOOL)populateObject:(id)inObject withSpecificationDictionary:(NSDictionary *)inSpecification error:(NSError **)outError
 	{
 	NSString *theID = inSpecification[@"id"];
-	Class theClass = [inObject class];
 
 	NSMutableDictionary *theDefaultSpecification = [NSMutableDictionary dictionary];
-
-	for (NSDictionary *theDefault in self.defaults)
-		{
-		if ([theDefault[@"ids"] containsObject:theID])
-			{
-			[theDefaultSpecification addEntriesFromDictionary:theDefault];
-			[theDefaultSpecification removeObjectForKey:@"ids"];
-			}
-		else if ([theClass isSubclassOfClass:[self classWithString:theDefault[@"class"] error:NULL]])
-			{
-			[theDefaultSpecification addEntriesFromDictionary:theDefault];
-			[theDefaultSpecification removeObjectForKey:@"ids"];
-			}
-		}
 
 	[theDefaultSpecification addEntriesFromDictionary:inSpecification];
 	NSDictionary *theSpecification = theDefaultSpecification;
@@ -598,7 +509,7 @@
 	{
 	id theValue = inValue;
 
-	NSDictionary *theTypeDictionary = [self typeForObject:inObject propertyName:inKeyPath];
+	NSDictionary *theTypeDictionary = [self.context typeForObject:inObject propertyName:inKeyPath];
 	inKeyPath = theTypeDictionary[@"keyPath"] ?: inKeyPath;
 
 	if ([inValue isKindOfClass:[NSString class]])
@@ -611,21 +522,12 @@
 			}
 		}
 
-	NSDictionary *theTestDictionary = @{
-		@"class": [inObject class],
-		@"property": inKeyPath
-		};
-
-	for (NSDictionary *theDictionary in self.context.propertyHandlers)
-		{
-		NSPredicate *thePredicate = theDictionary[@"predicate"];
-		if ([thePredicate evaluateWithObject:theTestDictionary] == YES)
-			{
-			MorselPropertyHandler theBlock = theDictionary[@"block"];
-			theBlock(inObject, inKeyPath, theValue, outError);
-			return(YES);
-			}
-		}
+    MorselPropertyHandler theBlock = [self.context handlerForObject:inObject keyPath:inKeyPath];
+    if (theBlock != NULL)
+        {
+        theBlock(inObject, inKeyPath, theValue, outError);
+        return(YES);
+        }
 
 	if (theValue == NULL)
 		{
@@ -650,7 +552,7 @@
 		}
 	NSString *theKey = [theComponents lastObject];
 
-	theTypeDictionary = [self typeForObject:inObject propertyName:theKey];
+	theTypeDictionary = [self.context typeForObject:inObject propertyName:theKey];
 	NSString *theType = theTypeDictionary[@"type"];
 	if (theType != NULL)
 		{
@@ -678,17 +580,12 @@
 
 - (id)objectOfType:(NSString *)inDestinationType withObject:(id)inSourceObject error:(NSError **)outError
     {
-    id theObject = [self.typeConverter objectOfType:inDestinationType withObject:inSourceObject error:outError];
-    if (theObject == NULL)
-        {
-        theObject = [self.context.typeConverter objectOfType:inDestinationType withObject:inSourceObject error:outError];
-        }
+    id theObject = [self.context objectOfType:inDestinationType withObject:inSourceObject error:outError];
     return(theObject);
     }
 
 - (Class)classWithString:(NSString *)inString error:(NSError **)outError
 	{
-	inString = self.classSynonyms[inString] ?: inString;
 	Class theClass = NSClassFromString(inString);
 	return(theClass);
 	}
@@ -706,32 +603,6 @@
 - (id)expandSpecification:(id)inSpecification
 	{
 	return(inSpecification);
-	}
-
-- (NSDictionary *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName
-	{
-    NSParameterAssert(inObject != NULL);
-	for (NSDictionary *thePropertyType in self.propertyTypes)
-		{
-		NSPredicate *thePredicate = thePropertyType[@"predicate"];
-		if ([thePredicate evaluateWithObject:@{
-			@"class": [inObject class],
-			@"property": inPropertyName}] == YES)
-			{
-			return(thePropertyType[@"type"]);
-			}
-		}
-	return(NULL);
-	}
-
-#pragma mark -
-
-- (NSPredicate *)predicateForClass:(Class)inClass property:(NSString *)inProperty
-	{
-	NSPredicate *thePredicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-		return([((Class)evaluatedObject[@"class"]) isSubclassOfClass:inClass] && [evaluatedObject[@"property"] isEqualToString:inProperty]);
-		}];
-	return(thePredicate);
 	}
 
 #pragma mark -
