@@ -42,6 +42,7 @@
 @implementation CMorselContext
 
 @synthesize propertyTypes = _propertyTypes;
+@synthesize defaults = _defaults;
 
 - (id)initWithSpecification:(NSDictionary *)inSpecification error:(NSError **)outError;
     {
@@ -81,6 +82,8 @@
 	return(YES);
 	}
 
+#pragma mark -
+
 - (NSArray *)propertyTypes
 	{
 	if (_propertyTypes == NULL)
@@ -102,7 +105,22 @@
 	return(_propertyTypes);
 	}
 
+- (NSArray *)defaults
+	{
+	if (_defaults == NULL)
+		{
+		_defaults = self.specification[@"defaults"];
+		}
+	return(_defaults);
+	}
+
 #pragma mark -
+
+- (Class)classWithString:(NSString *)inString error:(NSError **)outError
+	{
+	Class theClass = NSClassFromString(inString);
+	return(theClass);
+	}
 
 - (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(MorselPropertyHandler)inBlock
 	{
@@ -164,6 +182,33 @@
 		}
 
     return(NULL);
+    }
+
+- (NSDictionary *)defaultsForObjectOfID:(NSString *)inID class:(Class)inClass;
+    {
+	NSMutableDictionary *theDefaultSpecification = [NSMutableDictionary dictionary];
+
+    CMorselContext *theContext = self;
+    while (theContext != NULL)
+        {
+        for (NSDictionary *theDefault in theContext.defaults)
+            {
+            if ([theDefault[@"ids"] containsObject:inID])
+                {
+                [theDefaultSpecification addEntriesFromDictionary:theDefault];
+                [theDefaultSpecification removeObjectForKey:@"ids"];
+                }
+            else if ([inClass isSubclassOfClass:[self classWithString:theDefault[@"class"] error:NULL]])
+                {
+                [theDefaultSpecification addEntriesFromDictionary:theDefault];
+                [theDefaultSpecification removeObjectForKey:@"ids"];
+                }
+            }
+
+        theContext = theContext.nextContext;
+        }
+
+    return(theDefaultSpecification);
     }
 
 #pragma mark -

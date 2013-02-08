@@ -43,10 +43,13 @@ typedef BOOL (^MorselPropertyHandler)(id object, NSString *property, id specific
 @property (readonly, nonatomic, strong) CTypeConverter *typeConverter;
 @property (readonly, nonatomic, strong) NSMutableArray *propertyHandlers;
 @property (readonly, nonatomic, strong) NSArray *propertyTypes;
+@property (readonly, nonatomic, strong) NSArray *defaults;
 
 - (id)initWithSpecification:(NSDictionary *)inSpecification error:(NSError **)outError;
 
 - (BOOL)load:(NSError **)outError;
+
+- (Class)classWithString:(NSString *)inString error:(NSError **)outError;
 
 - (void)addPropertyHandlerForPredicate:(NSPredicate *)inPredicate block:(MorselPropertyHandler)inBlock;
 
@@ -54,5 +57,6 @@ typedef BOOL (^MorselPropertyHandler)(id object, NSString *property, id specific
 - (id)objectOfType:(NSString *)inDestinationType withObject:(id)inSourceObject error:(NSError **)outError;
 - (NSDictionary *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName;
 - (MorselPropertyHandler)handlerForObject:(id)inObject keyPath:(NSString *)inKeyPath;
+- (NSDictionary *)defaultsForObjectOfID:(NSString *)inID class:(Class)inClass;
 
 @end

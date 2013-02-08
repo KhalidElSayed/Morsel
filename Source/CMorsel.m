@@ -361,13 +361,12 @@
 - (BOOL)populateObject:(id)inObject withSpecificationDictionary:(NSDictionary *)inSpecification error:(NSError **)outError
 	{
 	NSString *theID = inSpecification[@"id"];
+	Class theClass = [inObject class];
+	NSMutableDictionary *theSpecification = [NSMutableDictionary dictionary];
+    [theSpecification addEntriesFromDictionary:[self.context defaultsForObjectOfID:theID class:theClass]];
+	[theSpecification addEntriesFromDictionary:inSpecification];
 
-	NSMutableDictionary *theDefaultSpecification = [NSMutableDictionary dictionary];
-
-	[theDefaultSpecification addEntriesFromDictionary:inSpecification];
-	NSDictionary *theSpecification = theDefaultSpecification;
-
-	// #########################################################################
+    // #########################################################################
 
 	__block NSError *theError = NULL;
 	[theSpecification enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
@@ -494,11 +493,11 @@
 		NSDictionary *theClassesForNames = @{
 			@"tap": NSStringFromClass([UITapGestureRecognizer class]),
 			};
-		NSString *theClassName = theClassesForNames[theKey] ?: theKey;
-		Class theClass = NSClassFromString(theClassName);
+		NSString *theRecognizerClassName = theClassesForNames[theKey] ?: theKey;
+		Class theRecognizerClass = NSClassFromString(theRecognizerClassName);
 		id theTarget = self.owner;
 		SEL theSelector = [self selector:theValue target:theTarget error:outError];
-		UIGestureRecognizer *theRecognizer = [[theClass alloc] initWithTarget:theTarget action:theSelector];
+		UIGestureRecognizer *theRecognizer = [[theRecognizerClass alloc] initWithTarget:theTarget action:theSelector];
 		[(UIView *)inObject addGestureRecognizer:theRecognizer];
 		}
 
