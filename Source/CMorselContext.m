@@ -37,6 +37,8 @@
 
 @interface CMorselContext ()
 @property (readwrite, nonatomic, strong) NSDictionary *specification;
+@property (readwrite, nonatomic, strong) NSCache *cache;
+
 @end
 
 @implementation CMorselContext
@@ -51,6 +53,7 @@
         _specification = inSpecification;
 		_typeConverter = [[CTypeConverter alloc] init];
 		_propertyHandlers = [NSMutableArray array];
+		_cache = [[NSCache alloc] init];
         }
     return self;
     }
@@ -151,17 +154,41 @@
 - (NSDictionary *)typeForObject:(id)inObject propertyName:(NSString *)inPropertyName
 	{
     NSParameterAssert(inObject != NULL);
-	for (NSDictionary *thePropertyType in self.allPropertyTypes)
+	NSDictionary *theType = NULL;
+
+	NSString *theKey = [NSString stringWithFormat:@"propertyType:%@.%@", NSStringFromClass([inObject class]), inPropertyName];
+
+	theType = [self.cache objectForKey:theKey];
+	if (theType == NULL)
 		{
-		NSPredicate *thePredicate = thePropertyType[@"predicate"];
-		if ([thePredicate evaluateWithObject:@{
+		// Search for the type...
+		NSDictionary *theEvaluator = @{
 			@"class": [inObject class],
-			@"property": inPropertyName}] == YES)
+			@"property": inPropertyName
+			};
+		for (NSDictionary *thePropertyType in self.propertyTypes)
 			{
-			return(thePropertyType[@"type"]);
+			NSPredicate *thePredicate = thePropertyType[@"predicate"];
+			if ([thePredicate evaluateWithObject:theEvaluator] == YES)
+				{
+				theType = thePropertyType[@"type"];
+				break;
+				}
+			}
+
+		// If we still don't have a type look in the nextContext...
+		if (theType == NULL)
+			{
+			theType = [self.nextContext typeForObject:inObject propertyName:inPropertyName];
+			}
+
+		if (theType != NULL)
+			{
+			[self.cache setObject:theType forKey:theKey];
 			}
 		}
-	return(NULL);
+
+	return(theType);
 	}
 
 - (MorselPropertyHandler)handlerForObject:(id)inObject keyPath:(NSString *)inKeyPath
@@ -222,17 +249,6 @@
         [thePropertyHandlers addObjectsFromArray:self.nextContext.allPropertyHandlers];
         }
     return(thePropertyHandlers);
-    }
-
-- (NSArray *)allPropertyTypes
-    {
-    NSMutableArray *thePropertyTypes = [NSMutableArray array];
-    [thePropertyTypes addObjectsFromArray:self.propertyTypes];
-    if (self.nextContext)
-        {
-        [thePropertyTypes addObjectsFromArray:self.nextContext.allPropertyTypes];
-        }
-    return(thePropertyTypes);
     }
 
 @end
