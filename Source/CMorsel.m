@@ -304,7 +304,7 @@
 	{
 	NSString *theID = inSpecification[@"id"];
 	NSString *theClassName = inSpecification[@"class"];
-	Class theClass = [self classWithString:theClassName error:outError];
+	Class theClass = [self.context classWithString:theClassName error:outError];
 	if (theClass == NULL)
 		{
 		NSLog(@"ERROR: Failed to load class of type %@ (%@)", theClassName, inSpecification);
@@ -582,12 +582,6 @@
     id theObject = [self.context objectOfType:inDestinationType withObject:inSourceObject error:outError];
     return(theObject);
     }
-
-- (Class)classWithString:(NSString *)inString error:(NSError **)outError
-	{
-	Class theClass = NSClassFromString(inString);
-	return(theClass);
-	}
 
 - (NSArray *)objectsWithIDs:(NSArray *)inIDs
 	{
