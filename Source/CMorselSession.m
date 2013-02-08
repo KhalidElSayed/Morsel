@@ -84,6 +84,8 @@ static CMorselSession *gSharedInstance = NULL;
 			return(theColor);
 			}];
 
+		_deserializedObjectsCache = [[NSCache alloc] init];
+
 		NSError *theError = NULL;
 		if ([self setup:&theError] == NO)
 			{
@@ -130,6 +132,7 @@ static CMorselSession *gSharedInstance = NULL;
 	NSParameterAssert(inURL != NULL);
 
 	id theDeserializedObject = [self.deserializedObjectsCache objectForKey:inURL];
+//	NSLog(@"MORSEL CACHE %@ (%@)", theDeserializedObject ? @"HIT" : @"MISS", inURL);
 	if (theDeserializedObject == NULL)
 		{
 //		NSLog(@"CACHE MISS: %@", inURL);
