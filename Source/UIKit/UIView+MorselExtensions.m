@@ -31,8 +31,6 @@
 
 #import "UIView+MorselExtensions.h"
 
-#import "UIView+MorselExtensions.h"
-
 #import <objc/runtime.h>
 
 static void *kMorselID;
